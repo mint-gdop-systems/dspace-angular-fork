@@ -4,9 +4,13 @@
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 	"cSpell.words": [
 		"COAR",
-		"crrsa"
+		"crrsa",
+		"Subcity",
+		"Woreda",
+		"Woredas"
 	],
 	"conventionalCommits.scopes": [
-		"theme"
+		"theme",
+		"i18n"
 	]
 }

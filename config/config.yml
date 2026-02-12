@@ -1,9 +1,13 @@
-fallbackLanguage: en
+fallbackLanguage: en-crrsa
 
 languages:
-  - code: en
+  - code: en-crrsa
     label: English
     active: true
+  - code: am
+    label: አማርኛ
+    active: true
+
 
 info:
   enableEndUserAgreement: false
