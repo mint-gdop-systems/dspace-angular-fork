@@ -1,5 +1,28 @@
-rest:
-  ssl: true
-  host: sandbox.dspace.org
-  port: 443
-  nameSpace: /server
+fallbackLanguage: en
+
+languages:
+  - code: en
+    label: English
+    active: true
+
+info:
+  enableEndUserAgreement: false
+  enablePrivacyStatement: false
+  enableCOARNotifySupport: false
+
+themes:
+  - name: crrsa
+    headTags:
+    - tagName: link
+      attributes:
+        rel: icon
+        href: assets/crrsa/images/favicons/favicon.ico
+        sizes: any
+    - tagName: link
+      attributes:
+        rel: apple-touch-icon
+        href: assets/crrsa/images/favicons/apple-touch-icon.png
+    - tagName: link
+      attributes:
+        rel: manifest
+        href: assets/crrsa/images/favicons/manifest.webmanifest

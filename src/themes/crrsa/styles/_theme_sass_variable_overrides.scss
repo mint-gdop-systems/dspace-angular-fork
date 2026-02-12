@@ -1,0 +1,96 @@
+// DSpace works with CSS variables for its own components, and has a mapping of all bootstrap Sass
+// variables to CSS equivalents (see src/styles/_bootstrap_variables_mapping.scss). However Bootstrap
+// still uses Sass variables internally. So if you want to override Bootstrap (or other sass
+// variables) you can do so here. Their CSS counterparts will include the changes you make here.
+
+// When this file is going to be compiled, internal Bootstrap variables won't have been declared yet,
+// therefore if you want to use any Bootstrap variable you also need to declare it here.
+
+// All SASS variables from the base theme are also included here. Do not use the '!default' flag
+// here if you want to override them.
+
+
+/*** FONT FAMILIES ***/
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700;1,800&display=swap');
+
+$font-family-sans-serif: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+
+/*** SEMANTIC COLOR SCHEME ***/
+
+// Gray scale (uncomment the variables that you want to override or that you need to use in this file)
+//$white:    #fff;
+//$gray-100: #f8f9fa;
+//$gray-200: #e9ecef;
+//$gray-300: #dee2e6;
+//$gray-400: #ced4da;
+//$gray-500: #adb5bd;
+//$gray-600: #6c757d;
+//$gray-700: #495057;
+//$gray-800: #343a40;
+//$gray-900: #212529;
+//$black:    #000;
+
+// Other colors (uncomment the variables that you want to override or that you need to use in this file)
+//$blue:    #007bff !default;
+//$indigo:  #6610f2 !default;
+//$purple:  #6f42c1 !default;
+//$pink:    #e83e8c !default;
+//$red:     #dc3545 !default;
+//$orange:  #fd7e14 !default;
+//$yellow:  #ffc107 !default;
+//$green:   #28a745 !default;
+//$teal:    #20c997 !default;
+//$cyan:    #17a2b8 !default;
+
+// Override semantic colors here
+$primary:   #073c59;  // Brand primary (logo)
+$secondary: #3f5f72;  // Muted steel blue
+$success:   #7bbf4b;  // Balanced green
+$info:      #2c7da0;  // Brand-compatible cyan-blue
+$warning:   #e39b3b;  // Warm amber
+$danger:    #c44141;  // Clear red
+$light:     #f6f8fa;  // Soft off-white
+$dark:      #041f2d;  // Deep navy
+
+// Add new semantic colors here (you don't need to add existing semantic colors)
+$theme-custom-semantic-colors: (
+);
+
+/*** OTHER BOOTSTRAP VARIABLES ***/
+
+$min-contrast-ratio: 3 !default;
+
+$body-color: #24343f;
+
+$link-color: #2c7da0;
+$link-decoration: none;
+$link-hover-color: darken($link-color, 12%);
+$link-hover-decoration: underline;
+
+$table-accent-bg: #f2f5f7;
+$table-hover-bg: #d6e1e8;
+
+$navbar-dark-color: #fff;
+
+
+/*** CUSTOM DSPACE VARIABLES ***/
+
+$ds-home-news-link-color: #9fe870;
+$ds-header-navbar-border-bottom-color: transparent;
+
+$ds-breadcrumb-link-color: #1f6b8a !default;
+$ds-breadcrumb-link-active-color: #041f2d !default;
+
+// Navigation colors - aligned to brand
+$ds-header-bg: #073c59;
+$ds-navbar-bg: #073c59;
+$ds-navbar-dropdown-bg: #073c59;
+$ds-expandable-navbar-bg: #073c59;
+$ds-navbar-link-color: #ffffff;
+$ds-navbar-link-color-hover: #8dc6e0;
+
+// Browse navigation colors
+$ds-browse-nav-bg: #073c59;
+$ds-browse-nav-link-color: #ffffff;
