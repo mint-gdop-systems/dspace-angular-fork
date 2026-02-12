@@ -24,6 +24,16 @@
   
   "admin.dashboard.admin-dashboard": "Admin Dashboard",
 
+  "submission.sections.upload.preview.select-file": "Select file to preview",
+
+  "submission.sections.upload.preview.pdf-not-supported": "Your browser does not support native PDF preview. You can download the file here:",
+
+  "submission.sections.upload.preview.unsupported-format": "Preview not available for this file format. Use the link below to download.",
+
+  "submission.sections.upload.preview.no-file-selected": "No file selected for preview.",
+  
+  "submission.sections.upload.uploaded-files-list": "Uploaded Files",
+
 
   
   "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",

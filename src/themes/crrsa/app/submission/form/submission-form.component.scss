@@ -1,0 +1,49 @@
+.submission-form-header {
+  background-color: rgba(255, 255, 255, .97);
+  padding: calc(var(--bs-spacer) / 2) 0 calc(var(--bs-spacer) / 2) 0;
+  top: 0;
+  z-index: 10;
+}
+
+.submission-form-header-item {
+  flex-grow: 1;
+}
+
+.submission-form-footer {
+  border-radius: var(--bs-card-border-radius);
+  bottom: 0;
+  background-color: var(--bs-gray-400);
+  padding: calc(var(--bs-spacer) / 2);
+  z-index: 5;
+}
+
+.btn-link-focus {
+  font-weight: normal;
+  color: var(--bs-link-color);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--bs-link-hover-color);
+    text-decoration: underline;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: var(--bs-gray-600);
+    pointer-events: none;
+  }
+}
+
+.submission-form-content {
+  padding-right: 2rem;
+  border-right: 1px solid var(--bs-gray-300);
+}
+
+.pdf-container {
+  overflow: hidden;
+}
+
+iframe {
+  border: none;
+  border-radius: 4px;
+}
