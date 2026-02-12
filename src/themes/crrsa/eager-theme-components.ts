@@ -5,6 +5,8 @@ import { HeaderComponent } from "./app/header/header.component";
 import { HeaderNavbarWrapperComponent } from "./app/header-nav-wrapper/header-navbar-wrapper.component";
 import { HomeNewsComponent } from "./app/home-page/home-news/home-news.component";
 import { NavbarComponent } from "./app/navbar/navbar.component";
+import { AdminDashboardPageComponent } from "src/themes/crrsa/app/admin/admin-dashboard-page/admin-dashboard-page.component";
+import { UserDashboardComponent } from "src/themes/crrsa/app/admin/user-dashboard-page/user-dashboard-page.component";
 
 export const COMPONENTS = [
 	AdminSidebarComponent,
@@ -12,4 +14,6 @@ export const COMPONENTS = [
 	HeaderComponent,
 	HeaderNavbarWrapperComponent,
 	NavbarComponent,
+	AdminDashboardPageComponent,
+	UserDashboardComponent
 ];

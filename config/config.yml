@@ -8,7 +8,6 @@ languages:
     label: አማርኛ
     active: true
 
-
 info:
   enableEndUserAgreement: false
   enablePrivacyStatement: false

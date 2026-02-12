@@ -2,6 +2,28 @@
 
   "home-page.news.welcome-text": "እንኳን ወደ ሲቪል ምዝገባ እና የነዋሪነት አገልግሎት ኤጀንሲ ዲጂታል መግቢያ በደህና መጡ",
 
+  "admin.dashboard.title": "Admin Statistics Dashboard",
+
+  "admin.dashboard.refresh": "Refresh Data",
+
+  "admin.dashboard.collections": "Woredas",
+
+  "admin.dashboard.archived-items": "Archived Items",
+
+  "admin.dashboard.workflow-items": "Workflow Items",
+
+  "admin.dashboard.collection-name": "Woreda Name",
+
+  "admin.dashboard.no-data": "No woreda statistics available.",
+
+  "menu.section.analytics": "Analytics",
+
+  "admin.dashboard.statistics.collections": "Woreda Statistics",
+
+  "admin.dashboard.user-dashboard": "User Dashboard",
+  
+  "admin.dashboard.admin-dashboard": "Admin Dashboard",
+
 
   
   "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",
