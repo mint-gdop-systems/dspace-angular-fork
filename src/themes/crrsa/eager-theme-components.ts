@@ -13,6 +13,7 @@ import { SubmissionUploadFilesComponent } from "src/themes/crrsa/app/submission/
 import { SubmissionFormComponent } from "src/themes/crrsa/app/submission/form/submission-form.component";
 import { SubmissionSectionUploadFileComponent } from "src/themes/crrsa/app/submission/sections/upload/file/section-upload-file.component";
 import { SubmissionSectionUploadFileEditComponent } from "src/themes/crrsa/app/submission/sections/upload/file/edit/section-upload-file-edit.component";
+import { FileSectionComponent } from "src/app/item-page/simple/field-components/file-section/file-section.component";
 
 export const COMPONENTS = [
 	AdminSidebarComponent,
@@ -27,5 +28,6 @@ export const COMPONENTS = [
 	SubmissionUploadFilesComponent,
 	SubmissionFormComponent,
 	SubmissionSectionUploadFileComponent,
-	SubmissionSectionUploadFileEditComponent
+	SubmissionSectionUploadFileEditComponent,
+	FileSectionComponent
 ];
