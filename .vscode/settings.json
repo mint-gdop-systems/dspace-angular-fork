@@ -12,6 +12,7 @@
 	],
 	"conventionalCommits.scopes": [
 		"theme",
-		"i18n"
+		"i18n",
+		"import"
 	]
 }

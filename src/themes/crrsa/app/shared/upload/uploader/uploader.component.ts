@@ -40,7 +40,7 @@ import { UploaderProperties } from 'src/app/shared/upload/uploader/uploader-prop
 @Component({
   selector: 'ds-uploader',
   templateUrl: 'uploader.component.html',
-  styleUrls: ['/src/app/shared/upload/uploader/uploader.component.scss'],
+  styleUrls: ['../../../../../../app/shared/upload/uploader/uploader.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
   encapsulation: ViewEncapsulation.Emulated,
   imports: [
