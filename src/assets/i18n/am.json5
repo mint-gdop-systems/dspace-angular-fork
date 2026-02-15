@@ -38,6 +38,14 @@
 
   "item.page.filesection.document.status": "Status",
 
+  "mydspace.results.no-heads": "No family heads",
+
+  "mydspace.results.no-description": "No description",
+
+  "mydspace.status.rejected": "Rejected",
+
+  "item.search-result.rejection-reason": "Rejection reason",
+
 
   
   "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",

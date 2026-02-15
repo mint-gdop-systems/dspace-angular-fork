@@ -58,7 +58,7 @@ export class DSONameService {
     },
     Default: (dso: DSpaceObject, escapeHTML?: boolean): string => {
       // If object doesn't have dc.title metadata use name property
-      return dso.firstMetadataValue('dc.title', undefined, escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
+      return dso.firstMetadataValue('dc.title', undefined, escapeHTML) || dso.firstMetadataValue('crvs.identifier.houseFamilyKey', undefined, escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
     },
   };
 
@@ -114,7 +114,7 @@ export class DSONameService {
     } else if (entityType === 'OrgUnit') {
       return this.firstMetadataValue(object, dso, 'organization.legalName', escapeHTML);
     }
-    return this.firstMetadataValue(object, dso, 'dc.title', escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
+    return this.firstMetadataValue(object, dso, 'dc.title', escapeHTML) || this.firstMetadataValue(object, dso, 'crvs.identifier.houseFamilyKey', escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
   }
 
   /**

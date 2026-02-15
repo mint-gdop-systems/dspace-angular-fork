@@ -7,14 +7,11 @@
 		"crrsa",
 		"crvs",
 		"filesection",
+		"mydspace",
 		"Subcities",
 		"Subcity",
 		"Woreda",
 		"Woredas"
 	],
-	"conventionalCommits.scopes": [
-		"theme",
-		"i18n",
-		"import"
-	]
+	"conventionalCommits.scopes": ["theme", "i18n", "import"]
 }
