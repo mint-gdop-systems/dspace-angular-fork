@@ -1,51 +1,92 @@
 {
 
-  "home-page.news.welcome-text": "እንኳን ወደ ሲቪል ምዝገባ እና የነዋሪነት አገልግሎት ኤጀንሲ ዲጂታል መግቢያ በደህና መጡ",
-
-  "admin.dashboard.title": "Admin Statistics Dashboard",
-
-  "admin.dashboard.refresh": "Refresh Data",
-
-  "admin.dashboard.collections": "Woredas",
+  "admin.dashboard.admin-dashboard": "Admin Dashboard",
 
   "admin.dashboard.archived-items": "Archived Items",
 
-  "admin.dashboard.workflow-items": "Workflow Items",
-
   "admin.dashboard.collection-name": "Woreda Name",
+
+  "admin.dashboard.collections": "Woredas",
 
   "admin.dashboard.no-data": "No woreda statistics available.",
 
-  "menu.section.analytics": "Analytics",
+  "admin.dashboard.refresh": "Refresh Data",
 
   "admin.dashboard.statistics.collections": "Woreda Statistics",
 
+  "admin.dashboard.title": "Admin Statistics Dashboard",
+
   "admin.dashboard.user-dashboard": "User Dashboard",
-  
-  "admin.dashboard.admin-dashboard": "Admin Dashboard",
 
-  "submission.sections.upload.preview.select-file": "Select file to preview",
-
-  "submission.sections.upload.preview.pdf-not-supported": "Your browser does not support native PDF preview. You can download the file here:",
-
-  "submission.sections.upload.preview.unsupported-format": "Preview not available for this file format. Use the link below to download.",
-
-  "submission.sections.upload.preview.no-file-selected": "No file selected for preview.",
-  
-  "submission.sections.upload.uploaded-files-list": "Uploaded Files",
-
-  "item.page.filesection.documentType": "Document Type",
+  "admin.dashboard.workflow-items": "Workflow Items",
 
   "item.page.filesection.document.status": "Status",
 
-  "mydspace.results.no-heads": "No family heads",
-
-  "mydspace.results.no-description": "No description",
-
-  "mydspace.status.rejected": "Rejected",
+  "item.page.filesection.documentType": "Document Type",
 
   "item.search-result.rejection-reason": "Rejection reason",
 
+  "home-page.news.welcome-text": "Welcome to Civil Registration and Residency Service Agency",
+
+  "menu.section.analytics": "Analytics",
+
+  "mydspace.results.no-description": "No description",
+
+  "mydspace.results.no-heads": "No family heads",
+
+  "mydspace.status.rejected": "Rejected",
+
+  "search.filters.filter.houseNumber.head": "House Number",
+
+  "search.filters.filter.houseNumber.placeholder": "House Number",
+
+  "search.filters.filter.houseNumber.label": "House Number",
+
+  "search.filters.filter.houseType.head": "House Type",
+
+  "search.filters.filter.houseType.placeholder": "House Type",
+
+  "search.filters.filter.houseType.label": "House Type",
+
+  "search.filters.filter.husband.head": "Husband Name",
+
+  "search.filters.filter.husband.placeholder": "Husband Name",
+
+  "search.filters.filter.husband.label": "Husband Name",
+
+  "search.filters.filter.registration.max.label": "End",
+
+  "search.filters.filter.registration.min.label": "Start",
+
+  "search.filters.filter.registration.head": "Registration Date",
+
+  "search.filters.filter.registration.placeholder": "Registration Date",
+
+  "search.filters.filter.registration.label": "Registration Date",
+
+  "search.filters.filter.wife.head": "Wife Name",
+
+  "search.filters.filter.wife.placeholder": "Wife Name",
+
+  "search.filters.filter.wife.label": "Wife Name",
+
+  "sorting.crvs.date.registration.ASC": "Registration date ascending",
+
+  "sorting.crvs.date.registration.DESC": "Registration date descending",
+
+  "sorting.crvs.identifier.houseNumber.ASC": "House number ascending",
+
+  "sorting.crvs.identifier.houseNumber.DESC": "House number descending",
+
+  "submission.sections.upload.preview.no-file-selected": "No file selected for preview.",
+
+  "submission.sections.upload.preview.pdf-not-supported": "Your browser does not support native PDF preview. You can download the file here:",
+
+  "submission.sections.upload.preview.select-file": "Select file to preview",
+
+  "submission.sections.upload.preview.unsupported-format": "Preview not available for this file format. Use the link below to download.",
+
+  "submission.sections.upload.uploaded-files-list": "Uploaded Files",
 
   
   "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",
