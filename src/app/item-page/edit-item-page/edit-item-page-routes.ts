@@ -19,7 +19,6 @@ import {
 } from './edit-item-page.routing-paths';
 import { ItemAccessControlComponent } from './item-access-control/item-access-control.component';
 import { ItemAuthorizationsComponent } from './item-authorizations/item-authorizations.component';
-import { ItemBitstreamsComponent } from './item-bitstreams/item-bitstreams.component';
 import { ItemCollectionMapperComponent } from './item-collection-mapper/item-collection-mapper.component';
 import { ItemCurateComponent } from './item-curate/item-curate.component';
 import { ItemDeleteComponent } from './item-delete/item-delete.component';
@@ -47,6 +46,7 @@ import { ItemRelationshipsComponent } from './item-relationships/item-relationsh
 import { ThemedItemStatusComponent } from './item-status/themed-item-status.component';
 import { ItemVersionHistoryComponent } from './item-version-history/item-version-history.component';
 import { ItemWithdrawComponent } from './item-withdraw/item-withdraw.component';
+import { ItemBitstreamsComponent } from 'src/themes/crrsa/app/item-page/edit-item-page/item-bitstreams/item-bitstreams.component';
 
 /**
  * Routing module that handles the routing for the Edit Item page administrator functionality

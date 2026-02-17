@@ -16,6 +16,8 @@ import { HeaderNavbarWrapperComponent } from "./app/header-nav-wrapper/header-na
 import { HomeNewsComponent } from "./app/home-page/home-news/home-news.component";
 import { NavbarComponent } from "./app/navbar/navbar.component";
 import { MyDSpaceStatusBadgeComponent } from "./app/shared/object-collection/shared/badges/my-dspace-status-badge/my-dspace-status-badge.component";
+import { ItemEditBitstreamBundleComponent } from "src/themes/crrsa/app/item-page/edit-item-page/item-bitstreams/item-edit-bitstream-bundle/item-edit-bitstream-bundle.component";
+import { ItemBitstreamsComponent } from "src/themes/crrsa/app/item-page/edit-item-page/item-bitstreams/item-bitstreams.component";
 
 export const COMPONENTS = [
 	AdminSidebarComponent,
@@ -34,4 +36,6 @@ export const COMPONENTS = [
 	FileSectionComponent,
 	ItemListPreviewComponent,
 	MyDSpaceStatusBadgeComponent,
+	ItemBitstreamsComponent,
+	ItemEditBitstreamBundleComponent
 ];
