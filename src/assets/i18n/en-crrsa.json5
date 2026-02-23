@@ -88,6 +88,12 @@
 
   "submission.sections.upload.uploaded-files-list": "Uploaded Files",
 
+  "submission.sections.submit.progressbar.birth": "Birth",
+
+  "submit.progressbar.marriage": "Marriage / Divorce",
+
+  "submit.progressbar.death": "Death",
+
 
   
   "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",
