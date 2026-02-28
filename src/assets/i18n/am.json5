@@ -132,6 +132,19 @@
   
   "bitstream.edit.form.documentStatus.options.Inactive": "Inactive",
 
+  "letter.listelement.badge": "Letter",
+
+  "letter.page.titleprefix": "Letter: ",
+
+  "letter.page.edit": "Edit Letter",
+
+  "letter.page.options": "Options",
+  
+  "house.page.options": "Options",
+  
+  "vitalevent.page.options": "Options",
+  
+
 
   
   "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",
