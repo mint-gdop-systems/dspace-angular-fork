@@ -254,16 +254,21 @@ export class SubmissionSectionUploadFileComponent implements OnChanges, OnInit, 
    * @return Bitstream object
    */
   public getBitstream(): Bitstream {
-    return Object.assign(new Bitstream(), {
+    return Object.assign(new Bitstream(), this.fileData, {
       uuid: this.fileData.uuid,
+      id: this.fileData.uuid,
+      _links: {
+        self: { href: this.fileData.url },
+        content: { href: this.fileData.url }
+      }
     });
   }
 
   editBitstreamData() {
-
     const options: NgbModalOptions = {
       size: 'xl',
       backdrop: 'static',
+      container: 'body'
     };
 
     const activeModal = this.modalService.open(SubmissionSectionUploadFileEditComponent, options);

@@ -15,9 +15,9 @@
     @if (isPdf(selectedFile)) {
     <div class="pdf-container w-100 h-100">
       @if (pdfUrl) {
-      <iframe [src]="pdfUrl" width="100%" height="1000px" frameborder="0">
+      <iframe [src]="pdfUrl" class="pdf-frame" frameborder="0">
         <p>{{ 'submission.sections.upload.preview.pdf-not-supported' | translate }}
-          <ds-file-download-link [bitstream]="selectedFile" [showIcon]="true"></ds-file-download-link>
+          <ds-file-download-link [bitstream]="asBitstream(selectedFile)" [showIcon]="true"></ds-file-download-link>
         </p>
       </iframe>
       } @else {
@@ -31,7 +31,7 @@
     <div class="text-center">
       <i class="fas fa-file fa-4x mb-3 text-secondary"></i>
       <p>{{ 'submission.sections.upload.preview.unsupported-format' | translate }}</p>
-      <ds-file-download-link [bitstream]="selectedFile" [showIcon]="true"
+      <ds-file-download-link [bitstream]="asBitstream(selectedFile)" [showIcon]="true"
         [cssClasses]="'btn btn-primary'"></ds-file-download-link>
     </div>
     }

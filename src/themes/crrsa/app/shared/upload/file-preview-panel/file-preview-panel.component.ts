@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { ThemedFileDownloadLinkComponent } from 'src/app/shared/file-download-link/themed-file-download-link.component';
+import { Bitstream } from '@dspace/core/shared/bitstream.model';
 
 @Component({
     selector: 'ds-file-preview-panel',
@@ -35,6 +36,14 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
         if (changes.selectedFile && this.selectedFile) {
             this.updatePreview();
         }
+    }
+
+    public asBitstream(file: any): Bitstream {
+        if (!file) return null;
+        if (file instanceof Bitstream) return file;
+        return Object.assign(new Bitstream(), file, {
+            _links: file._links || { self: { href: file.url } }
+        });
     }
 
     private updatePreview() {

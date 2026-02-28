@@ -88,6 +88,21 @@
 
   "submission.sections.upload.uploaded-files-list": "Uploaded Files",
 
+  "submission.sections.submit.progressbar.birth": "Birth",
+
+  "submission.sections.submit.progressbar.marriage": "Marriage / Divorce",
+
+  "submission.sections.submit.progressbar.death": "Death",
+
+  "house.page.edit": "Edit House",
+  
+  "vitalevent.page.edit": "Edit Vital Event",
+
+  "house.page.titleprefix": "House: ",
+
+  "vitalevent.page.titleprefix": "Vital Event: ",
+
+
   
   "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",
 

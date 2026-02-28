@@ -1,64 +1,86 @@
-<div class="container-fluid">
-  @if ((isLoading$ | async) !== true) {
-  <div class="submission-form-header mb-3">
-    <!-- Collection Add Section -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <div class="flex-grow-1 mr-3">
-        @if (!isSectionHidden) {
-        <ds-submission-form-collection [currentCollectionId]="collectionId" [currentDefinition]="definitionId"
-          [submissionId]="submissionId" [collectionModifiable]="collectionModifiable" [isReadonly]="isSectionReadonly"
-          (collectionChange)="onCollectionChange($event)">
-        </ds-submission-form-collection>
+<div class="submission-layout">
+
+  @if ((isLoading$ | async) === false) {
+
+  <!-- HEADER -->
+  <div class="submission-form-header position-sticky">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <div class="submission-form-header-title">
+        <h2 class="h5 mb-0">{{ 'submission.sections.general.header' | translate }}</h2>
+      </div>
+      <div class="submission-form-header-actions">
+        <!-- Optional: Header actions like Save/Deposit could be here too -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN BODY CONTAINER (Scrollable) -->
+  <div class="submission-body-container">
+
+    <!-- MAIN BODY SIDE-BY-SIDE -->
+    <div class="row submission-body g-0">
+
+      <!-- LEFT: FORM SECTIONS -->
+      <div class="col-md-7 submission-form-content">
+        @for (object of $any(submissionSections | async); track object) {
+        <ds-submission-section-container [collectionId]="collectionId" [submissionId]="submissionId"
+          [entityType]="entityType" [sectionData]="$any(object)">
+        </ds-submission-section-container>
         }
       </div>
-      <div>
-        <ds-submission-form-section-add [collectionId]="collectionId" [submissionId]="submissionId">
-        </ds-submission-form-section-add>
+
+      <!-- RIGHT: FILE PREVIEW PANEL -->
+      <div class="col-md-5 submission-preview-panel">
+        @if ((uploadEnabled$ | async)) {
+        <div class="file-selector-container mb-3 shadow-sm p-3 bg-light border-bottom">
+          <ds-submission-upload-files [submissionId]="submissionId" [collectionId]="collectionId"
+            [uploadFilesOptions]="uploadFilesOptions">
+          </ds-submission-upload-files>
+        </div>
+        }
+
+        <ds-file-preview-panel [fileList]="fileList" [selectedFile]="selectedFile"
+          (fileSelected)="onFileSelectedForPreview($event)">
+        </ds-file-preview-panel>
+
+      </div>
+
+    </div>
+
+    <hr class="my-5">
+
+    <!-- FULL WIDTH UPLOAD SECTION AT BOTTOM -->
+    @if (uploadSection$ | async; as uploadSectionObject) {
+    <div class="submission-upload-section-footer mt-4">
+      <div class="card shadow-sm border-primary">
+        <div class="card-header bg-primary text-white py-2">
+          <h5 class="mb-0 h6"><i class="fas fa-paperclip me-2"></i>{{ 'submission.sections.upload.header' | translate }}
+          </h5>
+        </div>
+        <div class="card-body p-0">
+          <ds-submission-section-container [collectionId]="collectionId" [submissionId]="submissionId"
+            [entityType]="entityType" [sectionData]="$any(uploadSectionObject)">
+          </ds-submission-section-container>
+        </div>
       </div>
     </div>
+    }
+
+  </div> <!-- End of submission-body-container -->
+
+
+  <!-- FOOTER -->
+  <div class="submission-form-footer mt-auto bg-white border-top shadow-sm p-3">
+    <ds-submission-form-footer [submissionId]="submissionId">
+    </ds-submission-form-footer>
   </div>
 
-  <div class="row">
-    <!-- LEFT COLUMN : Descriptive Forms -->
-    <div class="col-md-7 submission-form-content">
-      @for (object of $any(submissionSections | async); track object) {
-      @if (object.sectionType !== 'upload') {
-      <ds-submission-section-container [collectionId]="collectionId" [submissionId]="submissionId"
-        [sectionData]="$any(object)">
-      </ds-submission-section-container>
-      }
-      }
-    </div>
-
-    <!-- RIGHT COLUMN : Uploader and Preview -->
-    <div class="col-md-5">
-      @if ((uploadEnabled$ | async)) {
-      <ds-submission-upload-files [submissionId]="submissionId" [collectionId]="collectionId"
-        [uploadFilesOptions]="uploadFilesOptions"></ds-submission-upload-files>
-      }
-    </div>
-  </div>
-
-  <!-- BOTTOM ROW : Uploaded Files List -->
-  <div class="row mt-4 border-top pt-4">
-    <div class="col-12">
-      <h4 class="mb-3">{{ 'submission.sections.upload.uploaded-files-list' | translate }}</h4>
-      @for (object of $any(submissionSections | async); track object) {
-      @if (object.sectionType === 'upload') {
-      <ds-submission-section-container [collectionId]="collectionId" [submissionId]="submissionId"
-        [sectionData]="$any(object)">
-      </ds-submission-section-container>
-      }
-      }
-    </div>
-  </div>
-  } @else {
-  <ds-loading [message]="'form.loading' | translate"></ds-loading>
   }
 
-  @if ((isLoading$ | async) !== true) {
-  <div class="submission-form-footer mt-3 mb-3 position-sticky">
-    <ds-submission-form-footer [submissionId]="submissionId"></ds-submission-form-footer>
+  @if (isLoading$ | async) {
+  <div class="d-flex justify-content-center align-items-center flex-grow-1">
+    <ds-loading [message]="'form.loading' | translate"></ds-loading>
   </div>
   }
+
 </div>

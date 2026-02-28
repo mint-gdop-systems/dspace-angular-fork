@@ -90,9 +90,21 @@
 
   "submission.sections.submit.progressbar.birth": "Birth",
 
-  "submit.progressbar.marriage": "Marriage / Divorce",
+  "submission.sections.submit.progressbar.marriage": "Marriage / Divorce",
 
-  "submit.progressbar.death": "Death",
+  "submission.sections.submit.progressbar.death": "Death",
+
+  "house.listelement.badge": "Household",
+
+  "vitalevent.listelement.badge": "Vital Event",
+
+  "house.page.edit": "Edit House",
+  
+  "vitalevent.page.edit": "Edit Vital Event",
+
+  "house.page.titleprefix": "House: ",
+
+  "vitalevent.page.titleprefix": "Vital Event: ",
 
 
   
