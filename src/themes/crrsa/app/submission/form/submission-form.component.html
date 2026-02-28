@@ -1,21 +1,22 @@
 <div class="submission-layout">
 
   @if ((isLoading$ | async) === false) {
-
-  <!-- HEADER -->
-  <div class="submission-form-header position-sticky">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-      <div class="submission-form-header-title">
-        <h2 class="h5 mb-0">{{ 'submission.sections.general.header' | translate }}</h2>
-      </div>
-      <div class="submission-form-header-actions">
-        <!-- Optional: Header actions like Save/Deposit could be here too -->
-      </div>
-    </div>
-  </div>
-
   <!-- MAIN BODY CONTAINER (Scrollable) -->
   <div class="submission-body-container">
+    <div class="d-flex g-4 align-items-center mb-3">
+      <div>
+        @if (!isSectionHidden) {
+        <ds-submission-form-collection [currentCollectionId]="collectionId" [currentDefinition]="definitionId"
+          [submissionId]="submissionId" [collectionModifiable]="collectionModifiable" [isReadonly]="isSectionReadonly"
+          (collectionChange)="onCollectionChange($event)">
+        </ds-submission-form-collection>
+        }
+      </div>
+      <div>
+        <ds-submission-form-section-add [collectionId]="collectionId" [submissionId]="submissionId">
+        </ds-submission-form-section-add>
+      </div>
+    </div>
 
     <!-- MAIN BODY SIDE-BY-SIDE -->
     <div class="row submission-body g-0">
@@ -52,16 +53,10 @@
     <!-- FULL WIDTH UPLOAD SECTION AT BOTTOM -->
     @if (uploadSection$ | async; as uploadSectionObject) {
     <div class="submission-upload-section-footer mt-4">
-      <div class="card shadow-sm border-primary">
-        <div class="card-header bg-primary text-white py-2">
-          <h5 class="mb-0 h6"><i class="fas fa-paperclip me-2"></i>{{ 'submission.sections.upload.header' | translate }}
-          </h5>
-        </div>
-        <div class="card-body p-0">
-          <ds-submission-section-container [collectionId]="collectionId" [submissionId]="submissionId"
-            [entityType]="entityType" [sectionData]="$any(uploadSectionObject)">
-          </ds-submission-section-container>
-        </div>
+      <div class="card-body p-0">
+        <ds-submission-section-container [collectionId]="collectionId" [submissionId]="submissionId"
+          [entityType]="entityType" [sectionData]="$any(uploadSectionObject)">
+        </ds-submission-section-container>
       </div>
     </div>
     }
