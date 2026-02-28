@@ -106,6 +106,36 @@
 
   "vitalevent.page.titleprefix": "Vital Event: ",
 
+  "bitstream.edit.form.documentType.label": "Document Type",
+
+  "bitstream.edit.form.documentType.hint": "Select the type of the document",
+
+  "bitstream.edit.form.documentStatus.label": "Document Status",
+
+  "bitstream.edit.form.documentStatus.hint": "Select the status of the document",
+
+  "bitstream.edit.form.documentType.options.ID Card": "ID Card",
+
+  "bitstream.edit.form.documentType.options.Birth Certificate": "Birth Certificate",
+
+  "bitstream.edit.form.documentType.options.Death Certificate": "Death Certificate",
+
+  "bitstream.edit.form.documentType.options.Marriage Certificate": "Marriage Certificate",
+
+  "bitstream.edit.form.documentType.options.Divorce Certificate": "Divorce Certificate",
+
+  "bitstream.edit.form.documentType.options.Not-married Certificate": "Not-married Certificate",
+
+  "bitstream.edit.form.documentType.options.Adoption Decree": "Adoption Decree",
+
+  "bitstream.edit.form.documentType.options.Supporting Document": "Supporting Document",
+
+  "bitstream.edit.form.documentType.options.Other": "Other",
+
+  "bitstream.edit.form.documentStatus.options.Active": "Active",
+  
+  "bitstream.edit.form.documentStatus.options.Inactive": "Inactive",
+
 
   
   "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",

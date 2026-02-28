@@ -216,7 +216,7 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
     hasSelectableMetadata: false,
     resourceType: BITSTREAM_FORMAT,
     formatFunction: (format: BitstreamFormat | string) => {
-      if (format instanceof  BitstreamFormat) {
+      if (format instanceof BitstreamFormat) {
         return hasValue(format) && format.supportLevel === BitstreamFormatSupportLevel.Unknown ? this.translate.instant(this.KEY_PREFIX + 'selectedFormat.unknown') : format.shortDescription;
       } else {
         return format;
@@ -240,11 +240,11 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
     id: 'iiifLabel',
     name: 'iiifLabel',
   },
-  {
-    grid: {
-      host: 'col col-lg-6 d-inline-block',
-    },
-  });
+    {
+      grid: {
+        host: 'col col-lg-6 d-inline-block',
+      },
+    });
   iiifLabelContainer = new DynamicFormGroupModel({
     id: 'iiifLabelContainer',
     group: [this.iiifLabelModel],
@@ -312,7 +312,7 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
    * All input models in a simple array for easier iterations
    */
   inputModels = [this.primaryBitstreamModel, this.fileNameModel, this.descriptionModel, this.selectedFormatModel,
-    this.newFormatModel];
+  this.newFormatModel];
 
   /**
    * The dynamic form fields used for editing the information of a bitstream
@@ -446,15 +446,15 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
   private selectedFormat: BitstreamFormat;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private changeDetectorRef: ChangeDetectorRef,
-              private formService: DynamicFormService,
-              private translate: TranslateService,
-              private bitstreamService: BitstreamDataService,
-              public dsoNameService: DSONameService,
-              private notificationsService: NotificationsService,
-              private bitstreamFormatService: BitstreamFormatDataService,
-              private primaryBitstreamService: PrimaryBitstreamService,
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
+    private formService: DynamicFormService,
+    protected translate: TranslateService,
+    private bitstreamService: BitstreamDataService,
+    public dsoNameService: DSONameService,
+    private notificationsService: NotificationsService,
+    private bitstreamFormatService: BitstreamFormatDataService,
+    private primaryBitstreamService: PrimaryBitstreamService,
   ) {
   }
 
@@ -589,7 +589,7 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
    * @param id
    */
   isUnknownFormat(): boolean {
-    return hasValue(this.selectedFormat) &&  this.selectedFormat.supportLevel === BitstreamFormatSupportLevel.Unknown;
+    return hasValue(this.selectedFormat) && this.selectedFormat.supportLevel === BitstreamFormatSupportLevel.Unknown;
   }
 
   /**
@@ -805,8 +805,8 @@ export class EditBitstreamPageComponent implements OnInit, OnDestroy {
       map((bundle: RemoteData<Bundle>) => bundle.payload.item.pipe(
         getFirstSucceededRemoteData(),
         map((item: RemoteData<Item>) =>
-          (item.payload.firstMetadataValue('dspace.iiif.enabled') &&
-            item.payload.firstMetadataValue('dspace.iiif.enabled').match(regexIIIFItem) !== null),
+        (item.payload.firstMetadataValue('dspace.iiif.enabled') &&
+          item.payload.firstMetadataValue('dspace.iiif.enabled').match(regexIIIFItem) !== null),
         ))));
 
     const iiifSub = combineLatest(
