@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   hasValue,
   isEmpty,
+  isNotEmpty
 } from '@dspace/shared/utils/empty.util';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -56,9 +57,34 @@ export class DSONameService {
     OrgUnit: (dso: DSpaceObject, escapeHTML?: boolean): string => {
       return dso.firstMetadataValue('organization.legalName', undefined, escapeHTML);
     },
+    House: (dso: DSpaceObject, escapeHTML?: boolean): string => {
+      return dso.firstMetadataValue('crvs.identifier.houseFamilyKey', undefined, escapeHTML);
+    },
+    VitalEvent: (dso: DSpaceObject, escapeHTML?: boolean): string => {
+      const childName = dso.firstMetadataValue("crvs.birth.childName", undefined, escapeHTML)
+      const husbandName = dso.firstMetadataValue("crvs.marriage.husbandName", undefined, escapeHTML)
+      const wifeName = dso.firstMetadataValue("crvs.marriage.wifeName", undefined, escapeHTML)
+      const deceasedName = dso.firstMetadataValue("crvs.death.personName", undefined, escapeHTML)
+
+      if (isNotEmpty(childName)) {
+        return childName;
+      }
+
+      if (isNotEmpty(husbandName) && isNotEmpty(wifeName)) {
+        return `${husbandName} & ${wifeName}`;
+      }
+
+      if (isNotEmpty(husbandName) || isNotEmpty(wifeName)) {
+        return husbandName || wifeName;
+      }
+
+      if (isNotEmpty(deceasedName)) {
+        return deceasedName;
+      }
+    },
     Default: (dso: DSpaceObject, escapeHTML?: boolean): string => {
       // If object doesn't have dc.title metadata use name property
-      return dso.firstMetadataValue('dc.title', undefined, escapeHTML) || dso.firstMetadataValue('crvs.identifier.houseFamilyKey', undefined, escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
+      return dso.firstMetadataValue('dc.title', undefined, escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
     },
   };
 
@@ -101,7 +127,7 @@ export class DSONameService {
     const types = dso.getRenderTypes();
     const entityType = types
       .filter((type) => typeof type === 'string')
-      .find((type: string) => (['Person', 'OrgUnit']).includes(type)) as string;
+      .find((type: string) => (['Person', 'OrgUnit', 'House', 'VitalEvent']).includes(type)) as string;
     if (entityType === 'Person') {
       const familyName = this.firstMetadataValue(object, dso, 'person.familyName', escapeHTML);
       const givenName = this.firstMetadataValue(object, dso, 'person.givenName', escapeHTML);
@@ -113,8 +139,72 @@ export class DSONameService {
       return `${familyName}, ${givenName}`;
     } else if (entityType === 'OrgUnit') {
       return this.firstMetadataValue(object, dso, 'organization.legalName', escapeHTML);
+    } else if (entityType === "House") {
+      return this.firstMetadataValue(object, dso, 'crvs.identifier.houseFamilyKey', escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
+    } else if (entityType === "VitalEvent") {
+      const childName = this.firstMetadataValue(object, dso, "crvs.birth.childName", escapeHTML)
+      const husbandName = this.firstMetadataValue(object, dso, "crvs.marriage.husbandName", escapeHTML)
+      const wifeName = this.firstMetadataValue(object, dso, "crvs.marriage.wifeName", escapeHTML)
+      const deceasedName = this.firstMetadataValue(object, dso, "crvs.death.personName", escapeHTML)
+
+      if (isNotEmpty(childName)) {
+        return childName;
+      }
+
+      if (isNotEmpty(husbandName) && isNotEmpty(wifeName)) {
+        return `${husbandName} & ${wifeName}`;
+      }
+
+      if (isNotEmpty(husbandName) || isNotEmpty(wifeName)) {
+        return husbandName || wifeName;
+      }
+
+      if (isNotEmpty(deceasedName)) {
+        return deceasedName;
+      }
+
+      return this.translateService.instant('dso.name.untitled');
     }
-    return this.firstMetadataValue(object, dso, 'dc.title', escapeHTML) || this.firstMetadataValue(object, dso, 'crvs.identifier.houseFamilyKey', escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
+    return this.firstMetadataValue(object, dso, 'dc.title', escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
+  }
+
+  /**
+ * Gets the appropriate date
+ *
+ * @param object
+ * @param dso
+ * @param escapeHTML Whether the HTML is used inside a `[innerHTML]` attribute
+ *
+ * @returns {string} html embedded hit highlight.
+ */
+  getDate(object: any, dso: DSpaceObject, escapeHTML?: boolean): string {
+    const types = dso.getRenderTypes();
+    const entityType = types
+      .filter((type) => typeof type === 'string')
+      .find((type: string) => (['House', 'VitalEvent']).includes(type)) as string;
+    if (entityType === "House") {
+      return this.firstMetadataValue(object, dso, 'crvs.date.registration', escapeHTML) || "";
+    } else if (entityType === "VitalEvent") {
+      const dateOfBirth = this.firstMetadataValue(object, dso, "crvs.birth.dateOfBirth", escapeHTML)
+      const marriageDate = this.firstMetadataValue(object, dso, "crvs.marriage.date", escapeHTML)
+      const divorceDate = this.firstMetadataValue(object, dso, "crvs.divorce.courtApprovalDate", escapeHTML)
+      const dateOfDeath = this.firstMetadataValue(object, dso, "crvs.death.dateOfDeath", escapeHTML)
+
+      if (isNotEmpty(dateOfBirth)) {
+        return `Date of Birth: ${dateOfBirth}`;
+      }
+
+      if (isNotEmpty(marriageDate) || isNotEmpty(divorceDate)) {
+        return `Marriage: ${marriageDate || "N/A"}, Divorce: ${divorceDate || "N/A"}`;
+      }
+
+      if (isNotEmpty(dateOfDeath)) {
+        return `Date of Death: ${dateOfDeath}`;
+      }
+
+      return "No Date";
+    }
+    return "No Date";
   }
 
   /**

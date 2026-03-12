@@ -16,8 +16,8 @@
         <div>
           <span class="text-muted">
             <ds-truncatable-part [id]="item.id" [minLines]="1">
-              (<span class="item-list-date"
-                [innerHTML]="item.firstMetadataValue('crvs.date.registration', undefined, true) || ('mydspace.results.no-date' | translate)"></span>)
+              (<span class="item-list-date" [innerHTML]="dsoDate"></span>)
+
               @if (item.hasMetadata(['crvs.head.husband', 'crvs.head.wife']);) {
               <span class="item-list-authors">
                 @if (item.allMetadataValues(['crvs.head.husband', 'crvs.head.wife']).length === 0) {

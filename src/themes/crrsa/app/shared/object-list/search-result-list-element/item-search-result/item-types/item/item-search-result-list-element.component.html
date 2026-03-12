@@ -36,9 +36,14 @@
       }
       <span class="text-muted">
         <ds-truncatable-part [id]="dso.id" [minLines]="1">
-          (@if (firstMetadataValue('crvs.date.registration')) {
-          <span class="item-list-date" [innerHTML]="firstMetadataValue('crvs.date.registration')"> </span>
-          })
+          @if (firstMetadataValue('crvs.date.registration')) {
+          <span class="item-list-date"
+            [innerHTML]="'Date of Registration: ' + firstMetadataValue('crvs.date.registration')"> </span>
+          }
+          @if (firstMetadataValue('crvs.birth.dateOfBirth')) {
+          <span class="item-list-date" [innerHTML]="'Date of Birth: ' + firstMetadataValue('crvs.birth.dateOfBirth')">
+          </span>
+          }
           @if (allMetadataValues(['crvs.head.husband', 'crvs.head.wife']).length > 0) {
           <span class="item-list-authors">
             @for (author of allMetadataValues(['crvs.head.husband', 'crvs.head.wife']); track

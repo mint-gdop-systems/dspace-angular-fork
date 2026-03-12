@@ -71,11 +71,13 @@ export class ItemListPreviewComponent implements OnInit {
 
 	dsoTitle: string;
 
+	dsoDate: string;
+
 	constructor(
-    @Inject(APP_CONFIG) protected appConfig: AppConfig,
-    public dsoNameService: DSONameService,
-  ) {
-  }
+		@Inject(APP_CONFIG) protected appConfig: AppConfig,
+		public dsoNameService: DSONameService,
+	) {
+	}
 
 	ngOnInit(): void {
 		this.showThumbnails = this.appConfig.browseBy.showThumbnails;
@@ -84,5 +86,6 @@ export class ItemListPreviewComponent implements OnInit {
 			this.item,
 			true,
 		);
+		this.dsoDate = this.dsoNameService.getDate(this.object, this.item, true);
 	}
 }

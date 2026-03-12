@@ -1,7 +1,7 @@
 {
 	"typescript.check.workspaceVersion": false,
 	"i18n-ally.localesPaths": ["src/assets/i18n", "src/app/core/locale"],
-	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"js/ts.tsdk": "node_modules\\typescript\\lib",
 	"cSpell.words": [
 		"COAR",
 		"crrsa",
@@ -13,5 +13,6 @@
 		"Woreda",
 		"Woredas"
 	],
-	"conventionalCommits.scopes": ["theme", "i18n", "import"]
+	"conventionalCommits.scopes": ["theme", "i18n", "import"],
+	"files.autoSave": "off"
 }
