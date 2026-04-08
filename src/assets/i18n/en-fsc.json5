@@ -1,6 +1,8 @@
 {
 
   "admin.dashboard.admin-dashboard": "Admin Dashboard",
+  
+  "admin.dashboard.breadcrumbs": "Analytics",
 
   "admin.dashboard.archived-items": "Archived Items",
 
@@ -96,6 +98,10 @@
 
   "submission.sections.submit.progressbar.describe.physical": "Physical Location Info",
 
+  "house.listelement.badge": "Household",
+
+  "vitalevent.listelement.badge": "Vital Event",
+
   "house.page.edit": "Edit House",
   
   "vitalevent.page.edit": "Edit Vital Event",
@@ -104,13 +110,65 @@
 
   "vitalevent.page.titleprefix": "Vital Event: ",
 
+  "search.filters.filter.caseType.head": "Case Type",
+  "search.filters.filter.caseType.placeholder": "Filter by Case Type...",
+  "search.filters.filter.caseType.label": "Case Type",
+
+  "search.filters.filter.caseLevel.head": "Case Level",
+  "search.filters.filter.caseLevel.placeholder": "Filter by Case Level...",
+  "search.filters.filter.caseLevel.label": "Case Level",
+
+  "search.filters.filter.registrationDate.head": "Registration Date",
+  "search.filters.filter.registrationDate.placeholder": "Registration Date",
+  "search.filters.filter.registrationDate.label": "Registration Date",
+  "search.filters.filter.registrationDate.min.label": "Registered After",
+  "search.filters.filter.registrationDate.max.label": "Registered Before",
+
+  "search.filters.filter.primaryJudge.head": "Primary Judge",
+  "search.filters.filter.primaryJudge.placeholder": "Search for a Judge...",
+  "search.filters.filter.primaryJudge.label": "Primary Judge",
+
+  "search.filters.filter.fileNumber.head": "File Number",
+  "search.filters.filter.fileNumber.placeholder": "Search by File Number...",
+  "search.filters.filter.fileNumber.label": "File Number",
+
+  "search.filters.filter.plaintiff.head": "Plaintiff",
+  "search.filters.filter.plaintiff.placeholder": "Search for a Plaintiff...",
+  "search.filters.filter.plaintiff.label": "Plaintiff",
+
+  "search.filters.filter.defendant.head": "Defendant",
+  "search.filters.filter.defendant.placeholder": "Search for a Defendant...",
+  "search.filters.filter.defendant.label": "Defendant",
+
+  "submission.sections.upload.preview.no-file-selected": "No legal document selected for preview.",
+  "submission.sections.upload.preview.pdf-not-supported": "Your browser does not support native PDF preview. You can download the case file here:",
+  "submission.sections.upload.preview.select-file": "Select document to preview",
+  "submission.sections.upload.preview.unsupported-format": "Preview not available for this format. Use the link below to download the evidence.",
+  "submission.sections.upload.uploaded-files-list": "Case Documents & Exhibits",
+
+  "submission.sections.submit.progressbar.pleadings": "Pleadings",
+
+  "submission.sections.submit.progressbar.orders": "Orders & Minutes",
+
+  "submission.sections.submit.progressbar.evidence": "Evidence / Exhibits",
+
+  "submission.sections.submit.progressbar.describe.legal": "Case Management Info",
+
+  "legal.listelement.badge": "Court Case",
+
+  "document.listelement.badge": "Legal Document",
+
+  "legal.page.edit": "Edit Case File",
+
+  "legal.page.titleprefix": "Case: ",
+
   "bitstream.edit.form.documentType.label": "Document Type",
 
-  "bitstream.edit.form.documentType.hint": "Select the type of the document",
+  "bitstream.edit.form.documentType.hint": "Select the specific type of legal filing",
 
   "bitstream.edit.form.documentStatus.label": "Document Status",
 
-  "bitstream.edit.form.documentStatus.hint": "Select the status of the document",
+  "bitstream.edit.form.documentStatus.hint": "Select the current status (e.g., Draft, Signed, Sealed)",
 
   "bitstream.edit.form.documentType.options.ID Card": "ID Card",
 
@@ -128,11 +186,49 @@
 
   "bitstream.edit.form.documentType.options.Supporting Document": "Supporting Document",
 
-  "bitstream.edit.form.documentType.options.Other": "Other",
+  "bitstream.edit.form.documentType.options.Statement of Claim": "Statement of Claim / Petition",
+
+  "bitstream.edit.form.documentType.options.Statement of Defence": "Statement of Defence",
+
+  "bitstream.edit.form.documentType.options.Court Order": "Court Order",
+
+  "bitstream.edit.form.documentType.options.Minutes": "Hearing Minutes",
+
+  "bitstream.edit.form.documentType.options.Exhibit": "Exhibit / Evidence",
+
+  "bitstream.edit.form.documentType.options.Affidavit": "Affidavit",
+
+  "bitstream.edit.form.documentType.options.Judgement": "Final Judgement",
+
+  "bitstream.edit.form.documentType.options.Appeals": "Notice of Appeal",
+
+  "bitstream.edit.form.documentType.options.Other": "Other Legal Document",
 
   "bitstream.edit.form.documentStatus.options.Active": "Active",
   
   "bitstream.edit.form.documentStatus.options.Inactive": "Inactive",
+
+  "bitstream.edit.form.section.label": "Case Section",
+
+  "bitstream.edit.form.section.hint": "Select the sub-folder/section for this document",
+
+  "bitstream.edit.form.section.options.pleadings": "Pleadings Section",
+
+  "bitstream.edit.form.section.options.orders": "Orders & Minutes Section",
+
+  "bitstream.edit.form.section.options.evidence": "Evidence Section",
+
+  "bitstream.edit.form.section.options.judgement": "Judgement & Closing Section",
+
+  "bitstream.edit.form.exhibitCode.label": "Exhibit Code",
+  
+  "bitstream.edit.form.exhibitCode.hint": "Enter code (e.g., K-1 for Plaintiff, T-1 for Defendant)",
+
+  "item.edit.bitstreams.column.section": "Section",
+
+  "item.edit.bitstreams.column.exhibitCode": "Exhibit Code",
+
+  "item.edit.bitstreams.column.documentStatus": "Status",
 
   "letter.listelement.badge": "Letter",
 
@@ -145,7 +241,6 @@
   "house.page.options": "Options",
   
   "vitalevent.page.options": "Options",
-  
 
 
   
@@ -5172,17 +5267,29 @@
 
   "sorting.lastModified.DESC": "Last modified Descending",
 
-  "sorting.person.familyName.ASC": "Surname Ascending",
+  "sorting.legal.date.registration.DESC": "Registration date (newest first)",
 
-  "sorting.person.familyName.DESC": "Surname Descending",
+  "sorting.legal.date.registration.ASC": "Registration date (oldest first)",
 
-  "sorting.person.givenName.ASC": "Name Ascending",
+  "sorting.legal.case.fileNumber.ASC": "File number (A-Z/0-9)",
+  
+  "sorting.legal.case.fileNumber.DESC": "File number (Z-A/9-0)",
 
-  "sorting.person.givenName.DESC": "Name Descending",
+  "sorting.legal.judge.primary.ASC": "Primary Judge (A-Z)",
 
-  "sorting.person.birthDate.ASC": "Birth Date Ascending",
+  "sorting.legal.judge.primary.DESC": "Primary Judge (Z-A)",
 
-  "sorting.person.birthDate.DESC": "Birth Date Descending",
+  "sorting.legal.case.plaintiff.ASC": "Plaintiff name (A-Z)",
+
+  "sorting.legal.case.plaintiff.DESC": "Plaintiff name (Z-A)",
+
+  "sorting.legal.case.defendant.ASC": "Defendant name (A-Z)",
+
+  "sorting.legal.case.defendant.DESC": "Defendant name (Z-A)",
+
+  "sorting.legal.case.type.ASC": "Case Type (A-Z)",
+
+  "sorting.legal.case.type.DESC": "Case Type (Z-A)",
 
   "statistics.title": "Statistics",
 
@@ -5770,9 +5877,9 @@
 
   "submission.sections.submit.progressbar.describe.stepcustom": "Describe",
 
-  "submission.sections.submit.progressbar.describe.stepone": "Describe",
+  "submission.sections.submit.progressbar.describe.stepone": "Case Identity & Parties",
 
-  "submission.sections.submit.progressbar.describe.steptwo": "Describe",
+  "submission.sections.submit.progressbar.describe.steptwo": "Judicial Workflow & Archive",
 
   "submission.sections.submit.progressbar.duplicates": "Potential duplicates",
 

@@ -83,6 +83,24 @@ export class DSONameService {
       }
     },
     Default: (dso: DSpaceObject, escapeHTML?: boolean): string => {
+      const fileNumber = dso.firstMetadataValue('legal.case.fileNumber', undefined, escapeHTML);
+      const plaintiff = dso.firstMetadataValue('legal.case.plaintiff', undefined, escapeHTML);
+      const defendant = dso.firstMetadataValue('legal.case.defendant', undefined, escapeHTML);
+      const complaintNumber = dso.firstMetadataValue('legal.case.complaintNumber', undefined, escapeHTML);
+      
+      let legalName = '';
+      const vsPart = (plaintiff && defendant) ? `${plaintiff} Vs ${defendant}` : (plaintiff || defendant || '');
+
+      if (isNotEmpty(fileNumber) && isNotEmpty(vsPart)) {
+        legalName = `${fileNumber}<br>${vsPart}`;
+      } else {
+        legalName = fileNumber || vsPart || complaintNumber || '';
+      }
+
+      if (isNotEmpty(legalName)) {
+        return legalName;
+      }
+
       // If object doesn't have dc.title metadata use name property
       return dso.firstMetadataValue('dc.title', undefined, escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
     },
@@ -165,6 +183,25 @@ export class DSONameService {
 
       return this.translateService.instant('dso.name.untitled');
     }
+
+    const fileNumber = this.firstMetadataValue(object, dso, 'legal.case.fileNumber', escapeHTML);
+    const plaintiff = this.firstMetadataValue(object, dso, 'legal.case.plaintiff', escapeHTML);
+    const defendant = this.firstMetadataValue(object, dso, 'legal.case.defendant', escapeHTML);
+    const complaintNumber = this.firstMetadataValue(object, dso, 'legal.case.complaintNumber', escapeHTML);
+    
+    let legalName = '';
+    const vsPart = (plaintiff && defendant) ? `${plaintiff} Vs ${defendant}` : (plaintiff || defendant || '');
+
+    if (isNotEmpty(fileNumber) && isNotEmpty(vsPart)) {
+      legalName = `${fileNumber}<br>${vsPart}`;
+    } else {
+      legalName = fileNumber || vsPart || complaintNumber || '';
+    }
+
+    if (isNotEmpty(legalName)) {
+      return legalName;
+    }
+
     return this.firstMetadataValue(object, dso, 'dc.title', escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
   }
 
@@ -204,6 +241,12 @@ export class DSONameService {
 
       return "No Date";
     }
+
+    const registrationDate = this.firstMetadataValue(object, dso, 'legal.date.registration', escapeHTML);
+    if (isNotEmpty(registrationDate)) {
+      return registrationDate;
+    }
+
     return "No Date";
   }
 

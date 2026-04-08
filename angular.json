@@ -55,9 +55,9 @@
                 "bundleName": "custom-theme"
               },
               {
-                "input": "src/themes/crrsa/styles/theme.scss",
+                "input": "src/themes/fsc/styles/theme.scss",
                 "inject": false,
-                "bundleName": "crrsa-theme"
+                "bundleName": "fsc-theme"
               },
               {
                 "input": "src/themes/dspace/styles/theme.scss",

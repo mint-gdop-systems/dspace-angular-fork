@@ -1,7 +1,7 @@
-fallbackLanguage: en-crrsa
+fallbackLanguage: en-fsc
 
 languages:
-  - code: en-crrsa
+  - code: en-fsc
     label: English
     active: true
   - code: am
@@ -14,18 +14,18 @@ info:
   enableCOARNotifySupport: false
 
 themes:
-  - name: crrsa
+  - name: fsc
     headTags:
     - tagName: link
       attributes:
         rel: icon
-        href: assets/crrsa/images/favicons/favicon.ico
+        href: assets/fsc/images/favicons/favicon.ico
         sizes: any
     - tagName: link
       attributes:
         rel: apple-touch-icon
-        href: assets/crrsa/images/favicons/apple-touch-icon.png
+        href: assets/fsc/images/favicons/apple-touch-icon.png
     - tagName: link
       attributes:
         rel: manifest
-        href: assets/crrsa/images/favicons/manifest.webmanifest
+        href: assets/fsc/images/favicons/manifest.webmanifest

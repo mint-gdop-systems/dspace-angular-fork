@@ -1,0 +1,58 @@
+<ng-container *ngVar="(bitstreamRD$ | async) as bitstreamRD">
+    <div class="container">
+        @if (bitstreamRD?.hasSucceeded) {
+        <div class="row mt-4">
+            <div class="col-md-2 text-center">
+                <ds-thumbnail [thumbnail]="bitstreamRD?.payload"></ds-thumbnail>
+                <div class="mt-2">
+                    <span class="badge badge-info">{{bitstreamRD?.payload?.sizeBytes | dsFileSize}}</span>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <div class="container-fluid mb-3">
+                    <div class="row">
+                        <div class="col-12 border-bottom pb-2">
+                            <h1 class="h3 dont-break-out">
+                                {{'bitstream.edit.title' | translate}}: 
+                                <span class="text-primary">{{dsoNameService.getName(bitstreamRD?.payload)}}</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                @if (formGroup) {
+                <ds-form 
+                    [formId]="'edit-bitstream-legal-form'" 
+                    [formGroup]="formGroup" 
+                    [formModel]="formModel"
+                    [formLayout]="formLayout" 
+                    [submitLabel]="'form.save'" 
+                    (submitForm)="onSubmit()"
+                    (cancel)="onCancel()" 
+                    (dfChange)="onChange($event)">
+                    
+                    <div additional class="container-fluid py-3 border-top mt-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a class="btn btn-outline-secondary btn-sm" 
+                               [routerLink]="['/bitstreams', bitstreamRD?.payload?.id, 'authorizations']">
+                                <i class="fas fa-lock mr-1"></i>
+                                {{'bitstream.edit.authorizations.link' | translate}}
+                            </a>
+                        </div>
+                    </div>
+                </ds-form>
+                }
+            </div>
+        </div>
+        }
+
+        @if (bitstreamRD?.hasFailed) {
+            <ds-error message="{{'error.bitstream' | translate}}"></ds-error>
+        }
+
+        @if (!bitstreamRD || bitstreamRD?.isLoading) {
+            <ds-loading message="{{'loading.bitstream' | translate}}"></ds-loading>
+        }
+    </div>
+</ng-container>
