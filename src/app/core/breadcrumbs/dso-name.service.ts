@@ -82,7 +82,7 @@ export class DSONameService {
         return deceasedName;
       }
     },
-    Default: (dso: DSpaceObject, escapeHTML?: boolean): string => {
+    CaseFile: (dso: DSpaceObject, escapeHTML?: boolean): string => {
       const fileNumber = dso.firstMetadataValue('legal.case.fileNumber', undefined, escapeHTML);
       const plaintiff = dso.firstMetadataValue('legal.case.plaintiff', undefined, escapeHTML);
       const defendant = dso.firstMetadataValue('legal.case.defendant', undefined, escapeHTML);
@@ -101,6 +101,30 @@ export class DSONameService {
         return legalName;
       }
 
+      return dso.firstMetadataValue('dc.title', undefined, escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
+    },
+    CirculationEvent: (dso: DSpaceObject, escapeHTML?: boolean): string => {
+      const status = dso.firstMetadataValue('legal.event.status', undefined, escapeHTML);
+      const receiver = dso.firstMetadataValue('legal.event.receiver', undefined, escapeHTML);
+      const department = dso.firstMetadataValue('legal.event.department', undefined, escapeHTML);
+      const dateOut = dso.firstMetadataValue('legal.event.date', undefined, escapeHTML);
+
+      let eventName = status || 'Circulation Event';
+      if (receiver && department) {
+        eventName += ` to ${receiver} (${department})`;
+      } else if (receiver) {
+        eventName += ` to ${receiver}`;
+      } else if (department) {
+        eventName += ` to ${department}`;
+      }
+
+      if (dateOut) {
+        eventName += ` on ${dateOut}`;
+      }
+
+      return eventName;
+    },
+    Default: (dso: DSpaceObject, escapeHTML?: boolean): string => {
       // If object doesn't have dc.title metadata use name property
       return dso.firstMetadataValue('dc.title', undefined, escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
     },
@@ -145,7 +169,7 @@ export class DSONameService {
     const types = dso.getRenderTypes();
     const entityType = types
       .filter((type) => typeof type === 'string')
-      .find((type: string) => (['Person', 'OrgUnit', 'House', 'VitalEvent']).includes(type)) as string;
+      .find((type: string) => (['Person', 'OrgUnit', 'House', 'VitalEvent', 'CaseFile', 'CirculationEvent']).includes(type)) as string;
     if (entityType === 'Person') {
       const familyName = this.firstMetadataValue(object, dso, 'person.familyName', escapeHTML);
       const givenName = this.firstMetadataValue(object, dso, 'person.givenName', escapeHTML);
@@ -182,24 +206,45 @@ export class DSONameService {
       }
 
       return this.translateService.instant('dso.name.untitled');
-    }
+    } else if (entityType === 'CaseFile') {
+      const fileNumber = this.firstMetadataValue(object, dso, 'legal.case.fileNumber', escapeHTML);
+      const plaintiff = this.firstMetadataValue(object, dso, 'legal.case.plaintiff', escapeHTML);
+      const defendant = this.firstMetadataValue(object, dso, 'legal.case.defendant', escapeHTML);
+      const complaintNumber = this.firstMetadataValue(object, dso, 'legal.case.complaintNumber', escapeHTML);
+      
+      let legalName = '';
+      const vsPart = (plaintiff && defendant) ? `${plaintiff} Vs ${defendant}` : (plaintiff || defendant || '');
 
-    const fileNumber = this.firstMetadataValue(object, dso, 'legal.case.fileNumber', escapeHTML);
-    const plaintiff = this.firstMetadataValue(object, dso, 'legal.case.plaintiff', escapeHTML);
-    const defendant = this.firstMetadataValue(object, dso, 'legal.case.defendant', escapeHTML);
-    const complaintNumber = this.firstMetadataValue(object, dso, 'legal.case.complaintNumber', escapeHTML);
-    
-    let legalName = '';
-    const vsPart = (plaintiff && defendant) ? `${plaintiff} Vs ${defendant}` : (plaintiff || defendant || '');
+      if (isNotEmpty(fileNumber) && isNotEmpty(vsPart)) {
+        legalName = `${fileNumber}<br>${vsPart}`;
+      } else {
+        legalName = fileNumber || vsPart || complaintNumber || '';
+      }
 
-    if (isNotEmpty(fileNumber) && isNotEmpty(vsPart)) {
-      legalName = `${fileNumber}<br>${vsPart}`;
-    } else {
-      legalName = fileNumber || vsPart || complaintNumber || '';
-    }
+      if (isNotEmpty(legalName)) {
+        return legalName;
+      }
+      return this.firstMetadataValue(object, dso, 'dc.title', escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
+    } else if (entityType === 'CirculationEvent') {
+      const status = this.firstMetadataValue(object, dso, 'legal.event.status', escapeHTML);
+      const receiver = this.firstMetadataValue(object, dso, 'legal.event.receiver', escapeHTML);
+      const department = this.firstMetadataValue(object, dso, 'legal.event.department', escapeHTML);
+      const dateOut = this.firstMetadataValue(object, dso, 'legal.event.date', escapeHTML);
 
-    if (isNotEmpty(legalName)) {
-      return legalName;
+      let eventName = status || 'Circulation Event';
+      if (receiver && department) {
+        eventName += ` to ${receiver} (${department})`;
+      } else if (receiver) {
+        eventName += ` to ${receiver}`;
+      } else if (department) {
+        eventName += ` to ${department}`;
+      }
+
+      if (dateOut) {
+        eventName += ` on ${dateOut}`;
+      }
+
+      return eventName;
     }
 
     return this.firstMetadataValue(object, dso, 'dc.title', escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
@@ -218,7 +263,7 @@ export class DSONameService {
     const types = dso.getRenderTypes();
     const entityType = types
       .filter((type) => typeof type === 'string')
-      .find((type: string) => (['House', 'VitalEvent']).includes(type)) as string;
+      .find((type: string) => (['House', 'VitalEvent', 'CaseFile', 'CirculationEvent']).includes(type)) as string;
     if (entityType === "House") {
       return this.firstMetadataValue(object, dso, 'crvs.date.registration', escapeHTML) || "";
     } else if (entityType === "VitalEvent") {
@@ -240,11 +285,22 @@ export class DSONameService {
       }
 
       return "No Date";
-    }
-
-    const registrationDate = this.firstMetadataValue(object, dso, 'legal.date.registration', escapeHTML);
-    if (isNotEmpty(registrationDate)) {
-      return registrationDate;
+    } else if (entityType === "CaseFile") {
+      const registrationDate = this.firstMetadataValue(object, dso, 'legal.date.registration', escapeHTML);
+      if (isNotEmpty(registrationDate)) {
+        return registrationDate;
+      }
+      return "No Date";
+    } else if (entityType === "CirculationEvent") {
+      const dateOut = this.firstMetadataValue(object, dso, 'legal.event.date', escapeHTML);
+      const returnDate = this.firstMetadataValue(object, dso, 'legal.event.returnDate', escapeHTML);
+      
+      if (isNotEmpty(returnDate)) {
+        return `Returned: ${returnDate}`;
+      } else if (isNotEmpty(dateOut)) {
+        return `Out: ${dateOut}`;
+      }
+      return "No Date";
     }
 
     return "No Date";
