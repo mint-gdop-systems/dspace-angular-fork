@@ -1,18 +1,25 @@
 {
 	"typescript.check.workspaceVersion": false,
-	"i18n-ally.localesPaths": ["src/assets/i18n", "src/app/core/locale"],
+	"i18n-ally.localesPaths": [
+		"src/assets/i18n",
+		"src/app/core/locale"
+	],
 	"js/ts.tsdk": "node_modules\\typescript\\lib",
 	"cSpell.words": [
 		"COAR",
 		"crrsa",
 		"crvs",
 		"filesection",
+		"itemidentifier",
 		"mydspace",
 		"Subcities",
 		"Subcity",
 		"Woreda",
 		"Woredas"
 	],
-	"conventionalCommits.scopes": ["theme", "i18n", "import"],
-	"files.autoSave": "off"
+	"conventionalCommits.scopes": [
+		"theme",
+		"i18n",
+		"import"
+	]
 }

@@ -70,6 +70,12 @@
 
   "search.filters.filter.wife.label": "Wife Name",
 
+  "search.filters.filter.itemidentifier.head": "Item Identifier",
+
+  "search.filters.filter.itemidentifier.placeholder": "Item Identifier",
+
+  "search.filters.filter.itemidentifier.label": "Item Identifier",
+
   "sorting.crvs.date.registration.ASC": "Registration date ascending",
 
   "sorting.crvs.date.registration.DESC": "Registration date descending",
@@ -145,6 +151,110 @@
   "house.page.options": "Options",
   
   "vitalevent.page.options": "Options",
+
+  "menu.section.browse_global_by_housenumber": "By House Number",
+
+  "menu.section.browse_global_by_familykey": "By House-Family Key",
+
+  "menu.section.browse_global_by_householdhead": "By Household Heads",
+
+  "menu.section.browse_global_by_registrationdate": "By Registration Date",
+
+  "menu.section.browse_global_by_childname": "By Child Name",
+
+  "menu.section.browse_global_by_birthdate": "By Birth Date",
+
+  "menu.section.browse_global_by_mothername": "By Mother Name",
+
+  "menu.section.browse_global_by_fathername": "By Father Name",
+
+  "menu.section.browse_global_by_marriagecouple": "By Marriage Couple",
+
+  "menu.section.browse_global_by_marriagedate": "By Marriage Date",
+
+  "menu.section.browse_global_by_deceasedperson": "By Deceased Person",
+
+  "menu.section.browse_global_by_deathdate": "By Death Date",
+
+  "menu.section.browse_global_by_placeofdeath": "By Place of Death",
+
+  "browse.comcol.by.housenumber": "By House Number",
+
+  "browse.comcol.by.familykey": "By House-Family Key",
+
+  "browse.comcol.by.householdhead": "By Household Heads",
+
+  "browse.comcol.by.registrationdate": "By Registration Date",
+
+  "browse.comcol.by.childname": "By Child Name",
+
+  "browse.comcol.by.birthdate": "By Birth Date",
+
+  "browse.comcol.by.mothername": "By Mother Name",
+
+  "browse.comcol.by.fathername": "By Father Name",
+
+  "browse.comcol.by.marriagecouple": "By Marriage Couple",
+
+  "browse.comcol.by.marriagedate": "By Marriage Date",
+
+  "browse.comcol.by.deceasedperson": "By Deceased Person",
+
+  "browse.comcol.by.deathdate": "By Death Date",
+
+  "browse.comcol.by.placeofdeath": "By Place of Death",
+
+  "browse.metadata.housenumber": "House Number",
+
+  "browse.metadata.familykey": "House-Family Key",
+
+  "browse.metadata.householdhead": "Household Heads",
+
+  "browse.metadata.registrationdate": "Registration Date",
+
+  "browse.metadata.childname": "Child Name",
+
+  "browse.metadata.birthdate": "Birth Date",
+
+  "browse.metadata.mothername": "Mother Name",
+
+  "browse.metadata.fathername": "Father Name",
+
+  "browse.metadata.marriagecouple": "Marriage Couple",
+
+  "browse.metadata.marriagedate": "Marriage Date",
+
+  "browse.metadata.deceasedperson": "Deceased Person",
+
+  "browse.metadata.deathdate": "Death Date",
+
+  "browse.metadata.placeofdeath": "Place of Death",
+
+  "browse.metadata.housenumber.breadcrumbs": "Browse by House Number",
+
+  "browse.metadata.familykey.breadcrumbs": "Browse by House-Family Key",
+
+  "browse.metadata.householdhead.breadcrumbs": "Browse by Household Heads",
+
+  "browse.metadata.registrationdate.breadcrumbs": "Browse by Registration Date",
+
+  "browse.metadata.childname.breadcrumbs": "Browse by Child Name",
+
+  "browse.metadata.birthdate.breadcrumbs": "Browse by Birth Date",
+
+  "browse.metadata.mothername.breadcrumbs": "Browse by Mother Name",
+
+  "browse.metadata.fathername.breadcrumbs": "Browse by Father Name",
+
+  "browse.metadata.marriagecouple.breadcrumbs": "Browse by Marriage Couple",
+
+  "browse.metadata.marriagedate.breadcrumbs": "Browse by Marriage Date",
+
+  "browse.metadata.deceasedperson.breadcrumbs": "Browse by Deceased Person",
+
+  "browse.metadata.deathdate.breadcrumbs": "Browse by Death Date",
+
+  "browse.metadata.placeofdeath.breadcrumbs": "Browse by Place of Death",
   
 
 
