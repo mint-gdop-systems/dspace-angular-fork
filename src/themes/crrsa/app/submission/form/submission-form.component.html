@@ -40,9 +40,11 @@
         </div>
         }
 
-        <ds-file-preview-panel [fileList]="fileList" [selectedFile]="selectedFile"
-          (fileSelected)="onFileSelectedForPreview($event)">
-        </ds-file-preview-panel>
+        <div class="preview-panel-wrapper">
+          <ds-file-preview-panel [fileList]="fileList" [selectedFile]="selectedFile"
+            (fileSelected)="onFileSelectedForPreview($event)">
+          </ds-file-preview-panel>
+        </div>
 
       </div>
 
