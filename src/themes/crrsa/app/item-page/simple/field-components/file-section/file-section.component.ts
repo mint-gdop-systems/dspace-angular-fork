@@ -27,7 +27,9 @@ import {
 } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
 import { MetadataFieldWrapperComponent } from 'src/app/shared/metadata-field-wrapper/metadata-field-wrapper.component';
+import { FileSizePipe } from 'src/app/shared/utils/file-size-pipe';
 import { VarDirective } from 'src/app/shared/utils/var.directive';
 import { FilePreviewPanelComponent } from 'src/themes/crrsa/app/shared/file-preview-panel/file-preview-panel.component';
 
@@ -40,7 +42,9 @@ import { FilePreviewPanelComponent } from 'src/themes/crrsa/app/shared/file-prev
   templateUrl: './file-section.component.html',
   imports: [
     CommonModule,
+    FileSizePipe,
     MetadataFieldWrapperComponent,
+    ThemedLoadingComponent,
     TranslateModule,
     VarDirective,
     FilePreviewPanelComponent,
