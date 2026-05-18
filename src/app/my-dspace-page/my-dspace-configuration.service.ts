@@ -121,12 +121,22 @@ export class MyDSpaceConfigurationService extends SearchConfigurationService {
       first(),
       map(([isSubmitter, isController, isAdmin]: [boolean, boolean, boolean]) => {
         const availableConf: MyDSpaceConfigurationValueType[] = [];
+        const canManageWorkflow = isController || isAdmin;
+        
+        // Control the order in which they appear in the select input
+        // 1. Workflow Tasks
+        if (canManageWorkflow) {
+          availableConf.push(MyDSpaceConfigurationValueType.Workflow);
+        }
+
+        // 2. Your Submissions
         if (isSubmitter) {
           availableConf.push(MyDSpaceConfigurationValueType.Workspace);
         }
-        if (isController || isAdmin) {
+
+        // 3. Supervised Items
+        if (canManageWorkflow) {
           availableConf.push(MyDSpaceConfigurationValueType.SupervisedItems);
-          availableConf.push(MyDSpaceConfigurationValueType.Workflow);
         }
         return availableConf;
       }));
