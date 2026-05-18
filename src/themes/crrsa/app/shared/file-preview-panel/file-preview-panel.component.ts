@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, NgZone, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { ThemedFileDownloadLinkComponent } from 'src/app/shared/file-download-link/themed-file-download-link.component';
 import { Bitstream } from '@dspace/core/shared/bitstream.model';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'ds-file-preview-panel',
@@ -27,6 +29,9 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
     public pdfUrl: SafeResourceUrl | null = null;
     public imageUrl: SafeResourceUrl | null = null;
     private objectUrl: string | null = null;
+    private currentRequestId: string | null = null;
+    private destroy$ = new Subject<void>();
+    public isLoading: boolean = false;
 
     // Image manipulation state
     public zoomLevel: number = 1;
@@ -34,7 +39,9 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
 
     constructor(
         private http: HttpClient,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private ngZone: NgZone,
+        private cdr: ChangeDetectorRef
     ) { }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -52,33 +59,57 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
     }
 
     private updatePreview() {
+        const newRequestId = this.selectedFile?.uuid || this.selectedFile?.id;
+        if (!newRequestId) return;
+
+        this.currentRequestId = newRequestId;
         this.cleanup();
         this.resetImageState();
+        this.isLoading = true;
+        this.pdfUrl = null;
+        this.imageUrl = null;
 
         if (this.isPdf(this.selectedFile) || this.isImage(this.selectedFile)) {
             const url = this.getDownloadUrl(this.selectedFile);
             if (url) {
-                this.http.get(url, { responseType: 'blob' }).subscribe({
+                this.http.get(url, { responseType: 'blob' }).pipe(
+                    takeUntil(this.destroy$)
+                ).subscribe({
                     next: (blob) => {
-                        this.objectUrl = URL.createObjectURL(blob);
-                        if (this.isPdf(this.selectedFile)) {
-                            this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.objectUrl);
-                            this.imageUrl = null;
-                        } else {
-                            this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.objectUrl);
-                            this.pdfUrl = null;
+                        if (this.currentRequestId !== newRequestId) {
+                            return;
                         }
+                        this.ngZone.run(() => {
+                            this.objectUrl = URL.createObjectURL(blob);
+                            if (this.isPdf(this.selectedFile)) {
+                                this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.objectUrl);
+                                this.imageUrl = null;
+                            } else {
+                                this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.objectUrl);
+                                this.pdfUrl = null;
+                            }
+                            this.isLoading = false;
+                        });
                     },
                     error: (err) => {
-                        console.error('FilePreviewPanelComponent: Error fetching blob', err);
-                        this.pdfUrl = null;
-                        this.imageUrl = null;
+                        if (this.currentRequestId !== newRequestId) {
+                            return;
+                        }
+                        this.ngZone.run(() => {
+                            console.error('FilePreviewPanelComponent: Error fetching blob', err);
+                            this.pdfUrl = null;
+                            this.imageUrl = null;
+                            this.isLoading = false;
+                        });
                     }
                 });
+            } else {
+                this.isLoading = false;
             }
         } else {
             this.pdfUrl = null;
             this.imageUrl = null;
+            this.isLoading = false;
         }
     }
 
@@ -120,6 +151,8 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
         this.cleanup();
     }
 
@@ -129,7 +162,6 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
     }
 
     isPdf(file: any): boolean {
-        console.log('FilePreviewPanelComponent: Checking isPdf for', file);
         if (!file) return false;
 
         const mimetype = file?.format?.mimetype ||
@@ -139,13 +171,10 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
         const isPdf = mimetype === 'application/pdf' ||
             this.getFileName(file).toLowerCase().endsWith('.pdf');
 
-        console.log('FilePreviewPanelComponent: detected mimetype:', mimetype);
-        console.log('FilePreviewPanelComponent: isPdf result', isPdf);
         return isPdf;
     }
 
     getDownloadUrl(file: any): string {
-        console.log('FilePreviewPanelComponent: getDownloadUrl for', file);
         // Priority: content link in _links, then url property
         return file?._links?.content?.href || file?.url;
     }
@@ -160,5 +189,34 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
             metadata['dc.title']?.[0]?.display ||
             metadata['dc_title']?.[0]?.value ||
             file.uuid;
+    }
+
+    getFileSize(file: any): string {
+        if (!file || !file.sizeBytes) {
+            return 'Unknown';
+        }
+        const bytes = file.sizeBytes;
+        if (bytes < 1024) return bytes + ' B';
+        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+        if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        return (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
+    }
+
+    getDocumentType(file: any): string {
+        if (!file) return 'Unknown';
+        if (typeof file.firstMetadataValue === 'function') {
+            return file.firstMetadataValue('crvs.documentType') || 'Unknown';
+        }
+        const metadata = file.metadata || {};
+        return metadata['crvs.documentType']?.[0]?.value || 'Unknown';
+    }
+
+    getDocumentStatus(file: any): string {
+        if (!file) return 'Unknown';
+        if (typeof file.firstMetadataValue === 'function') {
+            return file.firstMetadataValue('crvs.document.status') || 'Active';
+        }
+        const metadata = file.metadata || {};
+        return metadata['crvs.document.status']?.[0]?.value || 'Active';
     }
 }

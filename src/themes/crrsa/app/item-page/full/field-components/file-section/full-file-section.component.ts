@@ -1,10 +1,12 @@
 import { AsyncPipe } from '@angular/common';
 import {
   Component,
+  EventEmitter,
   Inject,
   Input,
   OnDestroy,
   OnInit,
+  Output,
 } from '@angular/core';
 import {
   APP_CONFIG,
@@ -33,13 +35,10 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
-import { FileSizePipe } from 'src/app/shared/utils/file-size-pipe';
 import { MetadataFieldWrapperComponent } from 'src/app/shared/metadata-field-wrapper/metadata-field-wrapper.component';
-import { PaginationComponent } from 'src/app/shared/pagination/pagination.component';
-import { ThemedFileDownloadLinkComponent } from 'src/app/shared/file-download-link/themed-file-download-link.component';
-import { ThemedThumbnailComponent } from 'src/app/thumbnail/themed-thumbnail.component';
 import { VarDirective } from 'src/app/shared/utils/var.directive';
 import { FileSectionComponent } from 'src/app/item-page/simple/field-components/file-section/file-section.component';
+import { FilePreviewPanelComponent } from 'src/themes/crrsa/app/shared/file-preview-panel/file-preview-panel.component';
 
 /**
  * This component renders the file section of the item
@@ -52,13 +51,10 @@ import { FileSectionComponent } from 'src/app/item-page/simple/field-components/
   templateUrl: './full-file-section.component.html',
   imports: [
     AsyncPipe,
-    FileSizePipe,
     MetadataFieldWrapperComponent,
-    PaginationComponent,
-    ThemedFileDownloadLinkComponent,
-    ThemedThumbnailComponent,
     TranslateModule,
     VarDirective,
+    FilePreviewPanelComponent,
   ],
 })
 export class FullFileSectionComponent extends FileSectionComponent implements OnDestroy, OnInit {
@@ -81,6 +77,12 @@ export class FullFileSectionComponent extends FileSectionComponent implements On
     currentPage: 1,
     pageSize: this.appConfig.item.bitstream.pageSize,
   });
+
+  allFiles: Bitstream[] = [];
+
+  selectedFile: Bitstream | null = null;
+
+  @Output() fileSelected = new EventEmitter<Bitstream | null>();
 
   constructor(
     bitstreamDataService: BitstreamDataService,
@@ -112,6 +114,8 @@ export class FullFileSectionComponent extends FileSectionComponent implements On
       tap((rd: RemoteData<PaginatedList<Bitstream>>) => {
         if (hasValue(rd.errorMessage)) {
           this.notificationsService.error(this.translateService.get('file-section.error.header'), `${rd.statusCode} ${rd.errorMessage}`);
+        } else if (hasValue(rd.payload)) {
+          this.collectFiles(rd.payload.page);
         }
       },
       ),
@@ -131,11 +135,26 @@ export class FullFileSectionComponent extends FileSectionComponent implements On
       tap((rd: RemoteData<PaginatedList<Bitstream>>) => {
         if (hasValue(rd.errorMessage)) {
           this.notificationsService.error(this.translateService.get('file-section.error.header'), `${rd.statusCode} ${rd.errorMessage}`);
+        } else if (hasValue(rd.payload)) {
+          this.collectFiles(rd.payload.page);
         }
       },
       ),
     );
 
+  }
+
+  private collectFiles(files: Bitstream[]): void {
+    this.allFiles = [...this.allFiles, ...files];
+    if (!this.selectedFile && this.allFiles.length > 0) {
+      this.selectedFile = this.allFiles[0];
+      this.fileSelected.emit(this.selectedFile);
+    }
+  }
+
+  onFileSelected(file: Bitstream): void {
+    this.selectedFile = file;
+    this.fileSelected.emit(this.selectedFile);
   }
 
   hasValuesInBundle(bundle: PaginatedList<Bitstream>) {

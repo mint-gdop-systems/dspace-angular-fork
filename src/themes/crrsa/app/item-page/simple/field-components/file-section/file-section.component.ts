@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  EventEmitter,
   Inject,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
 import {
   APP_CONFIG,
@@ -25,11 +27,11 @@ import {
 } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ThemedFileDownloadLinkComponent } from 'src/app/shared/file-download-link/themed-file-download-link.component';
 import { ThemedLoadingComponent } from 'src/app/shared/loading/themed-loading.component';
 import { MetadataFieldWrapperComponent } from 'src/app/shared/metadata-field-wrapper/metadata-field-wrapper.component';
 import { FileSizePipe } from 'src/app/shared/utils/file-size-pipe';
 import { VarDirective } from 'src/app/shared/utils/var.directive';
+import { FilePreviewPanelComponent } from 'src/themes/crrsa/app/shared/file-preview-panel/file-preview-panel.component';
 
 /**
  * This component renders the file section of the item
@@ -42,10 +44,10 @@ import { VarDirective } from 'src/app/shared/utils/var.directive';
     CommonModule,
     FileSizePipe,
     MetadataFieldWrapperComponent,
-    ThemedFileDownloadLinkComponent,
     ThemedLoadingComponent,
     TranslateModule,
     VarDirective,
+    FilePreviewPanelComponent,
   ],
 })
 export class FileSectionComponent implements OnInit {
@@ -69,6 +71,12 @@ export class FileSectionComponent implements OnInit {
   pageSize: number;
 
   primaryBitstreamId: string;
+
+  selectedFile: Bitstream | null = null;
+
+  allFiles: Bitstream[] = [];
+
+  @Output() fileSelected = new EventEmitter<Bitstream | null>();
 
   constructor(
     protected bitstreamDataService: BitstreamDataService,
@@ -136,10 +144,20 @@ export class FileSectionComponent implements OnInit {
       } else if (hasValue(bitstreamsRD.payload)) {
         const current: Bitstream[] = this.bitstreams$.getValue();
         this.bitstreams$.next([...current, ...bitstreamsRD.payload.page]);
+        this.allFiles = [...this.allFiles, ...bitstreamsRD.payload.page];
+        if (!this.selectedFile && this.allFiles.length > 0) {
+          this.selectedFile = this.allFiles[0];
+          this.fileSelected.emit(this.selectedFile);
+        }
         this.isLoading = false;
         this.isLastPage = this.currentPage === bitstreamsRD.payload.totalPages;
       }
     });
+  }
+
+  onFileSelected(file: Bitstream): void {
+    this.selectedFile = file;
+    this.fileSelected.emit(this.selectedFile);
   }
 }
 

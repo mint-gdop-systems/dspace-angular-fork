@@ -41,7 +41,7 @@ import { SectionDataObject } from "src/app/submission/sections/models/section-da
 import { SectionsService } from "src/app/submission/sections/sections.service";
 import { SectionUploadService } from "src/app/submission/sections/upload/section-upload.service";
 import { SubmissionService } from "src/app/submission/submission.service";
-import { FilePreviewPanelComponent } from "src/themes/crrsa/app/shared/upload/file-preview-panel/file-preview-panel.component";
+import { FilePreviewPanelComponent } from "src/themes/crrsa/app/shared/file-preview-panel/file-preview-panel.component";
 
 /**
  * This component represents the submission form.

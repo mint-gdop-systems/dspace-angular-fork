@@ -7,6 +7,37 @@
       <option [value]="file.uuid">{{ getFileName(file) }}</option>
       }
     </select>
+    @if (selectedFile) {
+    <div class="file-details mt-2 p-2 bg-white border rounded">
+      <div class="small text-muted">
+        <div class="row g-2">
+          <!-- Size -->
+          <div class="col-12 col-md-4">
+            <strong>Size:</strong> {{ getFileSize(selectedFile) }}
+          </div>
+
+          <!-- Document Type -->
+          <div class="col-12 col-md-4">
+            <strong>Doc Type:</strong> {{ getDocumentType(selectedFile) }}
+          </div>
+
+          <!-- Status -->
+          <div class="col-12 col-md-4">
+            <strong>Status:</strong>
+            @if (getDocumentStatus(selectedFile) === 'Inactive') {
+            <span class="badge bg-secondary ms-1">
+              {{ getDocumentStatus(selectedFile) }}
+            </span>
+            } @else {
+            <span class="badge bg-success ms-1">
+              {{ getDocumentStatus(selectedFile) }}
+            </span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    }
   </div>
 
   <div class="preview-viewer border rounded bg-white d-flex align-items-center justify-content-center"
@@ -20,7 +51,7 @@
           <ds-file-download-link [bitstream]="asBitstream(selectedFile)" [showIcon]="true"></ds-file-download-link>
         </p>
       </iframe>
-      } @else {
+      } @else if (isLoading) {
       <div class="text-center p-5">
         <i class="fas fa-circle-notch fa-spin fa-3x mb-3 text-primary"></i>
         <p>Loading preview...</p>
@@ -46,7 +77,7 @@
         <img [src]="imageUrl" alt="Preview"
           [style.transform]="'scale(' + zoomLevel + ') rotate(' + rotationAngle + 'deg)'"
           style="transition: transform 0.3s ease; max-width: 100%; max-height: 100%; object-fit: contain;">
-        } @else {
+        } @else if (isLoading) {
         <div class="text-center p-5">
           <i class="fas fa-circle-notch fa-spin fa-3x mb-3 text-primary"></i>
           <p>Loading preview...</p>
