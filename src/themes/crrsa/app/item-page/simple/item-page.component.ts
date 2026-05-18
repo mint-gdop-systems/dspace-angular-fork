@@ -65,8 +65,8 @@ import { QaEventNotificationComponent } from 'src/app/item-page/simple/qa-event-
  * All fields of the item that should be displayed, are defined in its template.
  */
 @Component({
-  selector: 'ds-base-item-page',
-  styleUrls: ['/src/app/item-page/simple/item-page.component.scss'],
+  selector: 'ds-item-page',
+  styleUrls: ['./item-page.component.scss'],
   templateUrl: './item-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [fadeInOut],
