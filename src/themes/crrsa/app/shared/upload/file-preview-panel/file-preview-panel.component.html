@@ -27,6 +27,33 @@
       </div>
       }
     </div>
+    } @else if (isImage(selectedFile)) {
+    <div class="image-container w-100 h-100 d-flex flex-column" style="overflow: hidden;">
+      <div class="image-controls d-flex justify-content-center gap-2 p-2 bg-light border-bottom">
+        <button class="btn btn-sm btn-outline-secondary" (click)="zoomIn()" title="Zoom In">
+          <i class="fas fa-search-plus"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-secondary" (click)="zoomOut()" title="Zoom Out">
+          <i class="fas fa-search-minus"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-secondary" (click)="rotate()" title="Rotate">
+          <i class="fas fa-redo"></i>
+        </button>
+      </div>
+      <div class="image-viewer flex-grow-1 d-flex align-items-center justify-content-center p-3"
+        style="overflow: auto;">
+        @if (imageUrl) {
+        <img [src]="imageUrl" alt="Preview"
+          [style.transform]="'scale(' + zoomLevel + ') rotate(' + rotationAngle + 'deg)'"
+          style="transition: transform 0.3s ease; max-width: 100%; max-height: 100%; object-fit: contain;">
+        } @else {
+        <div class="text-center p-5">
+          <i class="fas fa-circle-notch fa-spin fa-3x mb-3 text-primary"></i>
+          <p>Loading preview...</p>
+        </div>
+        }
+      </div>
+    </div>
     } @else {
     <div class="text-center">
       <i class="fas fa-file fa-4x mb-3 text-secondary"></i>

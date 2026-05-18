@@ -25,7 +25,12 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
     @Output() fileSelected = new EventEmitter<any>();
 
     public pdfUrl: SafeResourceUrl | null = null;
+    public imageUrl: SafeResourceUrl | null = null;
     private objectUrl: string | null = null;
+
+    // Image manipulation state
+    public zoomLevel: number = 1;
+    public rotationAngle: number = 0;
 
     constructor(
         private http: HttpClient,
@@ -48,23 +53,63 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
 
     private updatePreview() {
         this.cleanup();
-        if (this.isPdf(this.selectedFile)) {
+        this.resetImageState();
+
+        if (this.isPdf(this.selectedFile) || this.isImage(this.selectedFile)) {
             const url = this.getDownloadUrl(this.selectedFile);
             if (url) {
                 this.http.get(url, { responseType: 'blob' }).subscribe({
                     next: (blob) => {
                         this.objectUrl = URL.createObjectURL(blob);
-                        this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.objectUrl);
+                        if (this.isPdf(this.selectedFile)) {
+                            this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.objectUrl);
+                            this.imageUrl = null;
+                        } else {
+                            this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.objectUrl);
+                            this.pdfUrl = null;
+                        }
                     },
                     error: (err) => {
                         console.error('FilePreviewPanelComponent: Error fetching blob', err);
                         this.pdfUrl = null;
+                        this.imageUrl = null;
                     }
                 });
             }
         } else {
             this.pdfUrl = null;
+            this.imageUrl = null;
         }
+    }
+
+    private resetImageState() {
+        this.zoomLevel = 1;
+        this.rotationAngle = 0;
+    }
+
+    public zoomIn() {
+        this.zoomLevel += 0.2;
+    }
+
+    public zoomOut() {
+        this.zoomLevel = Math.max(0.2, this.zoomLevel - 0.2);
+    }
+
+    public rotate() {
+        this.rotationAngle = (this.rotationAngle + 90) % 360;
+    }
+
+    public isImage(file: any): boolean {
+        if (!file) return false;
+
+        const mimetype = file?.format?.mimetype ||
+            file?.metadata?.['dc.format']?.[0]?.value ||
+            file?.metadata?.['dc.format.mimetype']?.[0]?.value || '';
+
+        const isImg = mimetype.startsWith('image/') ||
+            this.getFileName(file).toLowerCase().match(/\.(jpg|jpeg|png|gif|webp)$/) !== null;
+
+        return isImg;
     }
 
     private cleanup() {
