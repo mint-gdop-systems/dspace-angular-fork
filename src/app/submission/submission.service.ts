@@ -163,7 +163,7 @@ export class SubmissionService {
    */
   createSubmission(collectionId?: string): Observable<SubmissionObject> {
     return this.restService.postToEndpoint(this.workspaceLinkPath, {}, null, null, collectionId).pipe(
-      map((workspaceitem: SubmissionObject[]) => workspaceitem[0] as SubmissionObject),
+      map((response: any) => (Array.isArray(response) ? response[0] : response) as SubmissionObject),
       catchError(() => of({} as SubmissionObject)));
   }
 
@@ -608,9 +608,14 @@ export class SubmissionService {
    */
   retrieveSubmission(submissionId): Observable<RemoteData<SubmissionObject>> {
     return this.restService.getDataById(this.getSubmissionObjectLinkName(), submissionId).pipe(
-      find((submissionObjects: SubmissionObject[]) => isNotUndefined(submissionObjects)),
-      map((submissionObjects: SubmissionObject[]) => createSuccessfulRemoteDataObject(
-        submissionObjects[0])),
+      find((response: any) => {
+        const submissionObjects = Array.isArray(response) ? response : [response];
+        return isNotUndefined(submissionObjects);
+      }),
+      map((response: any) => {
+        const submissionObjects = Array.isArray(response) ? response : [response];
+        return createSuccessfulRemoteDataObject(submissionObjects[0] as SubmissionObject);
+      }),
       catchError((errorResponse: unknown) => {
         if (errorResponse instanceof ErrorResponse) {
           return createFailedRemoteDataObject$<SubmissionObject>(errorResponse.errorMessage, errorResponse.statusCode);

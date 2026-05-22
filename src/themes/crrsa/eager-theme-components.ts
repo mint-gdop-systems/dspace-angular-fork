@@ -7,6 +7,7 @@ import { ItemListPreviewComponent } from "src/themes/crrsa/app/shared/object-lis
 import { FilePreviewPanelComponent } from "src/themes/crrsa/app/shared/file-preview-panel/file-preview-panel.component";
 import { UploaderComponent } from "src/themes/crrsa/app/shared/upload/uploader/uploader.component";
 import { SubmissionFormComponent } from "src/themes/crrsa/app/submission/form/submission-form.component";
+import { SubmissionSectionFormComponent } from "src/themes/crrsa/app/submission/sections/form/section-form.component";
 import { SubmissionSectionUploadFileEditComponent } from "src/themes/crrsa/app/submission/sections/upload/file/edit/section-upload-file-edit.component";
 import { SubmissionSectionUploadFileComponent } from "src/themes/crrsa/app/submission/sections/upload/file/section-upload-file.component";
 import { AdminSidebarComponent } from "./app/admin/admin-sidebar/admin-sidebar.component";
@@ -32,6 +33,7 @@ export const COMPONENTS = [
 	FilePreviewPanelComponent,
 	UploaderComponent,
 	SubmissionFormComponent,
+	SubmissionSectionFormComponent,
 	SubmissionSectionUploadFileComponent,
 	SubmissionSectionUploadFileEditComponent,
 	FileSectionComponent,

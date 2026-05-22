@@ -94,6 +94,8 @@
 
   "submission.sections.upload.uploaded-files-list": "Uploaded Files",
 
+  "submission.sections.submit.progressbar.vitalEventType": "Vital Event Type",
+
   "submission.sections.submit.progressbar.birth": "Birth",
 
   "submission.sections.submit.progressbar.marriage": "Marriage / Divorce",
