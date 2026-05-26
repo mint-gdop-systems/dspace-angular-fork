@@ -1,0 +1,32 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { BadgesComponent } from './badges.component';
+import { ThemeService } from 'src/app/shared/theme-support/theme.service';
+import { getMockThemeService } from 'src/app/shared/theme-support/test/theme-service.mock';
+
+describe('BadgesComponent', () => {
+  let component: BadgesComponent;
+  let fixture: ComponentFixture<BadgesComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [BadgesComponent],
+      providers: [{ provide: ThemeService, useValue: getMockThemeService() }],
+      schemas: [NO_ERRORS_SCHEMA],
+    })
+      .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(BadgesComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

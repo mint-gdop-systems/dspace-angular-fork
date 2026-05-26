@@ -1,0 +1,11 @@
+<ds-status-badge [object]="object"></ds-status-badge>
+@if (isMyDSpaceStatus) {
+<ds-my-dspace-status-badge [context]="context" [object]="object"></ds-my-dspace-status-badge>
+}
+<div>
+  <ds-type-badge class="pe-1" [object]="object"></ds-type-badge>
+  <ds-vital-event-type-badge [object]="object"></ds-vital-event-type-badge>
+  @if (showAccessStatus) {
+  <ds-access-status-badge [object]="object"></ds-access-status-badge>
+  }
+</div>

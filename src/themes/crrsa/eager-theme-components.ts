@@ -15,12 +15,12 @@ import { HeaderComponent } from "./app/header/header.component";
 import { HeaderNavbarWrapperComponent } from "./app/header-nav-wrapper/header-navbar-wrapper.component";
 import { HomeNewsComponent } from "./app/home-page/home-news/home-news.component";
 import { NavbarComponent } from "./app/navbar/navbar.component";
-import { MyDSpaceStatusBadgeComponent } from "./app/shared/object-collection/shared/badges/my-dspace-status-badge/my-dspace-status-badge.component";
 import { ItemEditBitstreamBundleComponent } from "src/themes/crrsa/app/item-page/edit-item-page/item-bitstreams/item-edit-bitstream-bundle/item-edit-bitstream-bundle.component";
 import { ItemBitstreamsComponent } from "src/themes/crrsa/app/item-page/edit-item-page/item-bitstreams/item-bitstreams.component";
 import { FullItemPageComponent } from "src/themes/crrsa/app/item-page/full/full-item-page.component";
 import { UntypedItemComponent } from "src/themes/crrsa/app/item-page/simple/item-types/untyped-item/untyped-item.component";
 import { ItemPageComponent } from "src/themes/crrsa/app/item-page/simple/item-page.component";
+import { ThemedMyDSpaceStatusBadgeComponent } from "src/themes/crrsa/app/shared/object-collection/shared/badges/my-dspace-status-badge/themed-my-dspace-status-badge.component";
 
 export const COMPONENTS = [
 	AdminSidebarComponent,
@@ -38,7 +38,7 @@ export const COMPONENTS = [
 	SubmissionSectionUploadFileEditComponent,
 	FileSectionComponent,
 	ItemListPreviewComponent,
-	MyDSpaceStatusBadgeComponent,
+	ThemedMyDSpaceStatusBadgeComponent,
 	ItemBitstreamsComponent,
 	ItemEditBitstreamBundleComponent,
 	ItemPageComponent,
