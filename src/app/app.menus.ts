@@ -12,7 +12,7 @@ import { AccessControlMenuProvider } from './shared/menu/providers/access-contro
 import { AdminSearchMenuProvider } from './shared/menu/providers/admin-search.menu';
 import { AuditLogsMenuProvider } from './shared/menu/providers/audit-item.menu';
 import { AuditOverviewMenuProvider } from './shared/menu/providers/audit-overview.menu';
-import { BrowseMenuProvider } from './shared/menu/providers/browse.menu';
+import { CustomBrowseMenuProvider } from 'src/themes/fsc/app/shared/menu/providers/browse.menu';
 import { CoarNotifyMenuProvider } from './shared/menu/providers/coar-notify.menu';
 import { SubscribeMenuProvider } from './shared/menu/providers/comcol-subscribe.menu';
 import { CommunityListMenuProvider } from './shared/menu/providers/community-list.menu';
@@ -56,7 +56,7 @@ import { AdminDashboardMenuProvider } from 'src/themes/fsc/app/shared/menu/provi
 export const MENUS = buildMenuStructure({
   [MenuID.PUBLIC]: [
     CommunityListMenuProvider,
-    BrowseMenuProvider,
+    CustomBrowseMenuProvider,
     StatisticsMenuProvider,
   ],
   [MenuID.ADMIN]: [

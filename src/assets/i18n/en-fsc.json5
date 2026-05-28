@@ -3770,7 +3770,7 @@
 
   "menu.section.browse_community_by_title": "By Title",
 
-  "menu.section.browse_global": "All of DSpace",
+  "menu.section.browse_global": "All Records",
 
   "menu.section.browse_global_by_author": "By Author",
 
@@ -3787,6 +3787,16 @@
   "menu.section.browse_global_communities_and_collections": "Courts & Case Types",
 
   "menu.section.browse_global_geospatial_map": "By Geolocation (Map)",
+
+  "menu.section.browse_global_by_caseLevel": "Case Level",
+
+  "menu.section.browse_global_by_fileNumber": "File Number",
+
+  "menu.section.browse_global_by_registrationDate": "Registration Date",
+
+  "menu.section.browse_global_by_plaintiff": "Plaintiff",
+
+  "menu.section.browse_global_by_defendant": "Defendant",
 
   "menu.section.control_panel": "Control Panel",
 
@@ -3912,7 +3922,7 @@
 
   "metadata-export-search.submit.error": "Starting the export has failed",
 
-  "mydspace.breadcrumbs": "MyDSpace",
+  "mydspace.breadcrumbs": "Records",
 
   "mydspace.description": "",
 
@@ -3966,7 +3976,7 @@
 
   "mydspace.results.no-uri": "No URI",
 
-  "mydspace.search-form.placeholder": "Search in MyDSpace...",
+  "mydspace.search-form.placeholder": "Search in Records...",
 
   "mydspace.show.workflow": "Workflow tasks",
 
@@ -3986,7 +3996,7 @@
 
   "mydspace.status.mydspaceWorkspace": "Workspace",
 
-  "mydspace.title": "MyDSpace",
+  "mydspace.title": "Records",
 
   "mydspace.upload.upload-failed": "Error creating new workspace. Please verify the content uploaded before retry.",
 
@@ -4022,7 +4032,7 @@
 
   "nav.main.description": "Main navigation bar",
 
-  "nav.mydspace": "MyDSpace",
+  "nav.mydspace": "Records",
 
   "nav.profile": "Profile",
 
@@ -4221,6 +4231,22 @@
   "pagination.showing.label": "Now showing ",
 
   "pagination.sort-direction": "Sort Options",
+
+  "casefile.listelement.badge": "Case File",
+
+  "casefile.listelement.no-title": "No case file number found",
+
+  "casefile.page.titleprefix": "Case File: ",
+
+  "circulationevent.listelement.badge": "Circulation Event",
+
+  "circulationevent.listelement.no-title": "No circulation event title found",
+
+  "circulationevent.page.titleprefix": "Circulation Event: ",
+
+  "casefile.search.results.head": "CaseFiles Found",
+
+  "casefile.search.results.empty": "CaseFiles Not Found",
 
   "person.listelement.badge": "Person",
 
@@ -5367,7 +5393,7 @@
 
   "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to DSpace.",
 
-  "submission.import-external.back-to-my-dspace": "Back to MyDSpace",
+  "submission.import-external.back-to-my-dspace": "Back to Records",
 
   "submission.import-external.search.placeholder": "Search the external source",
 
@@ -5692,6 +5718,16 @@
   "submission.sections.describe.relationship-lookup.title.JournalVolume": "Journal Volumes",
 
   "submission.sections.describe.relationship-lookup.title.isJournalOfPublication": "Journals",
+
+  "submission.sections.describe.relationship-lookup.title.isCaseFileOf": "Case File",
+
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.isCaseFileOf": "Case Files ({{ count }})",
+
+  "submission.sections.describe.relationship-lookup.title.hasCirculationEvent": "Case File",
+
+  "submission.sections.describe.relationship-lookup.search-tab.tab-title.hasCirculationEvent": "Case Files ({{ count }})",
+
+  "submission.sections.describe.relationship-lookup.selection-tab.title.hasCirculationEvent": "Selected Case File",
 
   "submission.sections.describe.relationship-lookup.title.isAuthorOfPublication": "Authors",
 

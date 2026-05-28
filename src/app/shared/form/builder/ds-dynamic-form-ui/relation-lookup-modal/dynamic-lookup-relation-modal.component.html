@@ -9,10 +9,31 @@
     <ds-loading></ds-loading>
   }
   @if (item && collection) {
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
-      <li ngbNavItem role="presentation">
-        <a ngbNavLink>{{'submission.sections.describe.relationship-lookup.search-tab.tab-title.' + relationshipOptions.relationshipType | translate  : { count: (totalInternal$ | async)} }}</a>
-        <ng-template ngbNavContent>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" [class.active]="activeTabId === 'search'" (click)="activeTabId = 'search'" role="tab">
+          {{'submission.sections.describe.relationship-lookup.search-tab.tab-title.' + relationshipOptions.relationshipType | translate  : { count: (totalInternal$ | async)} }}
+        </button>
+      </li>
+      @for (source of (externalSourcesRD$ | async); track source; let idx = $index) {
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" [class.active]="activeTabId === source.id" (click)="activeTabId = source.id" role="tab">
+            {{'submission.sections.describe.relationship-lookup.search-tab.tab-title.' + source.id | translate  : { count: (totalExternal$ | async)?.[idx] } }}
+          </button>
+        </li>
+      }
+      @if (!isEditRelationship) {
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" [class.active]="activeTabId === 'selection'" (click)="activeTabId = 'selection'" role="tab">
+            {{'submission.sections.describe.relationship-lookup.selection-tab.tab-title' | translate : { count: (selection$ | async)?.length } }}
+          </button>
+        </li>
+      }
+    </ul>
+
+    <div class="tab-content pt-3">
+      @if (activeTabId === 'search') {
+        <div class="tab-pane active" role="tabpanel">
           <ds-dynamic-lookup-relation-search-tab
             [selection$]="selection$"
             [listId]="listId"
@@ -31,12 +52,11 @@
             (resultFound)="setTotalInternals($event.pageInfo.totalElements)"
             class="d-block pt-3">
           </ds-dynamic-lookup-relation-search-tab>
-        </ng-template>
-      </li>
+        </div>
+      }
       @for (source of (externalSourcesRD$ | async); track source; let idx = $index) {
-        <li ngbNavItem role="presentation">
-          <a ngbNavLink>{{'submission.sections.describe.relationship-lookup.search-tab.tab-title.' + source.id | translate  : { count: (totalExternal$ | async)?.[idx] } }}</a>
-          <ng-template ngbNavContent>
+        @if (activeTabId === source.id) {
+          <div class="tab-pane active" role="tabpanel">
             <ds-dynamic-lookup-relation-external-source-tab
               [label]="label"
               [listId]="listId"
@@ -50,28 +70,24 @@
               (importedObject)="imported($event)"
               class="d-block pt-3">
             </ds-dynamic-lookup-relation-external-source-tab>
-          </ng-template>
-        </li>
+          </div>
+        }
       }
-      @if (!isEditRelationship) {
-        <li ngbNavItem role="presentation">
-          <a ngbNavLink>{{'submission.sections.describe.relationship-lookup.selection-tab.tab-title' | translate : { count: (selection$ | async)?.length } }}</a>
-          <ng-template ngbNavContent>
-            <ds-dynamic-lookup-relation-selection-tab
-              [selection$]="selection$"
-              [listId]="listId"
-              [relationshipType]="relationshipOptions.relationshipType"
-              [repeatable]="repeatable"
-              [context]="context"
-              (selectObject)="select($event)"
-              (deselectObject)="deselect($event)"
-              class="d-block pt-3">
-            </ds-dynamic-lookup-relation-selection-tab>
-          </ng-template>
-        </li>
+      @if (!isEditRelationship && activeTabId === 'selection') {
+        <div class="tab-pane active" role="tabpanel">
+          <ds-dynamic-lookup-relation-selection-tab
+            [selection$]="selection$"
+            [listId]="listId"
+            [relationshipType]="relationshipOptions.relationshipType"
+            [repeatable]="repeatable"
+            [context]="context"
+            (selectObject)="select($event)"
+            (deselectObject)="deselect($event)"
+            class="d-block pt-3">
+          </ds-dynamic-lookup-relation-selection-tab>
+        </div>
       }
-    </ul>
-    <div [ngbNavOutlet]="nav"></div>
+    </div>
   }
 </div>
 <div class="modal-footer">

@@ -144,6 +144,11 @@ export class DsDynamicLookupRelationModalComponent implements OnInit, OnDestroy 
   query: string;
 
   /**
+   * The ID of the currently active tab
+   */
+  activeTabId = 'search';
+
+  /**
    * A hidden query that will be used but not displayed in the url/searchbar
    */
   hiddenQuery: string;
