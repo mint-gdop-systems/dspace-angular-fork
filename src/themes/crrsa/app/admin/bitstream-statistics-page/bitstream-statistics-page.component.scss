@@ -1,0 +1,25 @@
+.bitstream-statistics-dashboard .border-right {
+    border-right: 1px solid #dee2e6;
+}
+
+.bitstream-statistics-dashboard .text-xs {
+    font-size: 0.75rem;
+}
+
+.bitstream-statistics-dashboard .filter-active {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.12);
+}
+
+.bitstream-statistics-dashboard .dropdown-menu {
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.bitstream-statistics-dashboard .dropdown-item {
+    cursor: pointer;
+}
+
+.bitstream-statistics-dashboard .dropdown-item:hover {
+    background-color: #f8f9fa;
+}

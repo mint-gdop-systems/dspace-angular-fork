@@ -20,6 +20,8 @@
 
   "admin.dashboard.workflow-items": "Workflow Items",
 
+  "admin.dashboard.breadcrumbs": "Dashboard",
+
   "item.page.filesection.document.status": "Status",
 
   "item.page.filesection.documentType": "Document Type",

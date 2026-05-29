@@ -36,6 +36,7 @@ import {
     take,
 } from 'rxjs/operators';
 import { SearchService } from 'src/app/shared/search/search.service';
+import { BitstreamStatisticsDashboardComponent } from 'src/themes/crrsa/app/admin/bitstream-statistics-page/bitstream-statistics-page.component';
 import { UserDashboardComponent } from 'src/themes/crrsa/app/admin/user-dashboard-page/user-dashboard-page.component';
 
 @Component({
@@ -47,6 +48,7 @@ import { UserDashboardComponent } from 'src/themes/crrsa/app/admin/user-dashboar
         CommonModule,
         RouterModule,
         TranslateModule,
+        BitstreamStatisticsDashboardComponent,
         UserDashboardComponent,
     ],
 })
@@ -59,7 +61,7 @@ export class AdminDashboardPageComponent implements OnInit {
 
     isAdmin$: Observable<boolean>;
 
-    activeTab: 'admin' | 'user' = 'admin';
+    activeTab: 'admin' | 'user' | 'bitstream' = 'admin';
 
     constructor(
         protected searchService: SearchService,
