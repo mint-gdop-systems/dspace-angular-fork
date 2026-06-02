@@ -78,6 +78,22 @@
 
   "search.filters.filter.itemidentifier.label": "Item Identifier",
 
+  "search.filters.filter.eventType.head": "Event Type",
+
+  "search.filters.filter.eventType.placeholder": "Event Type",
+
+  "search.filters.filter.eventType.label": "Event Type",
+
+  "search.filters.filter.eventDate.head": "Event Date",
+
+  "search.filters.filter.eventDate.placeholder": "Event Date",
+
+  "search.filters.filter.eventDate.label": "Event Date",
+
+  "search.filters.filter.eventDate.max.label": "End",
+
+  "search.filters.filter.eventDate.min.label": "Start",
+
   "sorting.crvs.date.registration.ASC": "Registration date ascending",
 
   "sorting.crvs.date.registration.DESC": "Registration date descending",
