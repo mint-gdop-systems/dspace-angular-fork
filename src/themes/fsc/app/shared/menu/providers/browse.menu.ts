@@ -37,9 +37,9 @@ export class CustomBrowseMenuProvider extends AbstractExpandableMenuProvider {
         visible: true,
         model: {
           type: MenuItemType.LINK,
-          text: 'menu.section.browse_global_by_caseLevel',
+          text: 'menu.section.browse_global_by_caseStatus',
           link: '/search',
-          queryParams: { 'f.caseLevel': '[* TO *],equals' }
+          queryParams: { 'f.caseStatus': '[* TO *],equals' }
         } as LinkMenuItemModel,
       },
       {

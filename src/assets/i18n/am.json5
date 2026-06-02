@@ -26,7 +26,7 @@
 
   "item.search-result.rejection-reason": "Rejection reason",
 
-  "home-page.news.welcome-text": "Welcome to Federal Supreme Court of Ethiopia",
+  "home-page.news.welcome-text": "Back Office System",
 
   "menu.section.analytics": "Analytics",
 
@@ -3693,7 +3693,7 @@
 
   "menu.section.browse_global_geospatial_map": "By Geolocation (Map)",
 
-  "menu.section.browse_global_by_caseLevel": "Case Level",
+  "menu.section.browse_global_by_caseStatus": "Case Status",
 
   "menu.section.browse_global_by_fileNumber": "File Number",
 

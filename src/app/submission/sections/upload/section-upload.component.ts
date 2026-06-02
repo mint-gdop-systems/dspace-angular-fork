@@ -194,8 +194,12 @@ export class SubmissionSectionUploadComponent extends SectionModelComponent {
         filter((submissionObject: SubmissionObjectEntry) => isUndefined(this.collectionId) || this.collectionId !== submissionObject.collection),
         tap((submissionObject: SubmissionObjectEntry) => this.collectionId = submissionObject.collection),
         mergeMap((submissionObject: SubmissionObjectEntry) => this.collectionDataService.findById(submissionObject.collection)),
-        filter((rd: RemoteData<Collection>) => isNotUndefined((rd.payload))),
-        tap((collectionRemoteData: RemoteData<Collection>) => this.collectionName = this.dsoNameService.getName(collectionRemoteData.payload)),
+        filter((rd: RemoteData<Collection>) => hasValue(rd) && !rd.isLoading),
+        tap((collectionRemoteData: RemoteData<Collection>) => {
+          if (isNotUndefined(collectionRemoteData.payload)) {
+            this.collectionName = this.dsoNameService.getName(collectionRemoteData.payload);
+          }
+        }),
         // TODO review this part when https://github.com/DSpace/dspace-angular/issues/575 is resolved
         /*        mergeMap((collectionRemoteData: RemoteData<Collection>) => {
           return this.resourcePolicyService.findByHref(

@@ -160,12 +160,17 @@ export class SubmissionEditComponent implements OnDestroy, OnInit {
             this.router.navigate(['/mydspace']);
           } else {
             const collection = submissionObjectRD.payload.collection as Collection;
-            this.entityType = (hasValue(collection) && collection.hasMetadata('dspace.entity.type'))
+            this.entityType = (hasValue(collection) && typeof collection.hasMetadata === 'function' && collection.hasMetadata('dspace.entity.type'))
               ? collection.firstMetadataValue('dspace.entity.type') : null;
             const { errors } = submissionObjectRD.payload;
             this.submissionErrors = parseSectionErrors(errors);
             this.submissionId = submissionObjectRD.payload.id.toString();
-            this.collectionId = (submissionObjectRD.payload.collection as Collection).id;
+            if (hasValue(collection) && hasValue(collection.id)) {
+              this.collectionId = collection.id;
+            } else {
+              const collectionHref = submissionObjectRD.payload._links.collection.href;
+              this.collectionId = collectionHref.substring(collectionHref.lastIndexOf('/') + 1);
+            }
             this.selfUrl = submissionObjectRD.payload._links.self.href;
             this.sections = submissionObjectRD.payload.sections;
             this.itemLink$.next(submissionObjectRD.payload._links.item.href);
