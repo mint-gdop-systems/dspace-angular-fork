@@ -54,6 +54,9 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
     private updatePreview() {
         this.cleanup();
         this.resetImageState();
+        
+        this.pdfUrl = null;
+        this.imageUrl = null;
 
         if (this.isPdf(this.selectedFile) || this.isImage(this.selectedFile)) {
             const url = this.getDownloadUrl(this.selectedFile);
@@ -79,6 +82,17 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
         } else {
             this.pdfUrl = null;
             this.imageUrl = null;
+        }
+    }
+
+    public toggleFullscreen() {
+        const elem = document.querySelector('.preview-viewer');
+        if (!document.fullscreenElement) {
+            elem?.requestFullscreen().catch(err => {
+                console.log(`Error attempting to enable fullscreen mode: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
         }
     }
 

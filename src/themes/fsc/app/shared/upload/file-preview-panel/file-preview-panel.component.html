@@ -9,8 +9,15 @@
     </select>
   </div>
 
-  <div class="preview-viewer border rounded bg-white d-flex align-items-center justify-content-center"
+  <div class="preview-viewer border rounded bg-white d-flex align-items-center justify-content-center position-relative"
     style="min-height: 400px;">
+    
+    <div class="position-absolute top-0 end-0 p-2" style="z-index: 10;">
+      <button class="btn btn-sm btn-outline-secondary bg-white" (click)="toggleFullscreen()" title="Toggle Fullscreen">
+        <i class="fas fa-expand"></i>
+      </button>
+    </div>
+
     @if (selectedFile) {
     @if (isPdf(selectedFile)) {
     <div class="pdf-container w-100 h-100">
