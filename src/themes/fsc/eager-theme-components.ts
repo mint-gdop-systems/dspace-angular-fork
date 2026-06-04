@@ -18,6 +18,7 @@ import { MyDSpaceStatusBadgeComponent } from './app/shared/object-collection/sha
 import { ItemEditBitstreamBundleComponent } from 'src/themes/fsc/app/item-page/edit-item-page/item-bitstreams/item-edit-bitstream-bundle/item-edit-bitstream-bundle.component';
 import { ItemBitstreamsComponent } from 'src/themes/fsc/app/item-page/edit-item-page/item-bitstreams/item-bitstreams.component';
 import { ItemPageTitleFieldComponent } from './app/item-page/simple/field-components/specific-field/title/item-page-title-field.component';
+import { SubmissionFormFooterComponent } from 'src/themes/fsc/app/submission/form/footer/submission-form-footer.component';
 
 export const COMPONENTS = [
   AdminSidebarComponent,
@@ -38,4 +39,5 @@ export const COMPONENTS = [
   ItemBitstreamsComponent,
   ItemEditBitstreamBundleComponent,
   ItemPageTitleFieldComponent,
+  SubmissionFormFooterComponent,
 ];
