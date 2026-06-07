@@ -23,8 +23,14 @@ export interface UserContentStats {
     };
     archived: number;
     withdrawn: number;
+    pageCount: number;
   };
   myActions: {
+    [step: string]: {
+      [action: string]: number;
+    };
+  };
+  myActionsPageCounts: {
     [step: string]: {
       [action: string]: number;
     };
@@ -93,6 +99,22 @@ export class UserDashboardComponent implements OnInit {
   getActionCount(details: any[], actionName: string): number {
     const detail = details.find(d => d.action.toLowerCase() === actionName.toLowerCase());
     return detail ? detail.count : 0;
+  }
+
+  /**
+   * Helper to find a page count for a specific action (e.g. 'Approved') from the stats
+   */
+  getActionPageCount(stats: UserContentStats, step: string, actionName: string): number {
+    if (!stats || !stats.myActionsPageCounts || !stats.myActionsPageCounts[step]) {
+      return 0;
+    }
+    // Try exact match first
+    if (stats.myActionsPageCounts[step][actionName] !== undefined) {
+      return stats.myActionsPageCounts[step][actionName];
+    }
+    // Case insensitive search
+    const key = Object.keys(stats.myActionsPageCounts[step]).find(k => k.toLowerCase() === actionName.toLowerCase());
+    return key ? stats.myActionsPageCounts[step][key] : 0;
   }
 
   /**

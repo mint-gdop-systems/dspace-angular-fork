@@ -5,6 +5,10 @@ import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
 import { CollectionDataService } from '@dspace/core/data/collection-data.service';
 import { AuthorizationDataService } from '@dspace/core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '@dspace/core/data/feature-authorization/feature-id';
+import { DspaceRestService } from '@dspace/core/dspace-rest/dspace-rest.service';
+import { RawRestResponse } from '@dspace/core/dspace-rest/raw-rest-response.model';
+import { RESTURLCombiner } from '@dspace/core/url-combiner/rest-url-combiner';
+import { environment } from 'src/environments/environment';
 import { PaginatedList } from '@dspace/core/data/paginated-list.model';
 import { RemoteData } from '@dspace/core/data/remote-data';
 import { PaginationComponentOptions } from '@dspace/core/pagination/pagination-component-options.model';
@@ -25,6 +29,11 @@ import { map, shareReplay, startWith, switchMap, take } from 'rxjs/operators';
 import { SearchService } from 'src/app/shared/search/search.service';
 import { UserDashboardComponent } from 'src/themes/fsc/app/admin/user-dashboard-page/user-dashboard-page.component';
 
+export interface AdminStats {
+  totalPageCount: number;
+  collectionsStats: { collectionId: string, pageCount: number }[];
+}
+
 @Component({
   selector: 'ds-admin-dashboard-page',
   templateUrl: './admin-dashboard-page.component.html',
@@ -42,6 +51,7 @@ export class AdminDashboardPageComponent implements OnInit {
   archivedItemsCount$: Observable<number>;
   workflowItemsCount$: Observable<number>;
   collectionsStats$: Observable<any[]>;
+  totalSystemPages$: Observable<number>;
 
   isAdmin$: Observable<boolean>;
 
@@ -57,6 +67,7 @@ export class AdminDashboardPageComponent implements OnInit {
     protected collectionDataService: CollectionDataService,
     protected halService: HALEndpointService,
     protected authorizationService: AuthorizationDataService,
+    protected restService: DspaceRestService
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +92,17 @@ export class AdminDashboardPageComponent implements OnInit {
     const manyElementsPagination = Object.assign(
       new PaginationComponentOptions(),
       { id: 'admin-stats-many', pageSize: 100 },
+    );
+
+    const adminStatsUrl = new RESTURLCombiner(environment.rest.baseUrl, 'statistics', 'adminstats', 'all').toString();
+    const adminStats$ = this.restService.get(adminStatsUrl).pipe(
+      map((response: RawRestResponse) => response.payload as AdminStats),
+      startWith({ totalPageCount: 0, collectionsStats: [] } as AdminStats),
+      shareReplay(1)
+    );
+
+    this.totalSystemPages$ = adminStats$.pipe(
+      map((stats) => stats?.totalPageCount || 0)
     );
 
     // 0. Collections count (Discovery is best for this)
@@ -170,18 +192,22 @@ export class AdminDashboardPageComponent implements OnInit {
                 )
                 .pipe(getFirstCompletedRemoteData(), startWith(null));
 
-              return combineLatest([archived$, workflow$]).pipe(
-                map(([archivedRd, workflowRd]) => ({
-                  label: coll.name,
-                  archivedCount:
-                    archivedRd && archivedRd.hasSucceeded
-                      ? archivedRd.payload.totalElements
-                      : 0,
-                  workflowCount:
-                    workflowRd && workflowRd.hasSucceeded
-                      ? workflowRd.payload.totalElements
-                      : 0,
-                })),
+              return combineLatest([archived$, workflow$, adminStats$]).pipe(
+                map(([archivedRd, workflowRd, adminStats]) => {
+                  const collStat = adminStats?.collectionsStats?.find(c => c.collectionId === coll.id);
+                  return {
+                    label: coll.name,
+                    archivedCount:
+                      archivedRd && archivedRd.hasSucceeded
+                        ? archivedRd.payload.totalElements
+                        : 0,
+                    workflowCount:
+                      workflowRd && workflowRd.hasSucceeded
+                        ? workflowRd.payload.totalElements
+                        : 0,
+                    pageCount: collStat ? collStat.pageCount : 0
+                  };
+                }),
               );
             });
             return combineLatest(stats$);
