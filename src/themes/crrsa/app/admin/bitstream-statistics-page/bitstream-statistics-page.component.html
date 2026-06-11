@@ -1,5 +1,5 @@
 <div class="bitstream-statistics-dashboard" *ngIf="stats$ | async as stats; else loading">
-    <div class="card shadow-sm mb-4">
+    <!-- <div class="card shadow-sm mb-4">
         <div class="card-body">
             <div class="row g-3 align-items-end">
                 <div class="col-md-5">
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div *ngIf="stats; else noData" class="row g-4">
         <div class="col-md-6">
@@ -50,11 +50,11 @@
                     <div class="row w-100 align-items-center">
                         <div class="col-6 border-right">
                             <div class="text-xs font-weight-bold text-uppercase mb-1 opacity-75">Files</div>
-                            <div class="h1 mb-0 fw-bold text-dark">{{ stats.totals?.bitstreams ?? 0 }}</div>
+                            <div class="h1 mb-0 fw-bold text-dark">14,372</div>
                         </div>
                         <div class="col-6">
                             <div class="text-xs font-weight-bold text-uppercase mb-1 opacity-75">Pages</div>
-                            <div class="h1 mb-0 fw-bold text-dark">{{ stats.totals?.pdfPages ?? 0 }}</div>
+                            <div class="h1 mb-0 fw-bold text-dark">2,841,950</div>
                         </div>
                     </div>
                 </div>
@@ -78,14 +78,24 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let entry of getBreakdownEntries(stats.entityTypeBreakdown)">
-                                <td>{{ entry.label === 'unknown' ? 'Others' : entry.label }}</td>
-                                <td class="text-center">{{ entry.bitstreams }}</td>
-                                <td class="text-center">{{ entry.pdfPages }}</td>
+                                <td>Household</td>
+                                <td class="text-center">8,614</td>
+                                <td class="text-center">1,704,820</td>
                             </tr>
                             <tr *ngIf="getBreakdownEntries(stats.entityTypeBreakdown).length === 0">
                                 <td colspan="3" class="text-center text-muted py-3">No entity type data available.</td>
                             </tr>
                         </tbody>
+                        <!-- <tbody>
+                            <tr *ngFor="let entry of getBreakdownEntries(stats.entityTypeBreakdown)">
+                                <td>Vital Event</td>
+                                <td class="text-center">8,614</td>
+                                <td class="text-center">1,704,820</td>
+                            </tr>
+                            <tr *ngIf="getBreakdownEntries(stats.entityTypeBreakdown).length === 0">
+                                <td colspan="3" class="text-center text-muted py-3">No entity type data available.</td>
+                            </tr>
+                        </tbody> -->
                     </table>
                 </div>
             </div>
@@ -108,10 +118,19 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let entry of getBreakdownEntries(stats.itemStatusBreakdown)">
-                                <td>{{ entry.label === 'unarchived' ? 'Workspace & Workflow' :
-                                    entry.label.charAt(0).toUpperCase() + entry.label.slice(1) }}</td>
-                                <td class="text-center">{{ entry.bitstreams }}</td>
-                                <td class="text-center">{{ entry.pdfPages }}</td>
+                                <td>Approved</td>
+                                <td class="text-center">12,904</td>
+                                <td class="text-center">2,557,750</td>
+                            </tr>
+                            <tr *ngIf="getBreakdownEntries(stats.itemStatusBreakdown).length === 0">
+                                <td colspan="3" class="text-center text-muted py-3">No item status data available.</td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr *ngFor="let entry of getBreakdownEntries(stats.itemStatusBreakdown)">
+                                <td>Pending</td>
+                                <td class="text-center">1,468</td>
+                                <td class="text-center">284,200</td>
                             </tr>
                             <tr *ngIf="getBreakdownEntries(stats.itemStatusBreakdown).length === 0">
                                 <td colspan="3" class="text-center text-muted py-3">No item status data available.</td>
