@@ -32,6 +32,7 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
     private currentRequestId: string | null = null;
     private destroy$ = new Subject<void>();
     public isLoading: boolean = false;
+    private previewRequest$ = new Subject<void>();
 
     // Image manipulation state
     public zoomLevel: number = 1;
@@ -59,6 +60,8 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
     }
 
     private updatePreview() {
+        this.previewRequest$.next();
+        
         const newRequestId = this.selectedFile?.uuid || this.selectedFile?.id;
         if (!newRequestId) return;
 
@@ -73,7 +76,8 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
             const url = this.getDownloadUrl(this.selectedFile);
             if (url) {
                 this.http.get(url, { responseType: 'blob' }).pipe(
-                    takeUntil(this.destroy$)
+                    takeUntil(this.destroy$),
+                    takeUntil(this.previewRequest$)
                 ).subscribe({
                     next: (blob) => {
                         if (this.currentRequestId !== newRequestId) {
@@ -81,6 +85,7 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
                         }
                         this.ngZone.run(() => {
                             this.objectUrl = URL.createObjectURL(blob);
+
                             if (this.isPdf(this.selectedFile)) {
                                 this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.objectUrl);
                                 this.imageUrl = null;
@@ -88,7 +93,10 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
                                 this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.objectUrl);
                                 this.pdfUrl = null;
                             }
+
                             this.isLoading = false;
+
+                            this.cdr.detectChanges();
                         });
                     },
                     error: (err) => {
@@ -96,10 +104,11 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
                             return;
                         }
                         this.ngZone.run(() => {
-                            console.error('FilePreviewPanelComponent: Error fetching blob', err);
                             this.pdfUrl = null;
                             this.imageUrl = null;
                             this.isLoading = false;
+
+                            this.cdr.detectChanges();
                         });
                     }
                 });

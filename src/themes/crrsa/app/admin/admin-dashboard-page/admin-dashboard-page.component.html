@@ -1,7 +1,5 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 id="admin-dashboard-title">{{ (activeTab === 'admin' ? 'admin.dashboard.title' :
-            'admin.dashboard.user-dashboard') | translate }}</h1>
         <button *ngIf="activeTab === 'admin'" class="btn btn-primary" (click)="refresh()" id="admin-dashboard-refresh">
             <i class="fas fa-sync-alt mr-1"></i> {{ 'admin.dashboard.refresh' | translate }}
         </button>
@@ -86,9 +84,6 @@
             <!-- Collection Statistics -->
             <div class="col-lg-12 mb-4">
                 <div class="card shadow-sm h-100">
-                    <div class="card-header bg-white">
-                        <h4 class="mb-0">{{ 'admin.dashboard.statistics.collections' | translate }}</h4>
-                    </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-hover mb-0">
