@@ -2,7 +2,7 @@
 
   "admin.dashboard.admin-dashboard": "Admin Dashboard",
 
-  "admin.dashboard.archived-items": "Archived Items",
+  "admin.dashboard.archived-items": "Approved",
 
   "admin.dashboard.collection-name": "Woreda Name",
 
@@ -16,7 +16,7 @@
 
   "admin.dashboard.user-dashboard": "User Dashboard",
 
-  "admin.dashboard.workflow-items": "Workflow Items",
+  "admin.dashboard.workflow-items": "Pending",
 
   "admin.dashboard.breadcrumbs": "Dashboard",
 
@@ -3945,7 +3945,7 @@
 
   "metadata-export-search.submit.error": "Starting the export has failed",
 
-  "mydspace.breadcrumbs": "MyDSpace",
+  "mydspace.breadcrumbs": "Submissions & Tasks",
 
   "mydspace.description": "",
 
@@ -3999,7 +3999,7 @@
 
   "mydspace.results.no-uri": "No URI",
 
-  "mydspace.search-form.placeholder": "Search in MyDSpace...",
+  "mydspace.search-form.placeholder": "Search in Submissions & Tasks...",
 
   "mydspace.show.workflow": "Workflow tasks",
 
@@ -4019,7 +4019,7 @@
 
   "mydspace.status.mydspaceWorkspace": "Workspace",
 
-  "mydspace.title": "MyDSpace",
+  "mydspace.title": "Submissions & Tasks",
 
   "mydspace.upload.upload-failed": "Error creating new workspace. Please verify the content uploaded before retry.",
 
@@ -4055,7 +4055,7 @@
 
   "nav.main.description": "Main navigation bar",
 
-  "nav.mydspace": "MyDSpace",
+  "nav.mydspace": "Submissions & Tasks",
 
   "nav.profile": "Profile",
 
@@ -5388,7 +5388,7 @@
 
   "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to DSpace.",
 
-  "submission.import-external.back-to-my-dspace": "Back to MyDSpace",
+  "submission.import-external.back-to-my-dspace": "Back to Submissions & Tasks",
 
   "submission.import-external.search.placeholder": "Search the external source",
 
