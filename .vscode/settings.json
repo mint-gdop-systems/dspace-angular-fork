@@ -9,13 +9,15 @@
 		"COAR",
 		"crrsa",
 		"crvs",
+		"dspace",
 		"filesection",
 		"itemidentifier",
 		"mydspace",
 		"Subcities",
 		"Subcity",
 		"Woreda",
-		"Woredas"
+		"Woredas",
+		"Workspaceitem"
 	],
 	"conventionalCommits.scopes": [
 		"theme",

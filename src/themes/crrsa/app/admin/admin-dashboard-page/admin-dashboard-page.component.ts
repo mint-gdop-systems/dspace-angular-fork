@@ -6,12 +6,14 @@ import {
 import { RouterModule } from '@angular/router';
 import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
 import { CollectionDataService } from '@dspace/core/data/collection-data.service';
+import { CommunityDataService } from '@dspace/core/data/community-data.service';
 import { AuthorizationDataService } from '@dspace/core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '@dspace/core/data/feature-authorization/feature-id';
 import { PaginatedList } from '@dspace/core/data/paginated-list.model';
 import { RemoteData } from '@dspace/core/data/remote-data';
 import { PaginationComponentOptions } from '@dspace/core/pagination/pagination-component-options.model';
 import { Collection } from '@dspace/core/shared/collection.model';
+import { Community } from '@dspace/core/shared/community.model';
 import { DSpaceObjectType } from '@dspace/core/shared/dspace-object-type.model';
 import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
 import { HALEndpointService } from '@dspace/core/shared/hal-endpoint.service';
@@ -58,6 +60,8 @@ export class AdminDashboardPageComponent implements OnInit {
     archivedItemsCount$: Observable<number>;
     workflowItemsCount$: Observable<number>;
     collectionsStats$: Observable<any[]>;
+    communities$: Observable<Community[]>;
+    selectedCommunityId$: Observable<string>;
 
     isAdmin$: Observable<boolean>;
 
@@ -71,6 +75,7 @@ export class AdminDashboardPageComponent implements OnInit {
         protected poolTaskDataService: PoolTaskDataService,
         protected claimedTaskDataService: ClaimedTaskDataService,
         protected collectionDataService: CollectionDataService,
+        protected communityDataService: CommunityDataService,
         protected halService: HALEndpointService,
         protected authorizationService: AuthorizationDataService,
     ) { }
@@ -85,6 +90,19 @@ export class AdminDashboardPageComponent implements OnInit {
                 this.activeTab = 'user';
             }
         });
+
+        // Initialize communities list  
+        this.communities$ = this.communityDataService.findAll({ elementsPerPage: 100 }).pipe(
+            getFirstCompletedRemoteData(),
+            map((rd: RemoteData<PaginatedList<Community>>) => rd.hasSucceeded ? rd.payload.page : []),
+            shareReplay(1)
+        );
+
+        // Set default selected community (first one or 'all')  
+        this.selectedCommunityId$ = this.communities$.pipe(
+            map((communities) => communities.length > 0 ? communities[0].id : 'all'),
+            shareReplay(1)
+        );
 
         this.refresh();
     }
@@ -127,7 +145,13 @@ export class AdminDashboardPageComponent implements OnInit {
         );
 
         // 5. Collection Statistics (List ALL collections with Discovery counts)
-        this.collectionsStats$ = this.collectionDataService.findAll({ elementsPerPage: 100 }, false).pipe(
+        this.collectionsStats$ = this.selectedCommunityId$.pipe(
+            switchMap((selectedCommunityId) => { // Show collections for selected community only  
+                return this.collectionDataService.findByParent(
+                    selectedCommunityId,
+                    { elementsPerPage: 100 },
+                );
+            }),
             getFirstCompletedRemoteData(),
             switchMap((rd: RemoteData<PaginatedList<Collection>>) => {
                 if (rd.hasSucceeded && rd.payload?.page?.length > 0) {
@@ -161,5 +185,11 @@ export class AdminDashboardPageComponent implements OnInit {
             }),
             shareReplay(1),
         );
+    }
+
+    onCommunityChange(event: Event): void {
+        const communityId = (event.target as HTMLSelectElement).value;
+        this.selectedCommunityId$ = of(communityId).pipe(shareReplay(1));
+        this.refresh();
     }
 }

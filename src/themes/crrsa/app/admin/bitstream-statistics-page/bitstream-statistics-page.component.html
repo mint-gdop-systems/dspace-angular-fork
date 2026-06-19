@@ -8,7 +8,7 @@
                         <input id="bitstream-submitter-filter" class="form-control" type="text"
                             [ngClass]="{ 'filter-active': filtersForm.controls.submitter.value }"
                             [formControl]="filtersForm.controls.submitter" (focus)="showSuggestions = true"
-                            (blur)="hideSuggestions()" placeholder="Search by name or email" />
+                            (blur)="hideSuggestions()" placeholder="Search by email" />
                         <ul *ngIf="showSuggestions && (suggestions$ | async) as suggestions"
                             class="dropdown-menu show w-100 mt-1">
                             <li *ngFor="let suggestion of suggestions" class="dropdown-item"

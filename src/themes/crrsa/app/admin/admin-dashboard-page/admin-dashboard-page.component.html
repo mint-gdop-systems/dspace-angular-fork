@@ -13,7 +13,7 @@
                 <i class="fas fa-user-shield mr-1"></i> {{ 'admin.dashboard.admin-dashboard' | translate }}
             </a>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" [class.active]="activeTab === 'bitstream'" (click)="activeTab = 'bitstream'"
                 href="javascript:void(0)">
                 <i class="fas fa-file-alt mr-1"></i> File statistics
@@ -25,7 +25,7 @@
                 <i class="fas fa-user mr-1"></i> {{ 'admin.dashboard.user-dashboard' | translate }}
             </a>
         </li>
-       
+
     </ul>
 
     <!-- Admin Dashboard Content -->
@@ -79,6 +79,27 @@
             </div>
         </div>
 
+        <!-- Community Selector -->
+        <div class="row mb-3">
+            <div class="col-lg-12">
+                <div class="card shadow-sm">
+                    <div class="card-body p-3">
+                        <div class="d-flex align-items-center">
+                            <label for="community-selector" class="me-2 mb-0">
+                                {{ 'admin.dashboard.select-community' | translate }}
+                            </label>
+                            <select id="community-selector" class="form-select w-auto"
+                                (change)="onCommunityChange($event)">
+                                <option *ngFor="let community of communities$ | async" [value]="community.id"
+                                    [selected]="community.id === (selectedCommunityId$ | async)">
+                                    {{ community.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <!-- Collection Statistics -->
