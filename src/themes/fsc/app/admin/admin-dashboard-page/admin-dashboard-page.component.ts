@@ -31,7 +31,8 @@ import { UserDashboardComponent } from 'src/themes/fsc/app/admin/user-dashboard-
 
 export interface AdminStats {
   totalPageCount: number;
-  collectionsStats: { collectionId: string, pageCount: number }[];
+  totalWorkflowCount?: number;
+  collectionsStats: { collectionId: string, pageCount: number, workflowCount?: number }[];
 }
 
 @Component({
@@ -97,7 +98,7 @@ export class AdminDashboardPageComponent implements OnInit {
     const adminStatsUrl = new RESTURLCombiner(environment.rest.baseUrl, 'statistics', 'adminstats', 'all').toString();
     const adminStats$ = this.restService.get(adminStatsUrl).pipe(
       map((response: RawRestResponse) => response.payload as AdminStats),
-      startWith({ totalPageCount: 0, collectionsStats: [] } as AdminStats),
+      startWith({ totalPageCount: 0, totalWorkflowCount: 0, collectionsStats: [] } as AdminStats),
       shareReplay(1)
     );
 
@@ -138,24 +139,10 @@ export class AdminDashboardPageComponent implements OnInit {
         shareReplay(1),
       );
 
-    // 3. Workflow items count (Targeted Workflow Search to match table)
-    this.workflowItemsCount$ = this.searchService
-      .search(
-        new PaginatedSearchOptions({
-          configuration: 'workflow',
-          pagination: oneElementPagination,
-        }),
-        undefined,
-        false,
-      )
-      .pipe(
-        getFirstCompletedRemoteData(),
-        map((rs: RemoteData<SearchObjects<DSpaceObject>>) =>
-          rs.hasSucceeded ? rs.payload.totalElements : 0,
-        ),
-        startWith(0),
-        shareReplay(1),
-      );
+    // 3. Workflow items count (from AdminStats custom API)
+    this.workflowItemsCount$ = adminStats$.pipe(
+      map((stats) => stats?.totalWorkflowCount || 0)
+    );
 
     // 5. Collection Statistics (List ALL collections with Discovery counts)
     this.collectionsStats$ = this.collectionDataService
@@ -179,21 +166,8 @@ export class AdminDashboardPageComponent implements OnInit {
                 )
                 .pipe(getFirstCompletedRemoteData(), startWith(null));
 
-              // 5b. Workflow count from Discovery for this bucket
-              const workflow$ = this.searchService
-                .search(
-                  new PaginatedSearchOptions({
-                    configuration: 'workflow',
-                    scope: coll.id,
-                    pagination: oneElementPagination,
-                  }),
-                  undefined,
-                  false,
-                )
-                .pipe(getFirstCompletedRemoteData(), startWith(null));
-
-              return combineLatest([archived$, workflow$, adminStats$]).pipe(
-                map(([archivedRd, workflowRd, adminStats]) => {
+              return combineLatest([archived$, adminStats$]).pipe(
+                map(([archivedRd, adminStats]) => {
                   const collStat = adminStats?.collectionsStats?.find(c => c.collectionId === coll.id);
                   return {
                     label: coll.name,
@@ -201,10 +175,7 @@ export class AdminDashboardPageComponent implements OnInit {
                       archivedRd && archivedRd.hasSucceeded
                         ? archivedRd.payload.totalElements
                         : 0,
-                    workflowCount:
-                      workflowRd && workflowRd.hasSucceeded
-                        ? workflowRd.payload.totalElements
-                        : 0,
+                    workflowCount: collStat && collStat.workflowCount ? collStat.workflowCount : 0,
                     pageCount: collStat ? collStat.pageCount : 0
                   };
                 }),
