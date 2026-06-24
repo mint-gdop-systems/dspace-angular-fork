@@ -3230,6 +3230,8 @@
 
   "item.page.filesection.size": "Size:",
 
+  "item.page.filesection.pageCount": "Page Count",
+
   "item.page.journal.search.title": "Articles in this journal",
 
   "item.page.link.full": "Full case file page",

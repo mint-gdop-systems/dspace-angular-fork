@@ -37,12 +37,12 @@
                 {{ file.firstMetadataValue("dc.description") }}
               </dd>
               }
-              @if (file.hasMetadata('crvs.documentType')) {
+              @if (file.hasMetadata('legal.case.documentType')) {
               <dt class="col-md-4">
                 {{ "item.page.filesection.documentType" | translate }}
               </dt>
               <dd class="col-md-8">
-                {{ file.firstMetadataValue("crvs.documentType") }}
+                {{ file.firstMetadataValue("legal.case.documentType") }}
               </dd>
               }
               @if (file.hasMetadata('crvs.document.status')) {
@@ -51,6 +51,15 @@
               </dt>
               <dd class="col-md-8">
                 {{ file.firstMetadataValue("crvs.document.status") }}
+              </dd>
+              }
+              
+              @if (file.hasMetadata('legal.document.pageCount')) {
+              <dt class="col-md-4">
+                {{ "item.page.filesection.pageCount" | translate }}
+              </dt>
+              <dd class="col-md-8">
+                {{ file.firstMetadataValue("legal.document.pageCount") }}
               </dd>
               }
             </dl>

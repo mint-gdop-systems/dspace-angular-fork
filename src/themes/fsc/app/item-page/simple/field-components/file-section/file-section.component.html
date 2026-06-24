@@ -17,7 +17,15 @@
                     }
                     {{ dsoNameService.getName(file) }}
                   </span>
+                  
                   <span> ({{(file?.sizeBytes) | dsFileSize }})</span>
+
+                  @if (file.firstMetadataValue('legal.document.pageCount')) {
+                    <span class="page-count text-muted ms-1">
+                      • {{ file.firstMetadataValue('legal.document.pageCount') }} pages
+                    </span>
+                  }
+
                   @if (file.firstMetadataValue('legal.document.status') === "Inactive") {
                     <span class="badge bg-secondary ms-1" style="opacity: 0.6;">
                       {{ file.firstMetadataValue('legal.document.status') }}
