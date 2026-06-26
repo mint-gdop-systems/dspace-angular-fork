@@ -1,0 +1,173 @@
+<div class="bitstream-statistics-dashboard" *ngIf="stats$ | async as stats; else loading">
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label" for="bitstream-submitter-filter">Submitter</label>
+                    <div class="position-relative">
+                        <input id="bitstream-submitter-filter" class="form-control" type="text"
+                            [ngClass]="{ 'filter-active': filtersForm.controls.submitter.value }"
+                            [formControl]="filtersForm.controls.submitter" (focus)="showSuggestions = true"
+                            (blur)="hideSuggestions()" placeholder="Search by email" />
+                        <ul *ngIf="showSuggestions && (suggestions$ | async) as suggestions"
+                            class="dropdown-menu show w-100 mt-1">
+                            <li *ngFor="let suggestion of suggestions" class="dropdown-item"
+                                (mousedown)="selectUser(suggestion)">
+                                <strong>{{ suggestion.name || suggestion.email }}</strong>
+                                <div class="small text-muted">{{ suggestion.email }}</div>
+                            </li>
+                            <li *ngIf="suggestions.length === 0" class="dropdown-item text-muted">No users found</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label" for="bitstream-date-filter">
+                        Approved Date
+                        <span class="text-info"
+                            title="Filters by the date the item was approved/archived."><i
+                                class="fas fa-lg fa-fw fa-question-circle"></i></span>
+                    </label>
+                    <input id="bitstream-date-filter" class="form-control" type="date"
+                        [ngClass]="{ 'filter-active': filtersForm.controls.date.value }"
+                        [formControl]="filtersForm.controls.date" />
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button *ngIf="hasActiveFilters" type="button" class="btn btn-outline-secondary btn-sm w-100"
+                        (click)="clearFilters()">Clear filters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="stats; else noData" class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100 border-left-primary">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0 text-primary font-weight-bold"><i class="fas fa-file-alt mr-2"></i> Total Case Files
+                    </h5>
+                </div>
+                <div class="card-body d-flex align-items-center justify-content-center text-center min-vh-25">
+                    <div class="row w-100 align-items-center">
+                        <div class="col-6 border-right">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1 opacity-75">Total Case Files</div>
+                            <div class="h1 mb-0 fw-bold text-dark">{{ stats.totals?.bitstreams ?? 0 }}</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1 opacity-75">Total Pages</div>
+                            <div class="h1 mb-0 fw-bold text-dark">{{ stats.totals?.pdfPages ?? 0 }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100 border-left-info">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0 text-info font-weight-bold"><i class="fas fa-sitemap mr-2"></i> Entity type
+                        breakdown</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Entity type</th>
+                                <th class="text-center">Archives</th>
+                                <th class="text-center">Pages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let entry of getBreakdownEntries(stats.entityTypeBreakdown)">
+                                <td>{{ entry.label === 'unknown' ? 'Others' : entry.label }}</td>
+                                <td class="text-center">{{ entry.bitstreams }}</td>
+                                <td class="text-center">{{ entry.pdfPages }}</td>
+                            </tr>
+                            <tr *ngIf="getBreakdownEntries(stats.entityTypeBreakdown).length === 0">
+                                <td colspan="3" class="text-center text-muted py-3">No entity type data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card shadow-sm h-100 border-left-success">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0 text-success font-weight-bold"><i class="fas fa-toggle-on mr-2"></i> Item status
+                        breakdown</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th class="text-center">Case Files</th>
+                                <th class="text-center">Pages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let entry of getBreakdownEntries(stats.itemStatusBreakdown)">
+                                <td>{{ entry.label === 'unarchived' ? 'Workspace & Workflow' :
+                                    entry.label.charAt(0).toUpperCase() + entry.label.slice(1) }}</td>
+                                <td class="text-center">{{ entry.bitstreams }}</td>
+                                <td class="text-center">{{ entry.pdfPages }}</td>
+                            </tr>
+                            <tr *ngIf="getBreakdownEntries(stats.itemStatusBreakdown).length === 0">
+                                <td colspan="3" class="text-center text-muted py-3">No item status data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mt-4">
+            <div class="card shadow-sm h-100 border-left-warning">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0 text-warning font-weight-bold"><i class="fas fa-gavel mr-2"></i> Document type
+                        breakdown</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Document Type</th>
+                                <th class="text-center">Case Files</th>
+                                <th class="text-center">Pages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let entry of getBreakdownEntries(stats.documentTypeBreakdown)">
+                                <td>{{ entry.label === 'Other' ? 'Other' : entry.label }}</td>
+                                <td class="text-center">{{ entry.bitstreams }}</td>
+                                <td class="text-center">{{ entry.pdfPages }}</td>
+                            </tr>
+                            <tr *ngIf="getBreakdownEntries(stats.documentTypeBreakdown).length === 0">
+                                <td colspan="3" class="text-center text-muted py-3">No document type data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noData>
+    <div class="card shadow-sm border-0 bg-light">
+        <div class="card-body text-center py-5">
+            <i class="fas fa-chart-line fa-3x text-muted mb-3 opacity-25"></i>
+            <h5 class="text-muted">No bitstream statistics available</h5>
+            <p class="text-muted mb-0 small">Try another submitter or date filter.</p>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #loading>
+    <div class="d-flex justify-content-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</ng-template>
