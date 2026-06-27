@@ -22,6 +22,8 @@
 
   "admin.dashboard.workflow-items": "Pending Case files",
 
+  "admin.dashboard.select-community": "Courts",
+
   "item.page.filesection.document.status": "Status",
 
   "item.page.filesection.documentType": "Document Type",
