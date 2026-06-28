@@ -1,0 +1,183 @@
+<div class="user-item-stats-container">
+    <!-- Filters -->
+    <div class="card mb-4 shadow-sm" [formGroup]="filtersForm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-filter mr-2"></i> Filters</h5>
+            <div class="row align-items-end">
+                <div class="col-md-3 mb-3">
+                    <label for="userSelect">User</label>
+                    <div class="position-relative">
+                        <input id="userSelect" class="form-control" type="text"
+                               [ngClass]="{ 'filter-active': filtersForm.controls.submitterDisplay.value }"
+                               [formControl]="filtersForm.controls.submitterDisplay" 
+                               (focus)="showSuggestions = true"
+                               (blur)="onUserBlur()" 
+                               placeholder="Search by name or email">
+                        <ul *ngIf="showSuggestions && (suggestions$ | async) as suggestions"
+                            class="dropdown-menu show w-100 mt-1">
+                            <li *ngFor="let suggestion of suggestions" class="dropdown-item"
+                                (mousedown)="selectUser(suggestion)" style="cursor:pointer;">
+                                <strong>{{ suggestion.name || suggestion.email }}</strong>
+                                <div class="small text-muted">{{ suggestion.email }}</div>
+                            </li>
+                            <li *ngIf="suggestions.length === 0" class="dropdown-item text-muted">No users found</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label for="statusSelect">Item Status</label>
+                    <select id="statusSelect" class="form-control" [formControl]="filtersForm.controls.status"
+                            [ngClass]="{ 'filter-active': filtersForm.controls.status.value }">
+                        <option value="">All</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" class="form-control" [formControl]="filtersForm.controls.startDate"
+                           [ngClass]="{ 'filter-active': filtersForm.controls.startDate.value }">
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" class="form-control" [formControl]="filtersForm.controls.endDate"
+                           [ngClass]="{ 'filter-active': filtersForm.controls.endDate.value }">
+                </div>
+                <div class="col-md-2 mb-3 d-flex align-items-end">
+                    <button class="btn btn-outline-secondary w-100" (click)="filtersForm.reset()">
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="loading$ | async" class="d-flex justify-content-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!(loading$ | async) && (stats$ | async) as stats">
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <!-- Total Pages -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm border-left-success h-100">
+                    <div class="card-body py-4">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Pages Submitted</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.totalPageCount }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-file-alt fa-2x text-gray-300 opacity-25"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approved -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm border-left-info h-100">
+                    <div class="card-body py-4">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Approved Submissions</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.approvedCount }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-archive fa-2x text-gray-300 opacity-25"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm border-left-warning h-100">
+                    <div class="card-body py-4">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Submissions</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.pendingCount }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-tasks fa-2x text-gray-300 opacity-25"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Items -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm border-left-primary h-100">
+                    <div class="card-body py-4">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Items</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.totalItems }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-folder fa-2x text-gray-300 opacity-25"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Table -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="fas fa-list mr-2"></i> Items List</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>No.</th>
+                                <th>Case Number</th>
+                                <th>Item Status</th>
+                                <th>File Count</th>
+                                <th>በዳኛ የተሰራ<br/><small>(page count)</small></th>
+                                <th>ልዩ ልዩ<br/><small>(page count)</small></th>
+                                <th>Other<br/><small>(page count)</small></th>
+                                <th>Total Page Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of stats.items; let i = index">
+                                <td>{{ (page - 1) * pageSize + i + 1 }}</td>
+                                <td>{{ item.caseNumber || 'N/A' }}</td>
+                                <td>
+                                    <span class="badge" [ngClass]="{'badge-success': item.status === 'Approved', 'badge-warning': item.status === 'Pending'}">
+                                        {{ item.status }}
+                                    </span>
+                                </td>
+                                <td>{{ item.fileCount }}</td>
+                                <td>{{ item.judgePageCount }}</td>
+                                <td>{{ item.miscPageCount }}</td>
+                                <td>{{ item.otherPageCount }}</td>
+                                <td><strong>{{ item.totalPageCount }}</strong></td>
+                            </tr>
+                            <tr *ngIf="stats.items.length === 0">
+                                <td colspan="8" class="text-center py-4 text-muted">No items found matching the selected criteria.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white border-top-0 pt-3" *ngIf="stats.totalElements > 0">
+                <ds-pagination
+                    [paginationOptions]="paginationOptions"
+                    [collectionSize]="stats.totalElements">
+                </ds-pagination>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,7 +7,7 @@
 
     <!-- Tabs Navigation -->
     <ul class="nav nav-tabs mb-4" *ngIf="(isAdmin$ | async)">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="(isSiteAdmin$ | async)">
             <a class="nav-link" [class.active]="activeTab === 'admin'" (click)="activeTab = 'admin'"
                 href="javascript:void(0)">
                 <i class="fas fa-user-shield mr-1"></i> {{ 'admin.dashboard.admin-dashboard' | translate }}
@@ -23,6 +23,12 @@
             <a class="nav-link" [class.active]="activeTab === 'user'" (click)="activeTab = 'user'"
                 href="javascript:void(0)">
                 <i class="fas fa-user mr-1"></i> {{ 'admin.dashboard.user-dashboard' | translate }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'user-item-stats'" (click)="activeTab = 'user-item-stats'"
+                href="javascript:void(0)">
+                <i class="fas fa-chart-pie mr-1"></i> User and Item Stats
             </a>
         </li>
     </ul>
@@ -173,5 +179,10 @@
     <!-- Bitstream Statistics Content -->
     <div *ngIf="activeTab === 'bitstream'">
         <ds-bitstream-statistics-dashboard></ds-bitstream-statistics-dashboard>
+    </div>
+
+    <!-- User Item Stats Content -->
+    <div *ngIf="activeTab === 'user-item-stats'">
+        <ds-user-item-stats></ds-user-item-stats>
     </div>
 </div>

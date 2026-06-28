@@ -32,6 +32,7 @@ import {
     of
 } from 'rxjs';
 import {
+    catchError,
     map,
     shareReplay,
     startWith,
@@ -41,6 +42,7 @@ import {
 import { SearchService } from 'src/app/shared/search/search.service';
 import { BitstreamStatisticsDashboardComponent } from 'src/themes/fsc/app/admin/bitstream-statistics-page/bitstream-statistics-page.component';
 import { UserDashboardComponent } from 'src/themes/fsc/app/admin/user-dashboard-page/user-dashboard-page.component';
+import { UserItemStatsComponent } from 'src/themes/fsc/app/admin/user-item-stats/user-item-stats.component';
 
 export interface AdminStats {
   totalPageCount: number;
@@ -59,6 +61,7 @@ export interface AdminStats {
         TranslateModule,
         BitstreamStatisticsDashboardComponent,
         UserDashboardComponent,
+        UserItemStatsComponent,
     ],
 })
 export class AdminDashboardPageComponent implements OnInit {
@@ -72,8 +75,9 @@ export class AdminDashboardPageComponent implements OnInit {
     selectedCommunityId$: Observable<string>;
 
     isAdmin$: Observable<boolean>;
+    isSiteAdmin$: Observable<boolean>;
 
-    activeTab: 'admin' | 'user' | 'bitstream' = 'admin';
+    activeTab: 'admin' | 'user' | 'bitstream' | 'user-item-stats' = 'admin';
 
     private adminStats$: Observable<AdminStats>;
 
@@ -92,9 +96,22 @@ export class AdminDashboardPageComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
+        this.isSiteAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
             shareReplay(1)
         );
+        const isCollectionAdmin$ = this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin);
+        const isCommunityAdmin$ = this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin);
+
+        this.isAdmin$ = combineLatest([this.isSiteAdmin$, isCollectionAdmin$, isCommunityAdmin$]).pipe(
+            map(([isSite, isColl, isComm]: any[]) => isSite || isColl || isComm),
+            shareReplay(1)
+        );
+
+        this.isSiteAdmin$.pipe(take(1)).subscribe((isSiteAdmin) => {
+            if (!isSiteAdmin) {
+                this.activeTab = 'user-item-stats';
+            }
+        });
 
         this.isAdmin$.pipe(take(1)).subscribe((isAdmin) => {
             if (!isAdmin) {
@@ -125,6 +142,7 @@ export class AdminDashboardPageComponent implements OnInit {
         const adminStatsUrl = new RESTURLCombiner(environment.rest.baseUrl, 'statistics', 'adminstats', 'all').toString();
         this.adminStats$ = this.restService.get(adminStatsUrl).pipe(
             map((response: RawRestResponse) => response.payload as AdminStats),
+            catchError((err) => of({ totalPageCount: 0, totalWorkflowCount: 0, collectionsStats: [] } as AdminStats)),
             startWith({ totalPageCount: 0, totalWorkflowCount: 0, collectionsStats: [] } as AdminStats),
             shareReplay(1)
         );
@@ -180,7 +198,7 @@ export class AdminDashboardPageComponent implements OnInit {
                         }), undefined, false).pipe(getFirstCompletedRemoteData(), startWith(null));
 
                         return combineLatest([archived$, this.adminStats$]).pipe(
-                            map(([archivedRd, adminStats]) => {
+                            map(([archivedRd, adminStats]: any[]) => {
                                 const collStat = adminStats?.collectionsStats?.find(c => c.collectionId === coll.id);
                                 return {
                                     label: coll.name,
