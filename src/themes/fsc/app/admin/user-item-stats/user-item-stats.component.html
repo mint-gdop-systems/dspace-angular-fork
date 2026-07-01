@@ -62,7 +62,7 @@
         <!-- Summary Cards -->
         <div class="row mb-4">
             <!-- Total Items -->
-            <div class="col-md-3 mb-3">
+            <div class="col-md-4 mb-3">
                 <div class="card shadow-sm border-left-primary h-100">
                     <div class="card-body py-4">
                         <div class="row no-gutters align-items-center">
@@ -79,7 +79,7 @@
             </div>
 
             <!-- Approved -->
-            <div class="col-md-3 mb-3">
+            <div class="col-md-4 mb-3">
                 <div class="card shadow-sm border-left-info h-100">
                     <div class="card-body py-4">
                         <div class="row no-gutters align-items-center">
@@ -96,7 +96,7 @@
             </div>
 
             <!-- Pending -->
-            <div class="col-md-3 mb-3">
+            <div class="col-md-4 mb-3">
                 <div class="card shadow-sm border-left-warning h-100">
                     <div class="card-body py-4">
                         <div class="row no-gutters align-items-center">
@@ -111,9 +111,11 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="row mb-4">
             <!-- Total Pages -->
-            <div class="col-md-3 mb-3">
+            <div class="col-md-4 mb-3">
                 <div class="card shadow-sm border-left-success h-100">
                     <div class="card-body py-4">
                         <div class="row no-gutters align-items-center">
@@ -129,6 +131,39 @@
                 </div>
             </div>
 
+            <!-- Judge Pages -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm border-left-warning h-100">
+                    <div class="card-body py-4">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">በዳኛ የተሰራ (Judge Pages)</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.judgePageCount }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-gavel fa-2x text-gray-300 opacity-25"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Misc Pages -->
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm border-left-info h-100">
+                    <div class="card-body py-4">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">ልዩ ልዩ (Other Pages)</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.miscPageCount }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-file-invoice fa-2x text-gray-300 opacity-25"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Detailed Table -->

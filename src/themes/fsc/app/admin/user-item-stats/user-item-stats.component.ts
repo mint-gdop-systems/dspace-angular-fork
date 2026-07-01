@@ -85,7 +85,9 @@ export class UserItemStatsComponent implements OnInit {
 
     this.paginationService.getCurrentPagination(this.paginationOptions.id, this.paginationOptions).subscribe((currentPagination) => {
       this.page = currentPagination.currentPage;
+      this.pageSize = currentPagination.pageSize;
       this.paginationOptions.currentPage = this.page;
+      this.paginationOptions.pageSize = this.pageSize;
       this.loadStats();
     });
   }
