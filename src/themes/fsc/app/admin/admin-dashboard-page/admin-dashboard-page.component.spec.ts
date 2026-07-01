@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AdminDashboardPageComponent } from 'src/themes/fsc/app/admin/admin-dashboard-page/admin-dashboard-page.component';
 import { SearchService } from 'src/app/shared/search/search.service';
-import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
+// import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
 import { WorkspaceitemDataService } from '@dspace/core/submission/workspaceitem-data.service';
 import { PoolTaskDataService } from '@dspace/core/tasks/pool-task-data.service';
 import { ClaimedTaskDataService } from '@dspace/core/tasks/claimed-task-data.service';
@@ -16,7 +16,7 @@ describe('AdminDashboardPageComponent', () => {
     let fixture: ComponentFixture<AdminDashboardPageComponent>;
 
     const mockSearchService = jasmine.createSpyObj('SearchService', ['search', 'getFacetValuesFor']);
-    const mockBitstreamDataService = jasmine.createSpyObj('BitstreamDataService', ['findListByHref']);
+    // const mockBitstreamDataService = jasmine.createSpyObj('BitstreamDataService', ['findListByHref']);
     const mockWorkspaceitemDataService = jasmine.createSpyObj('WorkspaceitemDataService', ['findListByHref']);
     const mockPoolTaskDataService = jasmine.createSpyObj('PoolTaskDataService', ['findListByHref']);
     const mockClaimedTaskDataService = jasmine.createSpyObj('ClaimedTaskDataService', ['findListByHref']);
@@ -26,7 +26,7 @@ describe('AdminDashboardPageComponent', () => {
     beforeEach(async () => {
         mockSearchService.search.and.returnValue(of({ hasSucceeded: true, payload: { totalElements: 10 } }));
         mockSearchService.getFacetValuesFor.and.returnValue(of({ hasSucceeded: true, payload: { page: [] } }));
-        mockBitstreamDataService.findListByHref.and.returnValue(of({ hasSucceeded: true, payload: { totalElements: 20 } }));
+        // mockBitstreamDataService.findListByHref.and.returnValue(of({ hasSucceeded: true, payload: { totalElements: 20 } }));
         mockWorkspaceitemDataService.findListByHref.and.returnValue(of({ hasSucceeded: true, payload: { totalElements: 5 } }));
         mockPoolTaskDataService.findListByHref.and.returnValue(of({ hasSucceeded: true, payload: { page: [] } }));
         mockClaimedTaskDataService.findListByHref.and.returnValue(of({ hasSucceeded: true, payload: { page: [] } }));
@@ -36,7 +36,7 @@ describe('AdminDashboardPageComponent', () => {
             imports: [AdminDashboardPageComponent, TranslateModule.forRoot()],
             providers: [
                 { provide: SearchService, useValue: mockSearchService },
-                { provide: BitstreamDataService, useValue: mockBitstreamDataService },
+                // { provide: BitstreamDataService, useValue: mockBitstreamDataService },
                 { provide: WorkspaceitemDataService, useValue: mockWorkspaceitemDataService },
                 { provide: PoolTaskDataService, useValue: mockPoolTaskDataService },
                 { provide: ClaimedTaskDataService, useValue: mockClaimedTaskDataService },

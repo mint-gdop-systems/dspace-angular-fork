@@ -61,17 +61,17 @@
     <div *ngIf="!(loading$ | async) && (stats$ | async) as stats">
         <!-- Summary Cards -->
         <div class="row mb-4">
-            <!-- Total Pages -->
+            <!-- Total Items -->
             <div class="col-md-3 mb-3">
-                <div class="card shadow-sm border-left-success h-100">
+                <div class="card shadow-sm border-left-primary h-100">
                     <div class="card-body py-4">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Pages Submitted</div>
-                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.totalPageCount }}</div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Items</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.totalItems }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-file-alt fa-2x text-gray-300 opacity-25"></i>
+                                <i class="fas fa-folder fa-2x text-gray-300 opacity-25"></i>
                             </div>
                         </div>
                     </div>
@@ -112,22 +112,23 @@
                 </div>
             </div>
 
-            <!-- Total Items -->
+            <!-- Total Pages -->
             <div class="col-md-3 mb-3">
-                <div class="card shadow-sm border-left-primary h-100">
+                <div class="card shadow-sm border-left-success h-100">
                     <div class="card-body py-4">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Items</div>
-                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.totalItems }}</div>
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Pages Submitted</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.totalPageCount }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-folder fa-2x text-gray-300 opacity-25"></i>
+                                <i class="fas fa-file-alt fa-2x text-gray-300 opacity-25"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!-- Detailed Table -->
@@ -141,7 +142,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>No.</th>
-                                <th>Case Number</th>
+                                <th>የመዝገብ ቁጥር</th>
                                 <th>Item Status</th>
                                 <th>File Count</th>
                                 <th>በዳኛ የተሰራ<br/><small>(page count)</small></th>

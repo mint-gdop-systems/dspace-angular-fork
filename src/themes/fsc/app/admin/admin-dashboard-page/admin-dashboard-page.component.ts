@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
+// import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
 import { CollectionDataService } from '@dspace/core/data/collection-data.service';
 import { CommunityDataService } from '@dspace/core/data/community-data.service';
 import { AuthorizationDataService } from '@dspace/core/data/feature-authorization/authorization-data.service';
@@ -40,7 +40,7 @@ import {
     take,
 } from 'rxjs/operators';
 import { SearchService } from 'src/app/shared/search/search.service';
-import { BitstreamStatisticsDashboardComponent } from 'src/themes/fsc/app/admin/bitstream-statistics-page/bitstream-statistics-page.component';
+// import { BitstreamStatisticsDashboardComponent } from 'src/themes/fsc/app/admin/bitstream-statistics-page/bitstream-statistics-page.component';
 import { UserDashboardComponent } from 'src/themes/fsc/app/admin/user-dashboard-page/user-dashboard-page.component';
 import { UserItemStatsComponent } from 'src/themes/fsc/app/admin/user-item-stats/user-item-stats.component';
 
@@ -59,7 +59,7 @@ export interface AdminStats {
         CommonModule,
         RouterModule,
         TranslateModule,
-        BitstreamStatisticsDashboardComponent,
+        // BitstreamStatisticsDashboardComponent,
         UserDashboardComponent,
         UserItemStatsComponent,
     ],
@@ -77,13 +77,14 @@ export class AdminDashboardPageComponent implements OnInit {
     isAdmin$: Observable<boolean>;
     isSiteAdmin$: Observable<boolean>;
 
-    activeTab: 'admin' | 'user' | 'bitstream' | 'user-item-stats' = 'admin';
+    // activeTab: 'admin' | 'user' | 'bitstream' | 'user-item-stats' = 'admin';
+    activeTab: 'admin' | 'user' | 'user-item-stats' = 'admin';
 
     private adminStats$: Observable<AdminStats>;
 
     constructor(
         protected searchService: SearchService,
-        protected bitstreamDataService: BitstreamDataService,
+        // protected bitstreamDataService: BitstreamDataService,
         protected workspaceitemDataService: WorkspaceitemDataService,
         protected workflowItemDataService: WorkflowItemDataService,
         protected poolTaskDataService: PoolTaskDataService,
