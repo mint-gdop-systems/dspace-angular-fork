@@ -5,7 +5,7 @@ import { RESTURLCombiner } from '@dspace/core/url-combiner/rest-url-combiner';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpClient } from '@angular/common/http';
 
 export interface UserItemStatSummary {
   totalItems: number;
@@ -41,7 +41,10 @@ export interface UserItemStatsResponse {
 })
 export class UserItemStatsService {
 
-  constructor(protected restService: DspaceRestService) { }
+  constructor(
+    protected restService: DspaceRestService,
+    protected http: HttpClient
+  ) { }
 
   getStats(userId?: string, startDate?: string, endDate?: string, status?: string, page: number = 0, size: number = 10): Observable<UserItemStatsResponse> {
     let params = new HttpParams()
@@ -66,5 +69,26 @@ export class UserItemStatsService {
     return this.restService.get(url).pipe(
       map((response: RawRestResponse) => response.payload as UserItemStatsResponse)
     );
+  }
+
+  exportStats(userId?: string, startDate?: string, endDate?: string, status?: string): Observable<Blob> {
+    let params = new HttpParams();
+
+    if (userId) {
+      params = params.set('userId', userId);
+    }
+    if (startDate) {
+      params = params.set('startDate', startDate);
+    }
+    if (endDate) {
+      params = params.set('endDate', endDate);
+    }
+    if (status) {
+      params = params.set('filterStatus', status);
+    }
+
+    const url = new RESTURLCombiner(environment.rest.baseUrl, 'statistics', `useritemstats/export?${params.toString()}`).toString();
+
+    return this.http.get(url, { responseType: 'blob' });
   }
 }

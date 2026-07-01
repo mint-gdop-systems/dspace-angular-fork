@@ -24,8 +24,9 @@ import { getFirstCompletedRemoteData } from '@dspace/core/shared/operators';
 })
 export class UserItemStatsComponent implements OnInit {
 
-  stats$: BehaviorSubject<UserItemStatsResponse | null> = new BehaviorSubject(null);
-  loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  stats$: BehaviorSubject<UserItemStatsResponse | null> = new BehaviorSubject<UserItemStatsResponse | null>(null);
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  exporting$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   filtersForm = new FormGroup({
     submitterDisplay: new FormControl(''),
@@ -133,6 +134,27 @@ export class UserItemStatsComponent implements OnInit {
       }, err => {
         console.error(err);
         this.loading$.next(false);
+      });
+  }
+
+  exportToExcel() {
+    this.exporting$.next(true);
+    const formVals = this.filtersForm.value;
+    this.statsService.exportStats(formVals.submitterId, formVals.startDate, formVals.endDate, formVals.status)
+      .pipe(take(1))
+      .subscribe((blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'user_item_stats.xlsx';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        this.exporting$.next(false);
+      }, err => {
+        console.error('Export failed', err);
+        this.exporting$.next(false);
       });
   }
 }
