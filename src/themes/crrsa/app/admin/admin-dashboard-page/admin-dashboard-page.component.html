@@ -95,6 +95,9 @@
                                     {{ community.name }}
                                 </option>
                             </select>
+                            <span *ngIf="loading$ | async" class="ms-2">
+                                <i class="fas fa-spinner fa-spin text-muted"></i>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -110,9 +113,24 @@
                             <table class="table table-hover mb-0">
                                 <thead>
                                     <tr>
-                                        <th>{{ 'admin.dashboard.collection-name' | translate }}</th>
-                                        <th class="text-center">{{ 'admin.dashboard.archived-items' | translate }}</th>
-                                        <th class="text-center">{{ 'admin.dashboard.workflow-items' | translate }}</th>
+                                        <th rowspan="2" style="vertical-align: middle;">{{
+                                            'admin.dashboard.collection-name' | translate }}</th>
+                                        <th rowspan="2" class="text-center" style="vertical-align: middle;">{{
+                                            'admin.dashboard.archived-items' | translate }}</th>
+                                        <th rowspan="2" class="text-center" style="vertical-align: middle;">{{
+                                            'admin.dashboard.workflow-items' | translate }}</th>
+                                        <th colspan="4" class="text-center sep-left">Files</th>
+                                        <th colspan="4" class="text-center sep-left">Pages</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Approved</th>
+                                        <th class="text-center">Draft</th>
+                                        <th class="text-center">Pending</th>
+                                        <th class="text-center">Total</th>
+                                        <th class="text-center sep-left">Approved</th>
+                                        <th class="text-center">Draft</th>
+                                        <th class="text-center">Pending</th>
+                                        <th class="text-center">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody style="background-color: #ffffff !important;">
@@ -130,9 +148,88 @@
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
                                             {{ stat.workflowCount }}
                                         </td>
+                                        <td class="text-center sep-left"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
+                                            {{ stat.bitstreamApproved }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
+                                            {{ stat.bitstreamDraft }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
+                                            {{ stat.bitstreamPending }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
+                                            {{ stat.bitstreamCount }}
+                                        </td>
+                                        <td class="text-center sep-left"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
+                                            {{ stat.pageApproved }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
+                                            {{ stat.pageDraft }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
+                                            {{ stat.pagePending }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
+                                            {{ stat.pageCount }}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="(totals$ | async) as totals"
+                                        style="background-color: #f8f9fa !important; border-top: 2px solid #dee2e6;">
+                                        <td
+                                            style="color: #000000 !important; background-color: #f8f9fa !important; padding: 12px; font-weight: 700;">
+                                            Total
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
+                                            {{ totals.archivedCount }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
+                                            {{ totals.workflowCount }}
+                                        </td>
+                                        <td class="text-center sep-left"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
+                                            {{ totals.bitstreamApproved }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
+                                            {{ totals.bitstreamDraft }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
+                                            {{ totals.bitstreamPending }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
+                                            {{ totals.bitstreamCount }}
+                                        </td>
+                                        <td class="text-center sep-left"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
+                                            {{ totals.pageApproved }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
+                                            {{ totals.pageDraft }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
+                                            {{ totals.pagePending }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
+                                            {{ totals.pageCount }}
+                                        </td>
                                     </tr>
                                     <tr *ngIf="(collectionsStats$ | async)?.length === 0">
-                                        <td colspan="3" class="text-center py-4"
+                                        <td colspan="11" class="text-center py-4"
                                             style="color: #6c757d !important; background-color: #ffffff !important;">
                                             {{ 'admin.dashboard.no-data' | translate }}
                                         </td>
