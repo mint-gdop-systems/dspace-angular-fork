@@ -135,7 +135,7 @@ export class AdminDashboardPageComponent implements OnInit {
 
         // 3. Workflow items count (Targeted Workflow Search to match table)
         this.workflowItemsCount$ = this.searchService.search(new PaginatedSearchOptions({
-            configuration: 'workflow',
+            configuration: 'workflowAdmin',
             pagination: oneElementPagination,
         }), undefined, false).pipe(
             getFirstCompletedRemoteData(),
@@ -166,7 +166,7 @@ export class AdminDashboardPageComponent implements OnInit {
 
                         // 5b. Workflow count from Discovery for this bucket
                         const workflow$ = this.searchService.search(new PaginatedSearchOptions({
-                            configuration: 'workflow',
+                            configuration: 'workflowAdmin',
                             scope: coll.id,
                             pagination: oneElementPagination,
                         }), undefined, false).pipe(getFirstCompletedRemoteData(), startWith(null));
