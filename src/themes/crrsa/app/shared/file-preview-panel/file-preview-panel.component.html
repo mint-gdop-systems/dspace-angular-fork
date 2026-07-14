@@ -1,12 +1,16 @@
-<div class="file-preview-container p-3 border rounded bg-light">
-  <div class="mb-3">
-    <label for="fileSelect" class="form-label">{{ 'submission.sections.upload.preview.select-file' | translate
-      }}</label>
-    <select id="fileSelect" class="form-select" [ngModel]="selectedFile?.uuid" (change)="onFileChange($event)">
+<div class="file-preview-container border rounded bg-light">
+  <div class="p-3">
+    <label for="fileSelect" class="form-label">
+      {{ 'submission.sections.upload.preview.select-file' | translate}}
+    </label>
+
+    <select id="fileSelect" class="form-select" [ngModel]="selectedFile?.uuid" (change)="onFileChange($event)"
+      [disabled]="!fileList?.length">
       @for (file of fileList; track file.uuid) {
       <option [value]="file.uuid">{{ getFileName(file) }}</option>
       }
     </select>
+
     @if (selectedFile) {
     <div class="file-details mt-2 p-2 bg-white border rounded">
       <div class="small text-muted">
@@ -40,8 +44,7 @@
     }
   </div>
 
-  <div class="preview-viewer border rounded bg-white d-flex align-items-center justify-content-center"
-    style="min-height: 400px;">
+  <div class="preview-viewer">
     @if (selectedFile) {
     @if (isPdf(selectedFile)) {
     <div class="pdf-container w-100 h-100">

@@ -1,81 +1,72 @@
-<div class="submission-layout">
-
-  @if ((isLoading$ | async) === false) {
-  <!-- MAIN BODY CONTAINER (Scrollable) -->
-  <div class="submission-body-container">
-    <div class="d-flex g-4 align-items-center mb-3">
-      <div>
-        @if (!isSectionHidden) {
-        <ds-submission-form-collection [currentCollectionId]="collectionId" [currentDefinition]="definitionId"
-          [submissionId]="submissionId" [collectionModifiable]="collectionModifiable" [isReadonly]="isSectionReadonly"
-          (collectionChange)="onCollectionChange($event)">
-        </ds-submission-form-collection>
-        }
-      </div>
-      <div>
-        <ds-submission-form-section-add [collectionId]="collectionId" [submissionId]="submissionId">
-        </ds-submission-form-section-add>
-      </div>
+@if ((isLoading$ | async) === false) {
+<!-- MAIN BODY CONTAINER (Scrollable) -->
+<div class="submission-body-container">
+  <div class="d-flex gap-2 align-items-center mb-3">
+    <div>
+      @if (!isSectionHidden) {
+      <ds-submission-form-collection [currentCollectionId]="collectionId" [currentDefinition]="definitionId"
+        [submissionId]="submissionId" [collectionModifiable]="collectionModifiable" [isReadonly]="isSectionReadonly"
+        (collectionChange)="onCollectionChange($event)">
+      </ds-submission-form-collection>
+      }
     </div>
-
-    <!-- MAIN BODY SIDE-BY-SIDE -->
-    <div class="row submission-body g-0">
-
-      <!-- LEFT: FORM SECTIONS -->
-      <div class="col-md-7 submission-form-content">
-        @for (object of $any(submissionSections | async); track object) {
-        <ds-submission-section-container [collectionId]="collectionId" [submissionId]="submissionId"
-          [entityType]="entityType" [sectionData]="$any(object)">
-        </ds-submission-section-container>
-        }
-      </div>
-
-      <!-- RIGHT: FILE PREVIEW PANEL -->
-      <div class="col-md-5 submission-preview-panel">
-        @if ((uploadEnabled$ | async)) {
-        <div class="file-selector-container mb-3 shadow-sm p-3 bg-light border-bottom">
-          <ds-submission-upload-files [submissionId]="submissionId" [collectionId]="collectionId"
-            [uploadFilesOptions]="uploadFilesOptions">
-          </ds-submission-upload-files>
-        </div>
-        }
-
-
-        <ds-file-preview-panel [fileList]="fileList" [selectedFile]="selectedFile"
-          (fileSelected)="onFileSelectedForPreview($event)">
-        </ds-file-preview-panel>
-      </div>
-
+    <div>
+      <ds-submission-form-section-add [collectionId]="collectionId" [submissionId]="submissionId">
+      </ds-submission-form-section-add>
     </div>
-
-    <hr class="my-5">
-
-    <!-- FULL WIDTH UPLOAD SECTION AT BOTTOM -->
-    @if (uploadSection$ | async; as uploadSectionObject) {
-    <div class="submission-upload-section-footer mt-4">
-      <div class="card-body p-0">
-        <ds-submission-section-container [collectionId]="collectionId" [submissionId]="submissionId"
-          [entityType]="entityType" [sectionData]="$any(uploadSectionObject)">
-        </ds-submission-section-container>
-      </div>
-    </div>
-    }
-
-  </div> <!-- End of submission-body-container -->
-
-
-  <!-- FOOTER -->
-  <div class="submission-form-footer mt-auto bg-white border-top shadow-sm p-3">
-    <ds-submission-form-footer [submissionId]="submissionId">
-    </ds-submission-form-footer>
   </div>
 
-  }
+  <!-- MAIN BODY SIDE-BY-SIDE -->
+  <div class="submission-body">
 
-  @if (isLoading$ | async) {
-  <div class="d-flex justify-content-center align-items-center flex-grow-1">
-    <ds-loading [message]="'form.loading' | translate"></ds-loading>
+    <!-- LEFT: FORM SECTIONS -->
+    <div class="submission-form-content">
+      @for (object of $any(submissionSections | async); track object) {
+      <ds-submission-section-container [collectionId]="collectionId" [submissionId]="submissionId"
+        [entityType]="entityType" [sectionData]="$any(object)">
+      </ds-submission-section-container>
+      }
+    </div>
+
+    <!-- RIGHT: FILE PREVIEW PANEL -->
+    <div class="col-md-5 submission-preview-panel">
+      @if ((uploadEnabled$ | async)) {
+      <ds-submission-upload-files [submissionId]="submissionId" [collectionId]="collectionId"
+        [uploadFilesOptions]="uploadFilesOptions">
+      </ds-submission-upload-files>
+      }
+
+      <ds-file-preview-panel [fileList]="fileList" [selectedFile]="selectedFile"
+        (fileSelected)="onFileSelectedForPreview($event)">
+      </ds-file-preview-panel>
+    </div>
+
+  </div>
+
+  <!-- FULL WIDTH UPLOAD SECTION AT BOTTOM -->
+  @if (uploadSection$ | async; as uploadSectionObject) {
+  <div class="submission-upload-section-footer mt-4">
+    <div class="card-body p-0">
+      <ds-submission-section-container [collectionId]="collectionId" [submissionId]="submissionId"
+        [entityType]="entityType" [sectionData]="$any(uploadSectionObject)">
+      </ds-submission-section-container>
+    </div>
   </div>
   }
 
+</div> <!-- End of submission-body-container -->
+
+
+<!-- FOOTER -->
+<div class="submission-form-footer mt-auto bg-white border-top shadow-sm p-3">
+  <ds-submission-form-footer [submissionId]="submissionId">
+  </ds-submission-form-footer>
 </div>
+
+}
+
+@if (isLoading$ | async) {
+<div class="d-flex justify-content-center align-items-center flex-grow-1">
+  <ds-loading [message]="'form.loading' | translate"></ds-loading>
+</div>
+}
