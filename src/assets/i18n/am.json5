@@ -138,6 +138,13 @@
   
   "bitstream.edit.form.documentStatus.options.Inactive": "Inactive",
 
+  "bitstream.edit.form.documentType.options.judge": "በዳኛ የተሰራ",
+  
+  "bitstream.edit.form.documentType.options.other": "ልዩ ልዩ",
+
+  "bitstream.edit.form.documentType.options.excution": "በጽ/ቤቱ የተሰራ",
+
+
   "letter.listelement.badge": "Letter",
 
   "letter.page.titleprefix": "Letter: ",
@@ -4147,6 +4154,8 @@
 
   "casefile.page.titleprefix": "የመዝገብ ቁጥር: ",
 
+  "casefile.page.edit": "Edit Case File",
+
   "circulationevent.listelement.badge": "Circulation Event",
 
   "circulationevent.listelement.no-title": "ምንም የትውውቅ ክስተት አልተገኘም",
@@ -4679,9 +4688,9 @@
 
   "repository.image.logo": "Repository logo",
 
-  "repository.title": "DSpace Repository",
+  "repository.title": "FSC Archive",
 
-  "repository.title.prefix": "DSpace Repository :: ",
+  "repository.title.prefix": "FSC Archive :: ",
 
   "resource-policies.add.button": "Add",
 

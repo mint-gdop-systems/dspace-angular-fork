@@ -42,54 +42,15 @@ import { PrimaryBitstreamService } from '../../../../../app/core/data/primary-bi
 export class EditBitstreamPageComponent extends BaseComponent implements OnInit {
 
     /**
-     * Legal Document Section (Folder)
-     */
-    documentSectionModel = new DynamicSelectModel({
-        id: 'documentSection',
-        name: 'documentSection',
-        options: [
-            { label: 'Pleadings', value: 'Pleadings' },
-            { label: 'Orders & Minutes', value: 'Orders_Minutes' },
-            { label: 'Evidence', value: 'Evidence' },
-            { label: 'Administrative', value: 'Administrative' },
-        ],
-    });
-
-    /**
      * Legal Document Type
      */
     documentTypeModel = new DynamicSelectModel({
         id: 'documentType',
         name: 'documentType',
         options: [
-            { label: 'Complaint', value: 'Complaint' },
-            { label: 'Defense Statement', value: 'Defense' },
-            { label: 'Minutes', value: 'Minutes' },
-            { label: 'Final Judgment', value: 'Judgment' },
-            { label: 'Exhibit', value: 'Exhibit' },
-            { label: 'Expert Report', value: 'Expert_Report' },
-            { label: 'Fee Receipt', value: 'Fee_Receipt' },
-        ],
-    });
-
-    /**
-     * Exhibit Code (e.g., ከ-1, ተ-1)
-     */
-    exhibitCodeModel = new DynamicInputModel({
-        id: 'exhibitCode',
-        name: 'exhibitCode',
-        placeholder: 'e.g. ከ-1 or ተ-1',
-    });
-
-    /**
-     * Document Status
-     */
-    documentStatusModel = new DynamicSelectModel({
-        id: 'documentStatus',
-        name: 'documentStatus',
-        options: [
-            { label: 'Active', value: 'Active' },
-            { label: 'Inactive', value: 'Inactive' }
+            { label: 'judge', value: 'በዳኛ የተሰራ' },
+            { label: 'other', value: 'ልዩ ልዩ' },
+            { label: 'excution', value: 'በጽ/ቤቱ የተሰራ' },
         ],
     });
 
@@ -113,10 +74,7 @@ export class EditBitstreamPageComponent extends BaseComponent implements OnInit 
 
         this.formLayout = {
             ...this.formLayout,
-            documentSection: { grid: { host: 'col col-sm-6' } },
-            documentType: { grid: { host: 'col col-sm-6' } },
-            exhibitCode: { grid: { host: 'col col-sm-6' } },
-            documentStatus: { grid: { host: 'col col-sm-6' } },
+            documentType: { grid: { host: 'col-12 d-inline-block' } },
             legalContainer: { grid: { host: 'row' } },
         };
     }
@@ -138,18 +96,12 @@ export class EditBitstreamPageComponent extends BaseComponent implements OnInit 
             const legalContainer = new DynamicFormGroupModel({
                 id: 'legalContainer',
                 group: [
-                    this.documentSectionModel,
                     this.documentTypeModel,
-                    this.exhibitCodeModel,
-                    this.documentStatusModel,
                 ],
             });
             
             (this.inputModels as any[]).push(
-                this.documentSectionModel, 
-                this.documentTypeModel, 
-                this.exhibitCodeModel, 
-                this.documentStatusModel
+                this.documentTypeModel
             );
 
             // Insert after filename field
@@ -160,9 +112,9 @@ export class EditBitstreamPageComponent extends BaseComponent implements OnInit 
     }
 
     updateSelectOptions() {
-        [this.documentSectionModel, this.documentTypeModel, this.documentStatusModel].forEach(model => {
+        [this.documentTypeModel].forEach(model => {
             model.options.forEach(option => {
-                option.label = this.translate.instant(`${this.KEY_PREFIX}${model.id}.options.${option.value}`);
+                option.label = this.translate.instant(`${this.KEY_PREFIX}${model.id}.options.${option.label}`);
             });
         });
     }
@@ -174,10 +126,7 @@ export class EditBitstreamPageComponent extends BaseComponent implements OnInit 
         super.updateForm(bitstream);
         this.formGroup.patchValue({
             legalContainer: {
-                documentSection: bitstream.firstMetadataValue('legal.document.section'),
                 documentType: bitstream.firstMetadataValue('legal.document.type'),
-                exhibitCode: bitstream.firstMetadataValue('legal.document.exhibitCode'),
-                documentStatus: bitstream.firstMetadataValue('legal.document.status'),
             },
         });
     }
@@ -191,10 +140,7 @@ export class EditBitstreamPageComponent extends BaseComponent implements OnInit 
         const container = rawForm.legalContainer;
 
         const mappings = [
-            { field: 'legal.document.section', value: container.documentSection },
-            { field: 'legal.document.type', value: container.documentType },
-            { field: 'legal.document.exhibitCode', value: container.exhibitCode },
-            { field: 'legal.document.status', value: container.documentStatus }
+            { field: 'legal.document.type', value: container.documentType }
         ];
 
         mappings.forEach(m => {

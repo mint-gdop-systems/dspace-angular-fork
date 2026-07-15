@@ -194,17 +194,11 @@
 
   "bitstream.edit.form.documentType.options.Court Order": "Court Order",
 
-  "bitstream.edit.form.documentType.options.Minutes": "Hearing Minutes",
+  "bitstream.edit.form.documentType.options.judge": "በዳኛ የተሰራ",
+  
+  "bitstream.edit.form.documentType.options.other": "ልዩ ልዩ",
 
-  "bitstream.edit.form.documentType.options.Exhibit": "Exhibit / Evidence",
-
-  "bitstream.edit.form.documentType.options.Affidavit": "Affidavit",
-
-  "bitstream.edit.form.documentType.options.Judgement": "Final Judgement",
-
-  "bitstream.edit.form.documentType.options.Appeals": "Notice of Appeal",
-
-  "bitstream.edit.form.documentType.options.Other": "Other Legal Document",
+  "bitstream.edit.form.documentType.options.excution": "በጽ/ቤቱ የተሰራ",
 
   "bitstream.edit.form.documentStatus.options.Active": "Active",
   
@@ -4242,6 +4236,8 @@
 
   "casefile.page.titleprefix": "Case File: ",
 
+  "casefile.page.edit": "Edit Case File",
+
   "circulationevent.listelement.badge": "Circulation Event",
 
   "circulationevent.listelement.no-title": "No circulation event title found",
@@ -4774,9 +4770,9 @@
 
   "repository.image.logo": "Repository logo",
 
-  "repository.title": "DSpace Repository",
+  "repository.title": "FSC Archive",
 
-  "repository.title.prefix": "DSpace Repository :: ",
+  "repository.title.prefix": "FSC Archive :: ",
 
   "resource-policies.add.button": "Add",
 
