@@ -4,15 +4,15 @@
 
   "admin.dashboard.archived-items": "Archived Items",
 
-  "admin.dashboard.collection-name": "Case Type Name",
+  "admin.dashboard.collection-name": "Contract Type Name",
 
-  "admin.dashboard.collections": "Case Types",
+  "admin.dashboard.collections": "Contract Types",
 
-  "admin.dashboard.no-data": "No Case Type statistics available.",
+  "admin.dashboard.no-data": "No Contract Type statistics available.",
 
   "admin.dashboard.refresh": "Refresh Data",
 
-  "admin.dashboard.statistics.collections": "Case Type Statistics",
+  "admin.dashboard.statistics.collections": "Contract Type Statistics",
 
   "admin.dashboard.title": "Admin Statistics Dashboard",
 
@@ -20,7 +20,7 @@
 
   "admin.dashboard.workflow-items": "Pending Items",
 
-  "admin.dashboard.select-community": "Courts",
+  "admin.dashboard.select-community": "Service Categories",
 
   "item.page.filesection.document.status": "Status",
 
@@ -509,7 +509,7 @@
 
   "admin.access-control.epeople.form.table.name": "Name",
 
-  "admin.access-control.epeople.form.table.collectionOrCommunity": "Case Type/Court",
+  "admin.access-control.epeople.form.table.collectionOrCommunity": "Contract Type/Service Category",
 
   "admin.access-control.epeople.form.memberOfNoGroups": "This EPerson is not a member of any groups",
 
@@ -547,7 +547,7 @@
 
   "admin.access-control.groups.table.name": "Name",
 
-  "admin.access-control.groups.table.collectionOrCommunity": "Case Type/Court",
+  "admin.access-control.groups.table.collectionOrCommunity": "Contract Type/Service Category",
 
   "admin.access-control.groups.table.members": "Members",
 
@@ -575,7 +575,7 @@
 
   "admin.access-control.groups.form.groupName": "Group name",
 
-  "admin.access-control.groups.form.groupCommunity": "Court or Case Type",
+  "admin.access-control.groups.form.groupCommunity": "Service Category or Contract Type",
 
   "admin.access-control.groups.form.groupDescription": "Description",
 
@@ -663,7 +663,7 @@
 
   "admin.access-control.groups.form.subgroups-list.table.name": "Name",
 
-  "admin.access-control.groups.form.subgroups-list.table.collectionOrCommunity": "Case Type/Court",
+  "admin.access-control.groups.form.subgroups-list.table.collectionOrCommunity": "Contract Type/Service Category",
 
   "admin.access-control.groups.form.subgroups-list.table.edit": "Remove / Add",
 
@@ -699,27 +699,27 @@
 
   "admin.notifications.source.breadcrumbs": "Quality Assurance",
 
-  "admin.access-control.groups.form.tooltip.editGroupPage": "On this page, you can modify the properties and members of a group. In the top section, you can edit the group name and description, unless this is an admin group for a Case Type or Court, in which case the group name and description are auto-generated and cannot be edited. In the following sections, you can edit group membership. See [the wiki](https://wiki.lyrasis.org/display/DSDOC7x/Create+or+manage+a+user+group) for more details.",
+  "admin.access-control.groups.form.tooltip.editGroupPage": "On this page, you can modify the properties and members of a group. In the top section, you can edit the group name and description, unless this is an admin group for a Contract Type or Service Category, in which case the group name and description are auto-generated and cannot be edited. In the following sections, you can edit group membership. See [the wiki](https://wiki.lyrasis.org/display/DSDOC7x/Create+or+manage+a+user+group) for more details.",
 
   "admin.access-control.groups.form.tooltip.editGroup.addEpeople": "To add or remove an EPerson to/from this group, either click the 'Browse All' button or use the search bar below to search for users (use the dropdown to the left of the search bar to choose whether to search by metadata or by email). Then click the plus icon for each user you wish to add in the list below, or the trash can icon for each user you wish to remove. The list below may have several pages: use the page controls below the list to navigate to the next pages.",
 
   "admin.access-control.groups.form.tooltip.editGroup.addSubgroups": "To add or remove a Subgroup to/from this group, either click the 'Browse All' button or use the search bar below to search for groups. Then click the plus icon for each group you wish to add in the list below, or the trash can icon for each group you wish to remove. The list below may have several pages: use the page controls below the list to navigate to the next pages.",
 
-  "admin.reports.collections.title": "Case Type Filter Report",
+  "admin.reports.collections.title": "Contract Type Filter Report",
 
-  "admin.reports.collections.breadcrumbs": "Case Type Filter Report",
+  "admin.reports.collections.breadcrumbs": "Contract Type Filter Report",
 
-  "admin.reports.collections.head": "Case Type Filter Report",
+  "admin.reports.collections.head": "Contract Type Filter Report",
 
-  "admin.reports.button.show-collections": "Show Case Types",
+  "admin.reports.button.show-collections": "Show Contract Types",
 
-  "admin.reports.collections.collections-report": "Case Type Report",
+  "admin.reports.collections.collections-report": "Contract Type Report",
 
   "admin.reports.collections.item-results": "Item Results",
 
-  "admin.reports.collections.community": "Court",
+  "admin.reports.collections.community": "Service Category",
 
-  "admin.reports.collections.collection": "Case Type",
+  "admin.reports.collections.collection": "Contract Type",
 
   "admin.reports.collections.nb_items": "Nb. Items",
 
@@ -731,7 +731,7 @@
 
   "admin.reports.items.run": "Run Item Query",
 
-  "admin.reports.items.section.collectionSelector": "Case Type Selector",
+  "admin.reports.items.section.collectionSelector": "Contract Type Selector",
 
   "admin.reports.items.section.metadataFieldQueries": "Metadata Field Queries",
 
@@ -797,7 +797,7 @@
 
   "admin.reports.items.id": "UUID",
 
-  "admin.reports.items.collection": "Case Type",
+  "admin.reports.items.collection": "Contract Type",
 
   "admin.reports.items.handle": "URI",
 
@@ -957,7 +957,7 @@
 
   "admin.metadata-import.page.help": "You can drop or browse CSV files that contain batch metadata operations on files here",
 
-  "admin.batch-import.page.help": "Select the Case Type to import into. Then, drop or browse to a Simple Archive Format (SAF) zip file that includes the items to import",
+  "admin.batch-import.page.help": "Select the Contract Type to import into. Then, drop or browse to a Simple Archive Format (SAF) zip file that includes the items to import",
 
   "admin.batch-import.page.toggle.help": "It is possible to perform import either with file upload or via URL, use above toggle to set the input source",
 
@@ -973,7 +973,7 @@
 
   "admin.metadata-import.page.button.proceed": "Proceed",
 
-  "admin.metadata-import.page.button.select-collection": "Select Case Type",
+  "admin.metadata-import.page.button.select-collection": "Select Contract Type",
 
   "admin.metadata-import.page.error.addFile": "Select file first!",
 
@@ -1347,17 +1347,17 @@
 
   "claimed-declined-task-search-result-list-element.title": "Declined, sent back to Review Manager's workflow",
 
-  "collection.create.breadcrumbs": "Create Case Type",
+  "collection.create.breadcrumbs": "Create Contract Type",
 
-  "collection.browse.logo": "Browse for a Case Type logo",
+  "collection.browse.logo": "Browse for a Contract Type logo",
 
-  "collection.create.head": "Create a Case Type",
+  "collection.create.head": "Create a Contract Type",
 
-  "collection.create.notifications.success": "Successfully created the Case Type",
+  "collection.create.notifications.success": "Successfully created the Contract Type",
 
-  "collection.create.sub-head": "Create a Case Type for Court {{ parent }}",
+  "collection.create.sub-head": "Create a Contract Type for Service Category {{ parent }}",
 
-  "collection.curate.header": "Curate Case Type: {{collection}}",
+  "collection.curate.header": "Curate Contract Type: {{collection}}",
 
   "collection.delete.cancel": "Cancel",
 
@@ -1365,33 +1365,33 @@
 
   "collection.delete.processing": "Deleting",
 
-  "collection.delete.head": "Delete Case Type",
+  "collection.delete.head": "Delete Contract Type",
 
-  "collection.delete.notification.fail": "Case Type could not be deleted",
+  "collection.delete.notification.fail": "Contract Type could not be deleted",
 
-  "collection.delete.notification.success": "Successfully started a process to delete this Case Type",
+  "collection.delete.notification.success": "Successfully started a process to delete this Contract Type",
 
-  "collection.delete.text": "Are you sure you want to delete Case Type \"{{ dso }}\"",
+  "collection.delete.text": "Are you sure you want to delete Contract Type \"{{ dso }}\"",
 
-  "collection.edit.delete": "Delete this Case Type",
+  "collection.edit.delete": "Delete this Contract Type",
 
-  "collection.edit.head": "Edit Case Type",
+  "collection.edit.head": "Edit Contract Type",
 
-  "collection.edit.breadcrumbs": "Edit Case Type",
+  "collection.edit.breadcrumbs": "Edit Contract Type",
 
   "collection.edit.tabs.mapper.head": "Item Mapper",
 
-  "collection.edit.tabs.item-mapper.title": "Case Type Edit - Item Mapper",
+  "collection.edit.tabs.item-mapper.title": "Contract Type Edit - Item Mapper",
 
   "collection.edit.item-mapper.cancel": "Cancel",
 
-  "collection.edit.item-mapper.collection": "Case Type: \"<b>{{name}}</b>\"",
+  "collection.edit.item-mapper.collection": "Contract Type: \"<b>{{name}}</b>\"",
 
   "collection.edit.item-mapper.confirm": "Map selected items",
 
-  "collection.edit.item-mapper.description": "This is the item mapper tool that allows Case Type administrators to map items from other Case Types into this Case Type. You can search for items from other Case Types and map them, or browse the list of currently mapped items.",
+  "collection.edit.item-mapper.description": "This is the item mapper tool that allows Contract Type administrators to map items from other Contract Types into this Contract Type. You can search for items from other Contract Types and map them, or browse the list of currently mapped items.",
 
-  "collection.edit.item-mapper.head": "Item Mapper - Map Items from Other Case Types",
+  "collection.edit.item-mapper.head": "Item Mapper - Map Items from Other Contract Types",
 
   "collection.edit.item-mapper.no-search": "Please enter a query to search",
 
@@ -1423,35 +1423,35 @@
 
   "collection.edit.logo.delete-undo.title": "Undo delete",
 
-  "collection.edit.logo.label": "Case Type logo",
+  "collection.edit.logo.label": "Contract Type logo",
 
-  "collection.edit.logo.notifications.add.error": "Uploading Case Type logo failed. Please verify the content before retrying.",
+  "collection.edit.logo.notifications.add.error": "Uploading Contract Type logo failed. Please verify the content before retrying.",
 
-  "collection.edit.logo.notifications.add.success": "Uploading Case Type logo successful.",
+  "collection.edit.logo.notifications.add.success": "Uploading Contract Type logo successful.",
 
   "collection.edit.logo.notifications.delete.success.title": "Logo deleted",
 
-  "collection.edit.logo.notifications.delete.success.content": "Successfully deleted the Case Type's logo",
+  "collection.edit.logo.notifications.delete.success.content": "Successfully deleted the Contract Type's logo",
 
   "collection.edit.logo.notifications.delete.error.title": "Error deleting logo",
 
-  "collection.edit.logo.upload": "Drop a Case Type logo to upload",
+  "collection.edit.logo.upload": "Drop a Contract Type logo to upload",
 
-  "collection.edit.notifications.success": "Successfully edited the Case Type",
+  "collection.edit.notifications.success": "Successfully edited the Contract Type",
 
   "collection.edit.return": "Back",
 
   "collection.edit.tabs.access-control.head": "Access Control",
 
-  "collection.edit.tabs.access-control.title": "Case Type Edit - Access Control",
+  "collection.edit.tabs.access-control.title": "Contract Type Edit - Access Control",
 
   "collection.edit.tabs.curate.head": "Curate",
 
-  "collection.edit.tabs.curate.title": "Case Type Edit - Curate",
+  "collection.edit.tabs.curate.title": "Contract Type Edit - Curate",
 
   "collection.edit.tabs.authorizations.head": "Authorizations",
 
-  "collection.edit.tabs.authorizations.title": "Case Type Edit - Authorizations",
+  "collection.edit.tabs.authorizations.title": "Contract Type Edit - Authorizations",
 
   "collection.edit.item.authorizations.load-bundle-button": "Load more bundles",
 
@@ -1461,15 +1461,15 @@
 
   "collection.edit.tabs.metadata.head": "Edit Metadata",
 
-  "collection.edit.tabs.metadata.title": "Case Type Edit - Metadata",
+  "collection.edit.tabs.metadata.title": "Contract Type Edit - Metadata",
 
   "collection.edit.tabs.roles.head": "Assign Roles",
 
-  "collection.edit.tabs.roles.title": "Case Type Edit - Roles",
+  "collection.edit.tabs.roles.title": "Contract Type Edit - Roles",
 
-  "collection.edit.tabs.source.external": "This Case Type harvests its content from an external source",
+  "collection.edit.tabs.source.external": "This Contract Type harvests its content from an external source",
 
-  "collection.edit.tabs.source.form.errors.oaiSource.required": "You must provide a set id of the target Case Type.",
+  "collection.edit.tabs.source.form.errors.oaiSource.required": "You must provide a set id of the target Contract Type.",
 
   "collection.edit.tabs.source.form.harvestType": "Content being harvested",
 
@@ -1497,11 +1497,11 @@
 
   "collection.edit.tabs.source.notifications.invalid.title": "Metadata invalid",
 
-  "collection.edit.tabs.source.notifications.saved.content": "Your changes to this Case Type's content source were saved.",
+  "collection.edit.tabs.source.notifications.saved.content": "Your changes to this Contract Type's content source were saved.",
 
   "collection.edit.tabs.source.notifications.saved.title": "Content Source saved",
 
-  "collection.edit.tabs.source.title": "Case Type Edit - Content Source",
+  "collection.edit.tabs.source.title": "Contract Type Edit - Content Source",
 
   "collection.edit.template.add-button": "Add",
 
@@ -1515,7 +1515,7 @@
 
   "collection.edit.template.error": "An error occurred retrieving the template item",
 
-  "collection.edit.template.head": "Edit Template Item for Case Type \"{{ collection }}\"",
+  "collection.edit.template.head": "Edit Template Item for Contract Type \"{{ collection }}\"",
 
   "collection.edit.template.label": "Template item",
 
@@ -1531,7 +1531,7 @@
 
   "collection.form.description": "Introductory text (HTML)",
 
-  "collection.form.errors.title.required": "Please enter a Case Type name",
+  "collection.form.errors.title.required": "Please enter a Contract Type name",
 
   "collection.form.license": "License",
 
@@ -1545,15 +1545,15 @@
 
   "collection.form.entityType": "Entity Type",
 
-  "collection.listelement.badge": "Case Type",
+  "collection.listelement.badge": "Contract Type",
 
-  "collection.logo": "Case Type logo",
+  "collection.logo": "Contract Type logo",
 
   "collection.page.browse.search.head": "Search",
 
-  "collection.page.edit": "Edit this Case Type",
+  "collection.page.edit": "Edit this Contract Type",
 
-  "collection.page.handle": "Permanent URI for this Case Type",
+  "collection.page.handle": "Permanent URI for this Contract Type",
 
   "collection.page.license": "License",
 
@@ -1567,13 +1567,13 @@
 
   "collection.select.confirm": "Confirm selected",
 
-  "collection.select.empty": "No Case Types to show",
+  "collection.select.empty": "No Contract Types to show",
 
-  "collection.select.table.selected": "Selected Case Types",
+  "collection.select.table.selected": "Selected Contract Types",
 
-  "collection.select.table.select": "Select Case Type",
+  "collection.select.table.select": "Select Contract Type",
 
-  "collection.select.table.deselect": "Deselect Case Type",
+  "collection.select.table.deselect": "Deselect Contract Type",
 
   "collection.select.table.title": "Title",
 
@@ -1627,11 +1627,11 @@
 
   "collection.source.update.notifications.error.title": "Server Error",
 
-  "communityList.breadcrumbs": "Court List",
+  "communityList.breadcrumbs": "Service Category List",
 
-  "communityList.tabTitle": "Court List",
+  "communityList.tabTitle": "Service Category List",
 
-  "communityList.title": "List of Courts",
+  "communityList.title": "List of Service Categories",
 
   "communityList.showMore": "Show More",
 
@@ -1639,19 +1639,19 @@
 
   "communityList.collapse": "Collapse {{ name }}",
 
-  "community.browse.logo": "Browse for a Court logo",
+  "community.browse.logo": "Browse for a Service Category logo",
 
-  "community.subcoms-cols.breadcrumbs": "Courts and Case Types",
+  "community.subcoms-cols.breadcrumbs": "Service Categories and Contract Types",
 
-  "community.create.breadcrumbs": "Create Court",
+  "community.create.breadcrumbs": "Create Service Category",
 
-  "community.create.head": "Create a Court",
+  "community.create.head": "Create a Service Category",
 
-  "community.create.notifications.success": "Successfully created the Court",
+  "community.create.notifications.success": "Successfully created the Service Category",
 
-  "community.create.sub-head": "Create a Court for Court {{ parent }}",
+  "community.create.sub-head": "Create a Service Category for Service Category {{ parent }}",
 
-  "community.curate.header": "Curate Court: {{community}}",
+  "community.curate.header": "Curate Service Category: {{community}}",
 
   "community.delete.cancel": "Cancel",
 
@@ -1659,19 +1659,19 @@
 
   "community.delete.processing": "Deleting...",
 
-  "community.delete.head": "Delete Court",
+  "community.delete.head": "Delete Service Category",
 
-  "community.delete.notification.fail": "Court could not be deleted",
+  "community.delete.notification.fail": "Service Category could not be deleted",
 
-  "community.delete.notification.success": "Successfully started a process to delete this Court",
+  "community.delete.notification.success": "Successfully started a process to delete this Service Category",
 
-  "community.delete.text": "Are you sure you want to delete Court \"{{ dso }}\"",
+  "community.delete.text": "Are you sure you want to delete Service Category \"{{ dso }}\"",
 
-  "community.edit.delete": "Delete this Court",
+  "community.edit.delete": "Delete this Service Category",
 
-  "community.edit.head": "Edit Court",
+  "community.edit.head": "Edit Service Category",
 
-  "community.edit.breadcrumbs": "Edit Court",
+  "community.edit.breadcrumbs": "Edit Service Category",
 
   "community.edit.logo.delete.title": "Delete logo",
 
@@ -1681,51 +1681,51 @@
 
   "community-collection.edit.logo.delete-undo.title": "Undo delete",
 
-  "community.edit.logo.label": "Court logo",
+  "community.edit.logo.label": "Service Category logo",
 
-  "community.edit.logo.notifications.add.error": "Uploading Court logo failed. Please verify the content before retrying.",
+  "community.edit.logo.notifications.add.error": "Uploading Service Category logo failed. Please verify the content before retrying.",
 
-  "community.edit.logo.notifications.add.success": "Upload Court logo successful.",
+  "community.edit.logo.notifications.add.success": "Upload Service Category logo successful.",
 
   "community.edit.logo.notifications.delete.success.title": "Logo deleted",
 
-  "community.edit.logo.notifications.delete.success.content": "Successfully deleted the Court's logo",
+  "community.edit.logo.notifications.delete.success.content": "Successfully deleted the Service Category's logo",
 
   "community.edit.logo.notifications.delete.error.title": "Error deleting logo",
 
-  "community.edit.logo.upload": "Drop a Court logo to upload",
+  "community.edit.logo.upload": "Drop a Service Category logo to upload",
 
-  "community.edit.notifications.success": "Successfully edited the Court",
+  "community.edit.notifications.success": "Successfully edited the Service Category",
 
   "community.edit.notifications.unauthorized": "You do not have privileges to make this change",
 
-  "community.edit.notifications.error": "An error occurred while editing the Court",
+  "community.edit.notifications.error": "An error occurred while editing the Service Category",
 
   "community.edit.return": "Back",
 
   "community.edit.tabs.curate.head": "Curate",
 
-  "community.edit.tabs.curate.title": "Court Edit - Curate",
+  "community.edit.tabs.curate.title": "Service Category Edit - Curate",
 
   "community.edit.tabs.access-control.head": "Access Control",
 
-  "community.edit.tabs.access-control.title": "Court Edit - Access Control",
+  "community.edit.tabs.access-control.title": "Service Category Edit - Access Control",
 
   "community.edit.tabs.metadata.head": "Edit Metadata",
 
-  "community.edit.tabs.metadata.title": "Court Edit - Metadata",
+  "community.edit.tabs.metadata.title": "Service Category Edit - Metadata",
 
   "community.edit.tabs.roles.head": "Assign Roles",
 
-  "community.edit.tabs.roles.title": "Court Edit - Roles",
+  "community.edit.tabs.roles.title": "Service Category Edit - Roles",
 
   "community.edit.tabs.authorizations.head": "Authorizations",
 
-  "community.edit.tabs.authorizations.title": "Court Edit - Authorizations",
+  "community.edit.tabs.authorizations.title": "Service Category Edit - Authorizations",
 
-  "community.listelement.badge": "Court",
+  "community.listelement.badge": "Service Category",
 
-  "community.logo": "Court logo",
+  "community.logo": "Service Category logo",
 
   "comcol-role.edit.no-group": "None",
 
@@ -1751,23 +1751,23 @@
 
   "comcol-role.edit.collection-admin.name": "Administrators",
 
-  "comcol-role.edit.community-admin.description": "Court administrators can create courts or Case Types, and manage or assign management for those courts or Case Types. In addition, they decide who can submit items to any Case Types, edit item metadata (after submission), and add (map) existing items from other Case Types (subject to authorization).",
+  "comcol-role.edit.community-admin.description": "Service Category administrators can create courts or Contract Types, and manage or assign management for those courts or Contract Types. In addition, they decide who can submit items to any Contract Types, edit item metadata (after submission), and add (map) existing items from other Contract Types (subject to authorization).",
 
-  "comcol-role.edit.collection-admin.description": "Case Type administrators decide who can submit items to the Case Type, edit item metadata (after submission), and add (map) existing items from other Case Types to this Case Type (subject to authorization for that Case Type).",
+  "comcol-role.edit.collection-admin.description": "Contract Type administrators decide who can submit items to the Contract Type, edit item metadata (after submission), and add (map) existing items from other Contract Types to this Contract Type (subject to authorization for that Contract Type).",
 
   "comcol-role.edit.submitters.name": "Submitters",
 
-  "comcol-role.edit.submitters.description": "The E-People and Groups that have permission to submit new items to this Case Type.",
+  "comcol-role.edit.submitters.description": "The E-People and Groups that have permission to submit new items to this Contract Type.",
 
   "comcol-role.edit.item_read.name": "Default item read access",
 
-  "comcol-role.edit.item_read.description": "E-People and Groups that can read new items submitted to this Case Type. Changes to this role are not retroactive. Existing items in the system will still be viewable by those who had read access at the time of their addition.",
+  "comcol-role.edit.item_read.description": "E-People and Groups that can read new items submitted to this Contract Type. Changes to this role are not retroactive. Existing items in the system will still be viewable by those who had read access at the time of their addition.",
 
   "comcol-role.edit.item_read.anonymous-group": "Default read for incoming items is currently set to Anonymous.",
 
   "comcol-role.edit.bitstream_read.name": "Default bitstream read access",
 
-  "comcol-role.edit.bitstream_read.description": "E-People and Groups that can read new bitstreams submitted to this Case Type. Changes to this role are not retroactive. Existing bitstreams in the system will still be viewable by those who had read access at the time of their addition.",
+  "comcol-role.edit.bitstream_read.description": "E-People and Groups that can read new bitstreams submitted to this Contract Type. Changes to this role are not retroactive. Existing bitstreams in the system will still be viewable by those who had read access at the time of their addition.",
 
   "comcol-role.edit.bitstream_read.anonymous-group": "Default read for incoming bitstreams is currently set to Anonymous.",
 
@@ -1791,7 +1791,7 @@
 
   "community.form.description": "Introductory text (HTML)",
 
-  "community.form.errors.title.required": "Please enter a Court name",
+  "community.form.errors.title.required": "Please enter a Service Category name",
 
   "community.form.rights": "Copyright text (HTML)",
 
@@ -1799,9 +1799,9 @@
 
   "community.form.title": "Name",
 
-  "community.page.edit": "Edit this Court",
+  "community.page.edit": "Edit this Service Category",
 
-  "community.page.handle": "Permanent URI for this Court",
+  "community.page.handle": "Permanent URI for this Service Category",
 
   "community.page.license": "License",
 
@@ -1809,15 +1809,15 @@
 
   "community.page.options": "Options",
 
-  "community.all-lists.head": "Courts and Case Types",
+  "community.all-lists.head": "Service Categories and Contract Types",
 
   "community.search.breadcrumbs": "Search",
 
   "community.search.results.head": "Search Results",
 
-  "community.sub-collection-list.head": "Case Types in this Court",
+  "community.sub-collection-list.head": "Contract Types in this Service Category",
 
-  "community.sub-community-list.head": "Courts in this Court",
+  "community.sub-community-list.head": "Service Categories in this Service Category",
 
   "context-menu.actions.audit-item.btn": "Audit",
 
@@ -1957,17 +1957,17 @@
 
   "dso.name.unnamed": "Unnamed",
 
-  "dso-selector.create.collection.head": "New Case Type",
+  "dso-selector.create.collection.head": "New Contract Type",
 
-  "dso-selector.create.collection.sub-level": "Create a new Case Type in",
+  "dso-selector.create.collection.sub-level": "Create a new Contract Type in",
 
-  "dso-selector.create.community.head": "New Court",
+  "dso-selector.create.community.head": "New Service Category",
 
   "dso-selector.create.community.or-divider": "or",
 
-  "dso-selector.create.community.sub-level": "Create a new Court in",
+  "dso-selector.create.community.sub-level": "Create a new Service Category in",
 
-  "dso-selector.create.community.top-level": "Create a new top-level Court",
+  "dso-selector.create.community.top-level": "Create a new top-level Service Category",
 
   "dso-selector.create.item.head": "New item",
 
@@ -1975,9 +1975,9 @@
 
   "dso-selector.create.submission.head": "New submission",
 
-  "dso-selector.edit.collection.head": "Edit Case Type",
+  "dso-selector.edit.collection.head": "Edit Contract Type",
 
-  "dso-selector.edit.community.head": "Edit Court",
+  "dso-selector.edit.community.head": "Edit Service Category",
 
   "dso-selector.edit.item.head": "Edit item",
 
@@ -1993,13 +1993,13 @@
 
   "dso-selector.placeholder": "Search for a {{ type }}",
 
-  "dso-selector.placeholder.type.community": "Court",
+  "dso-selector.placeholder.type.community": "Service Category",
 
-  "dso-selector.placeholder.type.collection": "Case Type",
+  "dso-selector.placeholder.type.collection": "Contract Type",
 
   "dso-selector.placeholder.type.item": "item",
 
-  "dso-selector.select.collection.head": "Select a Case Type",
+  "dso-selector.select.collection.head": "Select a Contract Type",
 
   "dso-selector.set-scope.community.head": "Select a search scope",
 
@@ -2007,7 +2007,7 @@
 
   "dso-selector.set-scope.community.or-divider": "or",
 
-  "dso-selector.set-scope.community.input-header": "Search for a Court or Case Type",
+  "dso-selector.set-scope.community.input-header": "Search for a Service Category or Contract Type",
 
   "dso-selector.claim.item.head": "Profile tips",
 
@@ -2101,11 +2101,11 @@
 
   "error.browse-by": "Error fetching items",
 
-  "error.collection": "Error fetching Case Type",
+  "error.collection": "Error fetching Contract Type",
 
-  "error.collections": "Error fetching Case Types",
+  "error.collections": "Error fetching Contract Types",
 
-  "error.community": "Error fetching Court",
+  "error.community": "Error fetching Service Category",
 
   "error.identifier": "No item found for the identifier",
 
@@ -2125,7 +2125,7 @@
 
   "error.invalid-search-query": "Search query is not valid. Please check <a href=\"https://solr.apache.org/guide/query-syntax-and-parsing.html\" target=\"_blank\">Solr query syntax</a> best practices for further information about this error.",
 
-  "error.sub-collections": "Error fetching Case Types",
+  "error.sub-collections": "Error fetching Contract Types",
 
   "error.sub-communities": "Error fetching courts",
 
@@ -2431,9 +2431,9 @@
 
   "home.title": "Home",
 
-  "home.top-level-communities.head": "Courts in DSpace",
+  "home.top-level-communities.head": "Service Categories in DSpace",
 
-  "home.top-level-communities.help": "Select a Court to browse its Case Types.",
+  "home.top-level-communities.help": "Select a Service Category to browse its Contract Types.",
 
   "info.accessibility-settings.breadcrumbs": "Accessibility settings",
 
@@ -2663,9 +2663,9 @@
 
   "item.edit.tabs.disabled.tooltip": "You're not authorized to access this tab",
 
-  "item.edit.tabs.mapper.head": "Case Type Mapper",
+  "item.edit.tabs.mapper.head": "Contract Type Mapper",
 
-  "item.edit.tabs.item-mapper.title": "Item Edit - Case Type Mapper",
+  "item.edit.tabs.item-mapper.title": "Item Edit - Contract Type Mapper",
 
   "item.edit.identifiers.doi.status.UNKNOWN": "Unknown",
 
@@ -2709,41 +2709,41 @@
 
   "item.edit.register-doi.to-update": "The following DOI has already been minted and will be queued for registration online",
 
-  "item.edit.item-mapper.buttons.add": "Map item to selected Case Types",
+  "item.edit.item-mapper.buttons.add": "Map item to selected Contract Types",
 
-  "item.edit.item-mapper.buttons.remove": "Remove item's mapping for selected Case Types",
+  "item.edit.item-mapper.buttons.remove": "Remove item's mapping for selected Contract Types",
 
   "item.edit.item-mapper.cancel": "Cancel",
 
-  "item.edit.item-mapper.description": "This is the item mapper tool that allows administrators to map this item to other Case Types. You can search for Case Types and map them, or browse the list of Case Types the item is currently mapped to.",
+  "item.edit.item-mapper.description": "This is the item mapper tool that allows administrators to map this item to other Contract Types. You can search for Contract Types and map them, or browse the list of Contract Types the item is currently mapped to.",
 
-  "item.edit.item-mapper.head": "Item Mapper - Map Item to Case Types",
+  "item.edit.item-mapper.head": "Item Mapper - Map Item to Contract Types",
 
   "item.edit.item-mapper.item": "Item: \"<b>{{name}}</b>\"",
 
   "item.edit.item-mapper.no-search": "Please enter a query to search",
 
-  "item.edit.item-mapper.notifications.add.error.content": "Errors occurred for mapping of item to {{amount}} Case Types.",
+  "item.edit.item-mapper.notifications.add.error.content": "Errors occurred for mapping of item to {{amount}} Contract Types.",
 
   "item.edit.item-mapper.notifications.add.error.head": "Mapping errors",
 
-  "item.edit.item-mapper.notifications.add.success.content": "Successfully mapped item to {{amount}} Case Types.",
+  "item.edit.item-mapper.notifications.add.success.content": "Successfully mapped item to {{amount}} Contract Types.",
 
   "item.edit.item-mapper.notifications.add.success.head": "Mapping completed",
 
-  "item.edit.item-mapper.notifications.remove.error.content": "Errors occurred for the removal of the mapping to {{amount}} Case Types.",
+  "item.edit.item-mapper.notifications.remove.error.content": "Errors occurred for the removal of the mapping to {{amount}} Contract Types.",
 
   "item.edit.item-mapper.notifications.remove.error.head": "Removal of mapping errors",
 
-  "item.edit.item-mapper.notifications.remove.success.content": "Successfully removed mapping of item to {{amount}} Case Types.",
+  "item.edit.item-mapper.notifications.remove.success.content": "Successfully removed mapping of item to {{amount}} Contract Types.",
 
   "item.edit.item-mapper.notifications.remove.success.head": "Removal of mapping completed",
 
-  "item.edit.item-mapper.search-form.placeholder": "Search Case Types...",
+  "item.edit.item-mapper.search-form.placeholder": "Search Contract Types...",
 
-  "item.edit.item-mapper.tabs.browse": "Browse mapped Case Types",
+  "item.edit.item-mapper.tabs.browse": "Browse mapped Contract Types",
 
-  "item.edit.item-mapper.tabs.map": "Map new Case Types",
+  "item.edit.item-mapper.tabs.map": "Map new Contract Types",
 
   "item.edit.metadata.add-button": "Add",
 
@@ -2831,7 +2831,7 @@
 
   "item.edit.move.discard-button": "Discard",
 
-  "item.edit.move.description": "Select the Case Type you wish to move this item to. To narrow down the list of displayed Case Types, you can enter a search query in the box.",
+  "item.edit.move.description": "Select the Contract Type you wish to move this item to. To narrow down the list of displayed Contract Types, you can enter a search query in the box.",
 
   "item.edit.move.error": "An error occurred when attempting to move the item",
 
@@ -2839,15 +2839,15 @@
 
   "item.edit.move.inheritpolicies.checkbox": "Inherit policies",
 
-  "item.edit.move.inheritpolicies.description": "Inherit the default policies of the destination Case Type",
+  "item.edit.move.inheritpolicies.description": "Inherit the default policies of the destination Contract Type",
 
-  "item.edit.move.inheritpolicies.tooltip": "Warning: When enabled, the read access policy for the item and any files associated with the item will be replaced by the default read access policy of the Case Type. This cannot be undone.",
+  "item.edit.move.inheritpolicies.tooltip": "Warning: When enabled, the read access policy for the item and any files associated with the item will be replaced by the default read access policy of the Contract Type. This cannot be undone.",
 
   "item.edit.move.move": "Move",
 
   "item.edit.move.processing": "Moving...",
 
-  "item.edit.move.search.placeholder": "Enter a search query to look for Case Types",
+  "item.edit.move.search.placeholder": "Enter a search query to look for Contract Types",
 
   "item.edit.move.success": "The item has been moved successfully",
 
@@ -2951,13 +2951,13 @@
 
   "item.edit.tabs.status.buttons.delete.label": "Completely expunge item",
 
-  "item.edit.tabs.status.buttons.mappedCollections.button": "Mapped Case Types",
+  "item.edit.tabs.status.buttons.mappedCollections.button": "Mapped Contract Types",
 
-  "item.edit.tabs.status.buttons.mappedCollections.label": "Manage mapped Case Types",
+  "item.edit.tabs.status.buttons.mappedCollections.label": "Manage mapped Contract Types",
 
-  "item.edit.tabs.status.buttons.move.button": "Move this item to a different Case Type",
+  "item.edit.tabs.status.buttons.move.button": "Move this item to a different Contract Type",
 
-  "item.edit.tabs.status.buttons.move.label": "Move item to another Case Type",
+  "item.edit.tabs.status.buttons.move.label": "Move item to another Contract Type",
 
   "item.edit.tabs.status.buttons.private.button": "Make it non-discoverable...",
 
@@ -3117,7 +3117,7 @@
 
   "item.page.citation": "Citation",
 
-  "item.page.collections": "Case Types",
+  "item.page.collections": "Contract Types",
 
   "item.page.collections.loading": "Loading...",
 
@@ -3307,7 +3307,7 @@
 
   "item.select.table.author": "Author",
 
-  "item.select.table.collection": "Case Type",
+  "item.select.table.collection": "Contract Type",
 
   "item.select.table.title": "Title",
 
@@ -3585,13 +3585,13 @@
 
   "loading.browse-by-page": "Loading page...",
 
-  "loading.collection": "Loading Case Type...",
+  "loading.collection": "Loading Contract Type...",
 
-  "loading.collections": "Loading Case Types...",
+  "loading.collections": "Loading Contract Types...",
 
   "loading.content-source": "Loading content source...",
 
-  "loading.community": "Loading Court...",
+  "loading.community": "Loading Service Category...",
 
   "loading.default": "Loading...",
 
@@ -3607,7 +3607,7 @@
 
   "loading.search-results": "Loading search results...",
 
-  "loading.sub-collections": "Loading Case Types...",
+  "loading.sub-collections": "Loading Contract Types...",
 
   "loading.sub-communities": "Loading courts...",
 
@@ -3665,13 +3665,13 @@
 
   "menu.section.reports": "Reports",
 
-  "menu.section.reports.collections": "Filtered Case Types",
+  "menu.section.reports.collections": "Filtered Contract Types",
 
   "menu.section.reports.queries": "Metadata Query",
 
   "menu.section.admin_search": "Admin Search",
 
-  "menu.section.browse_community": "This Court",
+  "menu.section.browse_community": "This Service Category",
 
   "menu.section.browse_community_by_author": "By Author",
 
@@ -3693,7 +3693,7 @@
 
   "menu.section.browse_global_by_title": "By Title",
 
-  "menu.section.browse_global_communities_and_collections": "Courts & Case Types",
+  "menu.section.browse_global_communities_and_collections": "Service Categories & Contract Types",
 
   "menu.section.browse_global_geospatial_map": "By Geolocation (Map)",
 
@@ -3713,17 +3713,17 @@
 
   "menu.section.edit": "Edit",
 
-  "menu.section.edit_collection": "Case Type",
+  "menu.section.edit_collection": "Contract Type",
 
-  "menu.section.edit_community": "Court",
+  "menu.section.edit_community": "Service Category",
 
   "menu.section.edit_item": "Item",
 
   "menu.section.export": "Export",
 
-  "menu.section.export_collection": "Case Type",
+  "menu.section.export_collection": "Contract Type",
 
-  "menu.section.export_community": "Court",
+  "menu.section.export_community": "Service Category",
 
   "menu.section.export_item": "Item",
 
@@ -3767,9 +3767,9 @@
 
   "menu.section.new": "New",
 
-  "menu.section.new_collection": "Case Type",
+  "menu.section.new_collection": "Contract Type",
 
-  "menu.section.new_community": "Court",
+  "menu.section.new_community": "Service Category",
 
   "menu.section.new_item": "Item",
 
@@ -3873,7 +3873,7 @@
 
   "mydspace.results.no-authors": "No Authors",
 
-  "mydspace.results.no-collections": "No Case Types",
+  "mydspace.results.no-collections": "No Contract Types",
 
   "mydspace.results.no-date": "No Date",
 
@@ -3927,7 +3927,7 @@
 
   "nav.browse.header": "All of DSpace",
 
-  "nav.community-browse.header": "By Court",
+  "nav.community-browse.header": "By Service Category",
 
   "nav.context-help-toggle": "Toggle context help",
 
@@ -4581,7 +4581,7 @@
 
   "register-page.registration.header": "New user registration",
 
-  "register-page.registration.info": "Register an account to subscribe to Case Types for email updates, and submit new items to DSpace.",
+  "register-page.registration.info": "Register an account to subscribe to Contract Types for email updates, and submit new items to DSpace.",
 
   "register-page.registration.email": "Email Address *",
 
@@ -4693,9 +4693,9 @@
 
   "resource-policies.add.for.item": "Add a new Item policy",
 
-  "resource-policies.add.for.community": "Add a new Court policy",
+  "resource-policies.add.for.community": "Add a new Service Category policy",
 
-  "resource-policies.add.for.collection": "Add a new Case Type policy",
+  "resource-policies.add.for.collection": "Add a new Contract Type policy",
 
   "resource-policies.create.page.heading": "Create new resource policy for ",
 
@@ -4803,9 +4803,9 @@
 
   "resource-policies.table.headers.title.for.item": "Policies for Item",
 
-  "resource-policies.table.headers.title.for.community": "Policies for Court",
+  "resource-policies.table.headers.title.for.community": "Policies for Service Category",
 
-  "resource-policies.table.headers.title.for.collection": "Policies for Case Type",
+  "resource-policies.table.headers.title.for.collection": "Policies for Contract Type",
 
   "root.skip-to-content": "Skip to main content",
 
@@ -5438,7 +5438,7 @@
 
   "submission.sections.describe.relationship-lookup.external-source.import-modal.cancel": "Cancel",
 
-  "submission.sections.describe.relationship-lookup.external-source.import-modal.collection": "Select a Case Type to import new entries to",
+  "submission.sections.describe.relationship-lookup.external-source.import-modal.collection": "Select a Contract Type to import new entries to",
 
   "submission.sections.describe.relationship-lookup.external-source.import-modal.entities": "Entities",
 
@@ -5624,7 +5624,7 @@
 
   "submission.sections.describe.relationship-lookup.search-tab.tab-title.hasCirculationEvent": "የመዝገብ ቁጥሮች ({{ count }})",
 
-  "submission.sections.describe.relationship-lookup.selection-tab.title.hasCirculationEvent": "Selected Case File",
+  "submission.sections.describe.relationship-lookup.selection-tab.title.hasCirculationEvent": "Selected Document",
 
   "submission.sections.describe.relationship-lookup.title.isAuthorOfPublication": "Authors",
 
@@ -5760,7 +5760,7 @@
 
   "submission.sections.general.cannot_deposit": "Deposit cannot be completed due to errors in the form.<br>Please fill out all required fields to complete the deposit.",
 
-  "submission.sections.general.collection": "Case Type",
+  "submission.sections.general.collection": "Contract Type",
 
   "submission.sections.general.deposit_error_notice": "There was an issue when submitting the item, please try again later.",
 
@@ -5774,7 +5774,7 @@
 
   "submission.sections.general.metadata-extracted-new-section": "New <strong>{{sectionId}}</strong> section has been added to submission.",
 
-  "submission.sections.general.no-collection": "No Case Type found",
+  "submission.sections.general.no-collection": "No Contract Type found",
 
   "submission.sections.general.no-entity": "No entity types found",
 
@@ -5784,7 +5784,7 @@
 
   "submission.sections.general.save_success_notice": "Submission saved successfully.",
 
-  "submission.sections.general.search-collection": "Search for a Case Type",
+  "submission.sections.general.search-collection": "Search for a Contract Type",
 
   "submission.sections.general.sections_not_valid": "There are incomplete sections.",
 
@@ -5898,9 +5898,9 @@
 
   "submission.sections.upload.form.until-placeholder": "Until",
 
-  "submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} Case Type will be accessible according to the following group(s):",
+  "submission.sections.upload.header.policy.default.nolist": "Uploaded files in the {{collectionName}} Contract Type will be accessible according to the following group(s):",
 
-  "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} Case Type will be accessible, in addition to what is explicitly decided for the single file, with the following group(s):",
+  "submission.sections.upload.header.policy.default.withlist": "Please note that uploaded files in the {{collectionName}} Contract Type will be accessible, in addition to what is explicitly decided for the single file, with the following group(s):",
 
   "submission.sections.upload.info": "Here you will find all the files currently in the item. You can update the file metadata and access conditions or <strong>upload additional files by dragging & dropping them anywhere on the page.</strong>",
 
@@ -6044,7 +6044,7 @@
 
   "submission.workflow.tasks.claimed.approve": "Approve",
 
-  "submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the Case Type, select \"Approve\".",
+  "submission.workflow.tasks.claimed.approve_help": "If you have reviewed the item and it is suitable for inclusion in the Contract Type, select \"Approve\".",
 
   "submission.workflow.tasks.claimed.edit": "Edit",
 
@@ -6064,7 +6064,7 @@
 
   "submission.workflow.tasks.claimed.reject.submit": "Reject",
 
-  "submission.workflow.tasks.claimed.reject_help": "If you have reviewed the item and found it is <strong>not</strong> suitable for inclusion in the Case Type, select \"Reject\".  You will then be asked to enter a message indicating why the item is unsuitable, and whether the submitter should change something and resubmit.",
+  "submission.workflow.tasks.claimed.reject_help": "If you have reviewed the item and found it is <strong>not</strong> suitable for inclusion in the Contract Type, select \"Reject\".  You will then be asked to enter a message indicating why the item is unsuitable, and whether the submitter should change something and resubmit.",
 
   "submission.workflow.tasks.claimed.return": "Return to pool",
 
@@ -6098,7 +6098,7 @@
 
   "subscriptions.item": "Subscriptions for items",
 
-  "subscriptions.collection": "Subscriptions for Case Types",
+  "subscriptions.collection": "Subscriptions for Contract Types",
 
   "subscriptions.community": "Subscriptions for courts",
 
@@ -6164,7 +6164,7 @@
 
   "subscriptions.table.not-available-message": "The subscribed item has been deleted, or you don't currently have the permission to view it",
 
-  "subscriptions.table.empty.message": "You do not have any subscriptions at this time. To subscribe to email updates for a Court or Case Type, use the subscription button on the object's page.",
+  "subscriptions.table.empty.message": "You do not have any subscriptions at this time. To subscribe to email updates for a Service Category or Contract Type, use the subscription button on the object's page.",
 
   "thumbnail.default.alt": "Thumbnail Image",
 
@@ -6634,9 +6634,9 @@
 
   "item-access-control-title": "This form allows you to perform changes to the access conditions of the item's metadata or its bitstreams.",
 
-  "collection-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by this Case Type. Changes may be performed to either all Item metadata or all content (bitstreams).",
+  "collection-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by this Contract Type. Changes may be performed to either all Item metadata or all content (bitstreams).",
 
-  "community-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by any Case Type under this Court. Changes may be performed to either all Item metadata or all content (bitstreams).",
+  "community-access-control-title": "This form allows you to perform changes to the access conditions of all the items owned by any Contract Type under this Service Category. Changes may be performed to either all Item metadata or all content (bitstreams).",
 
   "access-control-item-header-toggle": "Item's Metadata",
 
@@ -6654,7 +6654,7 @@
 
   "access-control-access-conditions": "Access conditions",
 
-  "access-control-no-access-conditions-warning-message": "Currently, no access conditions are specified below. If executed, this will replace the current access conditions with the default access conditions inherited from the owning Case Type.",
+  "access-control-no-access-conditions-warning-message": "Currently, no access conditions are specified below. If executed, this will replace the current access conditions with the default access conditions inherited from the owning Contract Type.",
 
   "access-control-replace-all": "Replace access conditions",
 
