@@ -38,10 +38,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/assets",
-              "src/robots.txt"
-            ],
+            "assets": ["src/assets", "src/robots.txt"],
             "styles": [
               "src/styles/startup.scss",
               {
@@ -55,9 +52,9 @@
                 "bundleName": "custom-theme"
               },
               {
-                "input": "src/themes/fsc/styles/theme.scss",
+                "input": "src/themes/dars/styles/theme.scss",
                 "inject": false,
-                "bundleName": "fsc-theme"
+                "bundleName": "dars-theme"
               },
               {
                 "input": "src/themes/dspace/styles/theme.scss",
@@ -153,9 +150,7 @@
               "hidden": false,
               "vendor": false
             },
-            "assets": [
-              "src/assets"
-            ],
+            "assets": ["src/assets"],
             "styles": [
               {
                 "input": "src/styles/base-theme.scss",
@@ -242,9 +237,7 @@
           "options": {
             "buildTarget": "dspace-angular:build:production",
             "serverTarget": "dspace-angular:server:production",
-            "routes": [
-              "/"
-            ]
+            "routes": ["/"]
           },
           "configurations": {
             "production": {}
@@ -285,9 +278,7 @@
   },
   "cli": {
     "analytics": false,
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ]
+    "schematicCollections": ["@angular-eslint/schematics"]
   },
   "schematics": {
     "@angular-eslint/schematics:application": {

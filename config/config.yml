@@ -1,7 +1,7 @@
-fallbackLanguage: en-fsc
+fallbackLanguage: en-dars
 
 languages:
-  - code: en-fsc
+  - code: en-dars
     label: English
     active: true
   - code: am
@@ -14,18 +14,18 @@ info:
   enableCOARNotifySupport: false
 
 themes:
-  - name: fsc
+  - name: dars
     headTags:
-    - tagName: link
-      attributes:
-        rel: icon
-        href: assets/fsc/images/favicons/favicon.ico
-        sizes: any
-    - tagName: link
-      attributes:
-        rel: apple-touch-icon
-        href: assets/fsc/images/favicons/apple-touch-icon.png
-    - tagName: link
-      attributes:
-        rel: manifest
-        href: assets/fsc/images/favicons/manifest.webmanifest
+      - tagName: link
+        attributes:
+          rel: icon
+          href: assets/dars/images/favicons/favicon.ico
+          sizes: any
+      - tagName: link
+        attributes:
+          rel: apple-touch-icon
+          href: assets/dars/images/favicons/apple-touch-icon.png
+      - tagName: link
+        attributes:
+          rel: manifest
+          href: assets/dars/images/favicons/manifest.webmanifest

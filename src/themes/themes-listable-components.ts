@@ -1,4 +1,4 @@
-import { LISTABLE_COMPONENTS as FSC_LISTABLE_COMPONENTS } from './fsc/lazy-listable-components';
+import { LISTABLE_COMPONENTS as dars_LISTABLE_COMPONENTS } from './dars/lazy-listable-components';
 import { LISTABLE_COMPONENTS as DSPACE_LISTABLE_COMPONENTS } from './dspace/lazy-listable-components';
 
 /**
@@ -10,5 +10,5 @@ import { LISTABLE_COMPONENTS as DSPACE_LISTABLE_COMPONENTS } from './dspace/lazy
 export const THEME_LISTABLE_COMPONENTS = [
   // ...CUSTOM_LISTABLE_COMPONENTS,
   ...DSPACE_LISTABLE_COMPONENTS,
-  ...FSC_LISTABLE_COMPONENTS,
+  ...dars_LISTABLE_COMPONENTS,
 ];

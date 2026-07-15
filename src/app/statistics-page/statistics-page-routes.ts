@@ -34,7 +34,10 @@ export const ROUTES: Route[] = [
           title: 'admin.dashboard.title',
           breadcrumbKey: 'admin.dashboard',
         },
-        loadComponent: () => import('src/themes/fsc/app/admin/admin-dashboard-page/admin-dashboard-page.component').then((m) => m.AdminDashboardPageComponent),
+        loadComponent: () =>
+          import('src/themes/dars/app/admin/admin-dashboard-page/admin-dashboard-page.component').then(
+            (m) => m.AdminDashboardPageComponent,
+          ),
         canActivate: [statisticsAdministratorGuard],
       },
     ],

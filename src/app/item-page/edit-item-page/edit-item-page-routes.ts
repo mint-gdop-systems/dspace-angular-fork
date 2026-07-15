@@ -46,7 +46,7 @@ import { ItemRelationshipsComponent } from './item-relationships/item-relationsh
 import { ThemedItemStatusComponent } from './item-status/themed-item-status.component';
 import { ItemVersionHistoryComponent } from './item-version-history/item-version-history.component';
 import { ItemWithdrawComponent } from './item-withdraw/item-withdraw.component';
-import { ItemBitstreamsComponent } from 'src/themes/fsc/app/item-page/edit-item-page/item-bitstreams/item-bitstreams.component';
+import { ItemBitstreamsComponent } from 'src/themes/dars/app/item-page/edit-item-page/item-bitstreams/item-bitstreams.component';
 
 /**
  * Routing module that handles the routing for the Edit Item page administrator functionality

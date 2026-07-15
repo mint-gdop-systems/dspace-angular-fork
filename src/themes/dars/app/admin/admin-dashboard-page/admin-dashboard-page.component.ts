@@ -1,0 +1,282 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+// import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
+import { CollectionDataService } from '@dspace/core/data/collection-data.service';
+import { CommunityDataService } from '@dspace/core/data/community-data.service';
+import { AuthorizationDataService } from '@dspace/core/data/feature-authorization/authorization-data.service';
+import { FeatureID } from '@dspace/core/data/feature-authorization/feature-id';
+import { DspaceRestService } from '@dspace/core/dspace-rest/dspace-rest.service';
+import { RawRestResponse } from '@dspace/core/dspace-rest/raw-rest-response.model';
+import { RESTURLCombiner } from '@dspace/core/url-combiner/rest-url-combiner';
+import { environment } from 'src/environments/environment';
+import { PaginatedList } from '@dspace/core/data/paginated-list.model';
+import { RemoteData } from '@dspace/core/data/remote-data';
+import { PaginationComponentOptions } from '@dspace/core/pagination/pagination-component-options.model';
+import { Collection } from '@dspace/core/shared/collection.model';
+import { Community } from '@dspace/core/shared/community.model';
+import { DSpaceObjectType } from '@dspace/core/shared/dspace-object-type.model';
+import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
+import { HALEndpointService } from '@dspace/core/shared/hal-endpoint.service';
+import { getFirstCompletedRemoteData } from '@dspace/core/shared/operators';
+import { PaginatedSearchOptions } from '@dspace/core/shared/search/models/paginated-search-options.model';
+import { SearchObjects } from '@dspace/core/shared/search/models/search-objects.model';
+import { WorkflowItemDataService } from '@dspace/core/submission/workflowitem-data.service';
+import { WorkspaceitemDataService } from '@dspace/core/submission/workspaceitem-data.service';
+import { ClaimedTaskDataService } from '@dspace/core/tasks/claimed-task-data.service';
+import { PoolTaskDataService } from '@dspace/core/tasks/pool-task-data.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { combineLatest, Observable, of } from 'rxjs';
+import {
+  catchError,
+  map,
+  shareReplay,
+  startWith,
+  switchMap,
+  take,
+} from 'rxjs/operators';
+import { SearchService } from 'src/app/shared/search/search.service';
+// import { BitstreamStatisticsDashboardComponent } from 'src/themes/dars/app/admin/bitstream-statistics-page/bitstream-statistics-page.component';
+import { UserDashboardComponent } from 'src/themes/dars/app/admin/user-dashboard-page/user-dashboard-page.component';
+import { UserItemStatsComponent } from 'src/themes/dars/app/admin/user-item-stats/user-item-stats.component';
+
+export interface AdminStats {
+  totalPageCount: number;
+  totalWorkflowCount?: number;
+  collectionsStats: {
+    collectionId: string;
+    pageCount: number;
+    workflowCount?: number;
+  }[];
+}
+
+@Component({
+  selector: 'ds-admin-dashboard-page',
+  templateUrl: './admin-dashboard-page.component.html',
+  styleUrls: ['./admin-dashboard-page.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    TranslateModule,
+    // BitstreamStatisticsDashboardComponent,
+    UserDashboardComponent,
+    UserItemStatsComponent,
+  ],
+})
+export class AdminDashboardPageComponent implements OnInit {
+  collectionsCount$: Observable<number>;
+  archivedItemsCount$: Observable<number>;
+  workflowItemsCount$: Observable<number>;
+  collectionsStats$: Observable<any[]>;
+  totalSystemPages$: Observable<number>;
+  communities$: Observable<Community[]>;
+  selectedCommunityId$: Observable<string>;
+
+  isAdmin$: Observable<boolean>;
+  isSiteAdmin$: Observable<boolean>;
+
+  // activeTab: 'admin' | 'user' | 'bitstream' | 'user-item-stats' = 'admin';
+  activeTab: 'admin' | 'user' | 'user-item-stats' = 'admin';
+
+  private adminStats$: Observable<AdminStats>;
+
+  constructor(
+    protected searchService: SearchService,
+    // protected bitstreamDataService: BitstreamDataService,
+    protected workspaceitemDataService: WorkspaceitemDataService,
+    protected workflowItemDataService: WorkflowItemDataService,
+    protected poolTaskDataService: PoolTaskDataService,
+    protected claimedTaskDataService: ClaimedTaskDataService,
+    protected collectionDataService: CollectionDataService,
+    protected communityDataService: CommunityDataService,
+    protected halService: HALEndpointService,
+    protected authorizationService: AuthorizationDataService,
+    protected restService: DspaceRestService,
+  ) {}
+
+  ngOnInit(): void {
+    this.isSiteAdmin$ = this.authorizationService
+      .isAuthorized(FeatureID.AdministratorOf)
+      .pipe(shareReplay(1));
+    const isCollectionAdmin$ = this.authorizationService.isAuthorized(
+      FeatureID.IsCollectionAdmin,
+    );
+    const isCommunityAdmin$ = this.authorizationService.isAuthorized(
+      FeatureID.IsCommunityAdmin,
+    );
+
+    this.isAdmin$ = combineLatest([
+      this.isSiteAdmin$,
+      isCollectionAdmin$,
+      isCommunityAdmin$,
+    ]).pipe(
+      map(([isSite, isColl, isComm]: any[]) => isSite || isColl || isComm),
+      shareReplay(1),
+    );
+
+    this.isSiteAdmin$.pipe(take(1)).subscribe((isSiteAdmin) => {
+      if (!isSiteAdmin) {
+        this.activeTab = 'user-item-stats';
+      }
+    });
+
+    this.isAdmin$.pipe(take(1)).subscribe((isAdmin) => {
+      if (!isAdmin) {
+        this.activeTab = 'user';
+      }
+    });
+
+    // Initialize communities list
+    this.communities$ = this.communityDataService
+      .findAll({ elementsPerPage: 100 })
+      .pipe(
+        getFirstCompletedRemoteData(),
+        map((rd: RemoteData<PaginatedList<Community>>) =>
+          rd.hasSucceeded ? rd.payload.page : [],
+        ),
+        shareReplay(1),
+      );
+
+    // Set default selected community (first one or 'all')
+    this.selectedCommunityId$ = this.communities$.pipe(
+      map((communities) =>
+        communities.length > 0 ? communities[0].id : 'all',
+      ),
+      shareReplay(1),
+    );
+
+    this.refresh();
+  }
+
+  refresh(): void {
+    const oneElementPagination = Object.assign(
+      new PaginationComponentOptions(),
+      { id: 'admin-stats-one', pageSize: 1 },
+    );
+
+    // Fetch admin stats from custom backend API
+    const adminStatsUrl = new RESTURLCombiner(
+      environment.rest.baseUrl,
+      'statistics',
+      'adminstats',
+      'all',
+    ).toString();
+    this.adminStats$ = this.restService.get(adminStatsUrl).pipe(
+      map((response: RawRestResponse) => response.payload as AdminStats),
+      catchError((err) =>
+        of({
+          totalPageCount: 0,
+          totalWorkflowCount: 0,
+          collectionsStats: [],
+        } as AdminStats),
+      ),
+      startWith({
+        totalPageCount: 0,
+        totalWorkflowCount: 0,
+        collectionsStats: [],
+      } as AdminStats),
+      shareReplay(1),
+    );
+
+    this.totalSystemPages$ = this.adminStats$.pipe(
+      map((stats) => stats?.totalPageCount || 0),
+    );
+
+    // Collections count
+    this.collectionsCount$ = this.searchService
+      .search(
+        new PaginatedSearchOptions({
+          dsoTypes: [DSpaceObjectType.COLLECTION],
+          pagination: oneElementPagination,
+        }),
+      )
+      .pipe(
+        getFirstCompletedRemoteData(),
+        map((rs: RemoteData<SearchObjects<DSpaceObject>>) =>
+          rs.hasSucceeded ? rs.payload.totalElements : 0,
+        ),
+        startWith(0),
+        shareReplay(1),
+      );
+
+    // Archived items count
+    this.archivedItemsCount$ = this.searchService
+      .search(
+        new PaginatedSearchOptions({
+          dsoTypes: [DSpaceObjectType.ITEM],
+          pagination: oneElementPagination,
+        }),
+      )
+      .pipe(
+        getFirstCompletedRemoteData(),
+        map((rs: RemoteData<SearchObjects<DSpaceObject>>) =>
+          rs.hasSucceeded ? rs.payload.totalElements : 0,
+        ),
+        startWith(0),
+        shareReplay(1),
+      );
+
+    // Workflow items count from AdminStats API (system-wide accurate)
+    this.workflowItemsCount$ = this.adminStats$.pipe(
+      map((stats) => stats?.totalWorkflowCount || 0),
+    );
+
+    // Collection Statistics with community filtering
+    this.collectionsStats$ = this.selectedCommunityId$.pipe(
+      switchMap((selectedCommunityId) => {
+        return this.collectionDataService.findByParent(selectedCommunityId, {
+          elementsPerPage: 100,
+        });
+      }),
+      getFirstCompletedRemoteData(),
+      switchMap((rd: RemoteData<PaginatedList<Collection>>) => {
+        if (rd.hasSucceeded && rd.payload?.page?.length > 0) {
+          const collections = rd.payload.page;
+          const stats$ = collections.map((coll) => {
+            const archived$ = this.searchService
+              .search(
+                new PaginatedSearchOptions({
+                  scope: coll.id,
+                  dsoTypes: [DSpaceObjectType.ITEM],
+                  pagination: oneElementPagination,
+                }),
+                undefined,
+                false,
+              )
+              .pipe(getFirstCompletedRemoteData(), startWith(null));
+
+            return combineLatest([archived$, this.adminStats$]).pipe(
+              map(([archivedRd, adminStats]: any[]) => {
+                const collStat = adminStats?.collectionsStats?.find(
+                  (c) => c.collectionId === coll.id,
+                );
+                return {
+                  label: coll.name,
+                  archivedCount:
+                    archivedRd && archivedRd.hasSucceeded
+                      ? archivedRd.payload.totalElements
+                      : 0,
+                  workflowCount:
+                    collStat && collStat.workflowCount
+                      ? collStat.workflowCount
+                      : 0,
+                  pageCount: collStat ? collStat.pageCount : 0,
+                };
+              }),
+            );
+          });
+          return combineLatest(stats$);
+        }
+        return of<any[]>([]);
+      }),
+      shareReplay(1),
+    );
+  }
+
+  onCommunityChange(event: Event): void {
+    const communityId = (event.target as HTMLSelectElement).value;
+    this.selectedCommunityId$ = of(communityId).pipe(shareReplay(1));
+    this.refresh();
+  }
+}

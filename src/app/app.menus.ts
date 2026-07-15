@@ -12,7 +12,7 @@ import { AccessControlMenuProvider } from './shared/menu/providers/access-contro
 import { AdminSearchMenuProvider } from './shared/menu/providers/admin-search.menu';
 import { AuditLogsMenuProvider } from './shared/menu/providers/audit-item.menu';
 import { AuditOverviewMenuProvider } from './shared/menu/providers/audit-overview.menu';
-import { CustomBrowseMenuProvider } from 'src/themes/fsc/app/shared/menu/providers/browse.menu';
+import { CustomBrowseMenuProvider } from 'src/themes/dars/app/shared/menu/providers/browse.menu';
 import { CoarNotifyMenuProvider } from './shared/menu/providers/coar-notify.menu';
 import { SubscribeMenuProvider } from './shared/menu/providers/comcol-subscribe.menu';
 import { CommunityListMenuProvider } from './shared/menu/providers/community-list.menu';
@@ -35,7 +35,7 @@ import { StatisticsMenuProvider } from './shared/menu/providers/statistics.menu'
 import { SystemWideAlertMenuProvider } from './shared/menu/providers/system-wide-alert.menu';
 import { WithdrawnReinstateItemMenuProvider } from './shared/menu/providers/withdrawn-reinstate-item.menu';
 import { WorkflowMenuProvider } from './shared/menu/providers/workflow.menu';
-import { AdminDashboardMenuProvider } from 'src/themes/fsc/app/shared/menu/providers/admin-dashboard.menu';
+import { AdminDashboardMenuProvider } from 'src/themes/dars/app/shared/menu/providers/admin-dashboard.menu';
 
 /**
  * Represents and builds the menu structure for the three available menus (public navbar, admin sidebar and the dso edit
