@@ -1,8 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-    Component,
-    OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BitstreamDataService } from '@dspace/core/data/bitstream-data.service';
 import { CollectionDataService } from '@dspace/core/data/collection-data.service';
@@ -14,7 +11,6 @@ import { RemoteData } from '@dspace/core/data/remote-data';
 import { DspaceRestService } from '@dspace/core/dspace-rest/dspace-rest.service';
 import { RawRestResponse } from '@dspace/core/dspace-rest/raw-rest-response.model';
 import { PaginationComponentOptions } from '@dspace/core/pagination/pagination-component-options.model';
-import { Collection } from '@dspace/core/shared/collection.model';
 import { Community } from '@dspace/core/shared/community.model';
 import { DSpaceObjectType } from '@dspace/core/shared/dspace-object-type.model';
 import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
@@ -28,22 +24,8 @@ import { ClaimedTaskDataService } from '@dspace/core/tasks/claimed-task-data.ser
 import { PoolTaskDataService } from '@dspace/core/tasks/pool-task-data.service';
 import { RESTURLCombiner } from '@dspace/core/url-combiner/rest-url-combiner';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-    BehaviorSubject,
-    combineLatest,
-    Observable,
-    of,
-    Subscription,
-} from 'rxjs';
-import {
-    catchError,
-    finalize,
-    map,
-    shareReplay,
-    startWith,
-    switchMap,
-    take,
-} from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
+import { catchError, finalize, map, shareReplay, startWith, switchMap, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { SearchService } from 'src/app/shared/search/search.service';
 import { BitstreamStatisticsDashboardComponent } from 'src/themes/crrsa/app/admin/bitstream-statistics-page/bitstream-statistics-page.component';
@@ -150,7 +132,6 @@ export class AdminDashboardPageComponent implements OnInit {
 
     refresh(): void {
         const oneElementPagination = Object.assign(new PaginationComponentOptions(), { id: 'admin-stats-one', pageSize: 1 });
-        const manyElementsPagination = Object.assign(new PaginationComponentOptions(), { id: 'admin-stats-many', pageSize: 100 });
 
         // 0. Collections count (Discovery is best for this)
         this.collectionsCount$ = this.searchService.search(new PaginatedSearchOptions({
@@ -173,7 +154,6 @@ export class AdminDashboardPageComponent implements OnInit {
             shareReplay(1),
         );
 
-
         // 3. Workflow items count (Targeted Workflow Search to match table)
         this.workflowItemsCount$ = this.searchService.search(new PaginatedSearchOptions({
             configuration: 'workflowAdmin',
@@ -185,74 +165,56 @@ export class AdminDashboardPageComponent implements OnInit {
             shareReplay(1),
         );
 
-        // 5. Collection Statistics (List ALL collections with Discovery counts + bitstream stats)
+        // 5. Collection Statistics (Build list & query items directly from the API response payload)
         this.collectionsStats$ = this.selectedCommunityId$.pipe(
-            switchMap((selectedCommunityId) => {
-                const bitstreamStats$ = this.loadCommunityBitstreamStats(selectedCommunityId);
-                return this.collectionDataService.findByParent(
-                    selectedCommunityId,
-                    { elementsPerPage: 100 },
-                ).pipe(
-                    getFirstCompletedRemoteData(),
-                    switchMap((rd: RemoteData<PaginatedList<Collection>>) => {
-                        return bitstreamStats$.pipe(
-                            map((bitstreamStats) => ({ rd, bitstreamStats })),
-                        );
-                    }),
-                );
-            }),
-            switchMap(({ rd, bitstreamStats }: { rd: RemoteData<PaginatedList<Collection>>; bitstreamStats: CommunityBitstreamStatsResponse | null }) => {
-                const zero = { approved: 0, draft: 0, pending: 0 };
-                const bitstreamMap = new Map<string, { bitstreams: typeof zero; pages: typeof zero }>();
-                if (bitstreamStats?.collections) {
-                    for (const coll of bitstreamStats.collections) {
-                        const approved = coll.approved || { bitstreams: 0, pages: 0 };
-                        const draft = coll.draft || { bitstreams: 0, pages: 0 };
-                        const pending = coll.pending || { bitstreams: 0, pages: 0 };
-                        bitstreamMap.set(coll.collectionId, {
-                            bitstreams: { approved: approved.bitstreams, draft: draft.bitstreams, pending: pending.bitstreams },
-                            pages: { approved: approved.pages, draft: draft.pages, pending: pending.pages },
-                        });
-                    }
+            switchMap((selectedCommunityId) => this.loadCommunityBitstreamStats(selectedCommunityId)),
+            switchMap((bitstreamStats) => {
+                if (!bitstreamStats || !bitstreamStats.collections || bitstreamStats.collections.length === 0) {
+                    return of([]);
                 }
 
-                if (rd.hasSucceeded && rd.payload?.page?.length > 0) {
-                    const collections = rd.payload.page;
-                    const stats$ = collections.map((coll) => {
-                        const archived$ = this.searchService.search(new PaginatedSearchOptions({
-                            scope: coll.id,
-                            dsoTypes: [DSpaceObjectType.ITEM],
-                            pagination: oneElementPagination,
-                        }), undefined, false).pipe(getFirstCompletedRemoteData(), startWith(null));
+                // Create the stats observables for each collection returned by the REST payload
+                const stats$ = bitstreamStats.collections.map((coll) => {
+                    const archived$ = this.searchService.search(new PaginatedSearchOptions({
+                        scope: coll.collectionId,
+                        dsoTypes: [DSpaceObjectType.ITEM],
+                        pagination: oneElementPagination,
+                    }), undefined, false).pipe(getFirstCompletedRemoteData(), startWith(null));
 
-                        const workflow$ = this.searchService.search(new PaginatedSearchOptions({
-                            configuration: 'workflowAdmin',
-                            scope: coll.id,
-                            pagination: oneElementPagination,
-                        }), undefined, false).pipe(getFirstCompletedRemoteData(), startWith(null));
+                    const workflow$ = this.searchService.search(new PaginatedSearchOptions({
+                        configuration: 'workflowAdmin',
+                        scope: coll.collectionId,
+                        pagination: oneElementPagination,
+                    }), undefined, false).pipe(getFirstCompletedRemoteData(), startWith(null));
 
-                        return combineLatest([archived$, workflow$]).pipe(
-                            map(([archivedRd, workflowRd]) => {
-                                const bs = bitstreamMap.get(coll.id) || { bitstreams: zero, pages: zero };
-                                return {
-                                    label: coll.name,
-                                    archivedCount: (archivedRd && archivedRd.hasSucceeded) ? archivedRd.payload.totalElements : 0,
-                                    workflowCount: (workflowRd && workflowRd.hasSucceeded) ? workflowRd.payload.totalElements : 0,
-                                    bitstreamApproved: bs.bitstreams.approved,
-                                    bitstreamDraft: bs.bitstreams.draft,
-                                    bitstreamPending: bs.bitstreams.pending,
-                                    bitstreamCount: bs.bitstreams.approved + bs.bitstreams.draft + bs.bitstreams.pending,
-                                    pageApproved: bs.pages.approved,
-                                    pageDraft: bs.pages.draft,
-                                    pagePending: bs.pages.pending,
-                                    pageCount: bs.pages.approved + bs.pages.draft + bs.pages.pending,
-                                };
-                            }),
-                        );
-                    });
-                    return combineLatest(stats$);
-                }
-                return of<any[]>([]);
+                    return combineLatest([archived$, workflow$]).pipe(
+                        map(([archivedRd, workflowRd]) => {
+                            const approvedBitstreams = coll.approved?.bitstreams || 0;
+                            const draftBitstreams = coll.draft?.bitstreams || 0;
+                            const pendingBitstreams = coll.pending?.bitstreams || 0;
+
+                            const approvedPages = coll.approved?.pages || 0;
+                            const draftPages = coll.draft?.pages || 0;
+                            const pendingPages = coll.pending?.pages || 0;
+
+                            return {
+                                label: coll.collectionName,
+                                archivedCount: (archivedRd && archivedRd.hasSucceeded) ? archivedRd.payload.totalElements : 0,
+                                workflowCount: (workflowRd && workflowRd.hasSucceeded) ? workflowRd.payload.totalElements : 0,
+                                bitstreamApproved: approvedBitstreams,
+                                bitstreamDraft: draftBitstreams,
+                                bitstreamPending: pendingBitstreams,
+                                bitstreamCount: approvedBitstreams + draftBitstreams + pendingBitstreams,
+                                pageApproved: approvedPages,
+                                pageDraft: draftPages,
+                                pagePending: pendingPages,
+                                pageCount: approvedPages + draftPages + pendingPages,
+                            };
+                        }),
+                    );
+                });
+
+                return combineLatest(stats$);
             }),
             shareReplay(1),
         );
