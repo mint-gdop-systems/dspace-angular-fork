@@ -10,6 +10,7 @@ import { RESTURLCombiner } from '@dspace/core/url-combiner/rest-url-combiner';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, shareReplay, startWith, switchMap } from 'rxjs/operators';
+import { ThousandsSeparatorPipe } from 'src/app/shared/utils/thousands-separator.pipe';
 import { environment } from 'src/environments/environment';
 
 export interface BitstreamStatisticsResponse {
@@ -24,7 +25,7 @@ export interface BitstreamStatisticsResponse {
 @Component({
   selector: 'ds-bitstream-statistics-dashboard',
   standalone: true,
-  imports: [CommonModule, NgClass, ReactiveFormsModule, TranslateModule],
+  imports: [CommonModule, NgClass, ReactiveFormsModule, TranslateModule, ThousandsSeparatorPipe],
   templateUrl: './bitstream-statistics-page.component.html',
   styleUrls: ['./bitstream-statistics-page.component.scss'],
 })

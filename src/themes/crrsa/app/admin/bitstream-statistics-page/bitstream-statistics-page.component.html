@@ -50,11 +50,13 @@
                     <div class="row w-100 align-items-center">
                         <div class="col-6 border-right">
                             <div class="text-xs font-weight-bold text-uppercase mb-1 opacity-75">Total Archives</div>
-                            <div class="h1 mb-0 fw-bold text-dark">{{ stats.totals?.bitstreams ?? 0 }}</div>
+                            <div class="h1 mb-0 fw-bold text-dark">{{ stats.totals?.bitstreams ?? 0 |
+                                dsThousandsSeparator}}</div>
                         </div>
                         <div class="col-6">
                             <div class="text-xs font-weight-bold text-uppercase mb-1 opacity-75">Total Pages</div>
-                            <div class="h1 mb-0 fw-bold text-dark">{{ stats.totals?.pdfPages ?? 0 }}</div>
+                            <div class="h1 mb-0 fw-bold text-dark">{{ stats.totals?.pdfPages ?? 0 |
+                                dsThousandsSeparator}}</div>
                         </div>
                     </div>
                 </div>
@@ -79,8 +81,8 @@
                         <tbody>
                             <tr *ngFor="let entry of getBreakdownEntries(stats.entityTypeBreakdown)">
                                 <td>{{ entry.label === 'unknown' ? 'Others' : entry.label }}</td>
-                                <td class="text-center">{{ entry.bitstreams }}</td>
-                                <td class="text-center">{{ entry.pdfPages }}</td>
+                                <td class="text-center">{{ entry.bitstreams | dsThousandsSeparator }}</td>
+                                <td class="text-center">{{ entry.pdfPages | dsThousandsSeparator }}</td>
                             </tr>
                             <tr *ngIf="getBreakdownEntries(stats.entityTypeBreakdown).length === 0">
                                 <td colspan="3" class="text-center text-muted py-3">No entity type data available.</td>
@@ -110,8 +112,8 @@
                             <tr *ngFor="let entry of getBreakdownEntries(stats.itemStatusBreakdown)">
                                 <td>{{ entry.label === 'unarchived' ? 'Workspace & Workflow' :
                                     entry.label.charAt(0).toUpperCase() + entry.label.slice(1) }}</td>
-                                <td class="text-center">{{ entry.bitstreams }}</td>
-                                <td class="text-center">{{ entry.pdfPages }}</td>
+                                <td class="text-center">{{ entry.bitstreams | dsThousandsSeparator }}</td>
+                                <td class="text-center">{{ entry.pdfPages | dsThousandsSeparator }}</td>
                             </tr>
                             <tr *ngIf="getBreakdownEntries(stats.itemStatusBreakdown).length === 0">
                                 <td colspan="3" class="text-center text-muted py-3">No item status data available.</td>

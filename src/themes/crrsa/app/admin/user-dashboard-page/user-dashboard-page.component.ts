@@ -7,6 +7,7 @@ import { RESTURLCombiner } from '@dspace/core/url-combiner/rest-url-combiner';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay, switchMap, take } from 'rxjs/operators';
+import { ThousandsSeparatorPipe } from 'src/app/shared/utils/thousands-separator.pipe';
 import { environment } from 'src/environments/environment';
 
 export interface UserContentStats {
@@ -34,7 +35,7 @@ export interface UserContentStats {
 @Component({
   selector: 'ds-user-dashboard',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, ThousandsSeparatorPipe],
   templateUrl: './user-dashboard-page.component.html',
   styleUrls: ['./user-dashboard-page.component.scss']
 })

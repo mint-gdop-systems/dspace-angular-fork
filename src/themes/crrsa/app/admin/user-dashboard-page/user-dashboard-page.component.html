@@ -13,15 +13,16 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col-6 pr-3 border-right">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1 opacity-75">Total Items</div>
-                                <div class="h3 mb-0 font-weight-bold">{{ stats.mySubmission.workspace.total }}</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.mySubmission.workspace.total |
+                                    dsThousandsSeparator }}</div>
                             </div>
                             <div class="col-6 pl-4">
                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1 opacity-75">
                                     Rejected
                                 </div>
-                                <div class="h3 mb-0 font-weight-bold text-danger">{{
-                                    stats.mySubmission.workspace.rejected
-                                    }}</div>
+                                <div class="h3 mb-0 font-weight-bold text-danger">
+                                    {{ stats.mySubmission.workspace.rejected | dsThousandsSeparator}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -40,20 +41,23 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col-4 pr-3 border-right">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1 opacity-75">Review Step</div>
-                                <div class="h3 mb-0 font-weight-bold">{{ stats.mySubmission.workflow.reviewstep || 0 }}
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.mySubmission.workflow.reviewstep || 0 |
+                                    dsThousandsSeparator}}
                                 </div>
                             </div>
                             <div class="col-4 pr-3 border-right">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1 opacity-75">Edit Step</div>
-                                <div class="h3 mb-0 font-weight-bold">{{ stats.mySubmission.workflow.editstep || 0 }}
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.mySubmission.workflow.editstep || 0 |
+                                    dsThousandsSeparator}}
                                 </div>
                             </div>
                             <div class="col-4 pl-4">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1 opacity-75">Final
                                     Edit
                                     Step</div>
-                                <div class="h3 mb-0 font-weight-bold text-warning">{{
-                                    stats.mySubmission.workflow.finaleditstep || 0 }}</div>
+                                <div class="h3 mb-0 font-weight-bold text-warning">
+                                    {{stats.mySubmission.workflow.finaleditstep || 0 | dsThousandsSeparator }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -71,7 +75,8 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Approved Submissions
                                 </div>
-                                <div class="h3 mb-0 font-weight-bold">{{ stats.mySubmission.archived }}</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.mySubmission.archived |
+                                    dsThousandsSeparator }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-archive fa-2x text-gray-300 opacity-25"></i>
@@ -89,7 +94,8 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Withdrawn
                                     Submissions</div>
-                                <div class="h3 mb-0 font-weight-bold">{{ stats.mySubmission.withdrawn }}</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.mySubmission.withdrawn |
+                                    dsThousandsSeparator }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-ban fa-2x text-gray-300 opacity-25"></i>
@@ -139,7 +145,7 @@
                                     Approved
                                 </div>
                                 <div class="h3 mb-0 font-weight-bold text-success">{{ getActionCount(entry.details,
-                                    'Approved') }}</div>
+                                    'Approved') | dsThousandsSeparator }}</div>
                             </div>
                             <div class="col-6 pl-4">
                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1 opacity-75">
@@ -147,7 +153,7 @@
                                 </div>
                                 <div class="h3 mb-0 font-weight-bold text-danger">
                                     {{ getActionCount(entry.details, 'Rejected') || getActionCount(entry.details,
-                                    'rejected') }}
+                                    'rejected') | dsThousandsSeparator }}
                                 </div>
                             </div>
                         </div>

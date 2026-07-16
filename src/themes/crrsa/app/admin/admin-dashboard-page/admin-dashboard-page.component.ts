@@ -48,6 +48,7 @@ import { environment } from 'src/environments/environment';
 import { SearchService } from 'src/app/shared/search/search.service';
 import { BitstreamStatisticsDashboardComponent } from 'src/themes/crrsa/app/admin/bitstream-statistics-page/bitstream-statistics-page.component';
 import { UserDashboardComponent } from 'src/themes/crrsa/app/admin/user-dashboard-page/user-dashboard-page.component';
+import { ThousandsSeparatorPipe } from 'src/app/shared/utils/thousands-separator.pipe';
 
 interface BitstreamStatCounts {
     bitstreams: number;
@@ -86,6 +87,7 @@ interface CommunityBitstreamStatsResponse {
         TranslateModule,
         BitstreamStatisticsDashboardComponent,
         UserDashboardComponent,
+        ThousandsSeparatorPipe
     ],
 })
 export class AdminDashboardPageComponent implements OnInit {

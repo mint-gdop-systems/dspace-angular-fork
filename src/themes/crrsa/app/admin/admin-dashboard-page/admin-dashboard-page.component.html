@@ -38,7 +38,8 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h5 class="card-title mb-1 small">{{ 'admin.dashboard.collections' | translate }}</h5>
-                                <h3 class="mb-0" id="collections-count">{{ collectionsCount$ | async }}</h3>
+                                <h3 class="mb-0" id="collections-count">{{ collectionsCount$ | async |
+                                    dsThousandsSeparator }}</h3>
                             </div>
                             <i class="fas fa-layer-group fa-2x opacity-50"></i>
                         </div>
@@ -54,7 +55,8 @@
                             <div>
                                 <h5 class="card-title mb-1 small">{{ 'admin.dashboard.archived-items' | translate }}
                                 </h5>
-                                <h3 class="mb-0" id="archived-items-count">{{ archivedItemsCount$ | async }}</h3>
+                                <h3 class="mb-0" id="archived-items-count">{{ archivedItemsCount$ | async |
+                                    dsThousandsSeparator }}</h3>
                             </div>
                             <i class="fas fa-archive fa-2x opacity-50"></i>
                         </div>
@@ -70,7 +72,8 @@
                             <div>
                                 <h5 class="card-title mb-1 small">{{ 'admin.dashboard.workflow-items' | translate }}
                                 </h5>
-                                <h3 class="mb-0" id="workflow-items-count">{{ workflowItemsCount$ | async }}</h3>
+                                <h3 class="mb-0" id="workflow-items-count">{{ workflowItemsCount$ | async |
+                                    dsThousandsSeparator}}</h3>
                             </div>
                             <i class="fas fa-tasks fa-2x opacity-50"></i>
                         </div>
@@ -142,43 +145,43 @@
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
-                                            {{ stat.archivedCount }}
+                                            {{ stat.archivedCount | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
-                                            {{ stat.workflowCount }}
+                                            {{ stat.workflowCount | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center sep-left"
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
-                                            {{ stat.bitstreamApproved }}
+                                            {{ stat.bitstreamApproved | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
-                                            {{ stat.bitstreamDraft }}
+                                            {{ stat.bitstreamDraft | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
-                                            {{ stat.bitstreamPending }}
+                                            {{ stat.bitstreamPending | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
-                                            {{ stat.bitstreamCount }}
+                                            {{ stat.bitstreamCount | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center sep-left"
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
-                                            {{ stat.pageApproved }}
+                                            {{ stat.pageApproved | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
-                                            {{ stat.pageDraft }}
+                                            {{ stat.pageDraft | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
-                                            {{ stat.pagePending }}
+                                            {{ stat.pagePending | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #ffffff !important; padding: 12px;">
-                                            {{ stat.pageCount }}
+                                            {{ stat.pageCount | dsThousandsSeparator }}
                                         </td>
                                     </tr>
                                     <tr *ngIf="(totals$ | async) as totals"
@@ -189,43 +192,43 @@
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
-                                            {{ totals.archivedCount }}
+                                            {{ totals.archivedCount | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
-                                            {{ totals.workflowCount }}
+                                            {{ totals.workflowCount | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center sep-left"
                                             style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
-                                            {{ totals.bitstreamApproved }}
+                                            {{ totals.bitstreamApproved | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
-                                            {{ totals.bitstreamDraft }}
+                                            {{ totals.bitstreamDraft | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
-                                            {{ totals.bitstreamPending }}
+                                            {{ totals.bitstreamPending | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
-                                            {{ totals.bitstreamCount }}
+                                            {{ totals.bitstreamCount | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center sep-left"
                                             style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
-                                            {{ totals.pageApproved }}
+                                            {{ totals.pageApproved | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
-                                            {{ totals.pageDraft }}
+                                            {{ totals.pageDraft | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
-                                            {{ totals.pagePending }}
+                                            {{ totals.pagePending | dsThousandsSeparator }}
                                         </td>
                                         <td class="text-center"
                                             style="color: #000000 !important; font-weight: 700; background-color: #f8f9fa !important; padding: 12px;">
-                                            {{ totals.pageCount }}
+                                            {{ totals.pageCount | dsThousandsSeparator }}
                                         </td>
                                     </tr>
                                     <tr *ngIf="(collectionsStats$ | async)?.length === 0">
