@@ -23,7 +23,7 @@ import { WorkspaceitemDataService } from '@dspace/core/submission/workspaceitem-
 import { ClaimedTaskDataService } from '@dspace/core/tasks/claimed-task-data.service';
 import { PoolTaskDataService } from '@dspace/core/tasks/pool-task-data.service';
 import { RESTURLCombiner } from '@dspace/core/url-combiner/rest-url-combiner';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
 import { catchError, finalize, map, shareReplay, startWith, switchMap, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -31,6 +31,8 @@ import { SearchService } from 'src/app/shared/search/search.service';
 import { BitstreamStatisticsDashboardComponent } from 'src/themes/crrsa/app/admin/bitstream-statistics-page/bitstream-statistics-page.component';
 import { UserDashboardComponent } from 'src/themes/crrsa/app/admin/user-dashboard-page/user-dashboard-page.component';
 import { ThousandsSeparatorPipe } from 'src/app/shared/utils/thousands-separator.pipe';
+import { HttpClient } from '@angular/common/http';
+import { NotificationsService } from '@dspace/core/notification-system/notifications.service';
 
 interface BitstreamStatCounts {
     bitstreams: number;
@@ -69,7 +71,7 @@ interface CommunityBitstreamStatsResponse {
         TranslateModule,
         BitstreamStatisticsDashboardComponent,
         UserDashboardComponent,
-        ThousandsSeparatorPipe
+        ThousandsSeparatorPipe,
     ],
 })
 export class AdminDashboardPageComponent implements OnInit {
@@ -81,6 +83,7 @@ export class AdminDashboardPageComponent implements OnInit {
     totals$: Observable<{ archivedCount: number; workflowCount: number; bitstreamApproved: number; bitstreamDraft: number; bitstreamPending: number; bitstreamCount: number; pageApproved: number; pageDraft: number; pagePending: number; pageCount: number }>;
     communities$: Observable<Community[]>;
     selectedCommunityId$: Observable<string>;
+    exportingPdf$ = new BehaviorSubject<boolean>(false);
 
     loading$ = new BehaviorSubject<boolean>(false);
     private loadingSubscription?: Subscription;
@@ -101,6 +104,9 @@ export class AdminDashboardPageComponent implements OnInit {
         protected halService: HALEndpointService,
         protected authorizationService: AuthorizationDataService,
         protected restService: DspaceRestService,
+        protected http: HttpClient,
+        protected notificationsService: NotificationsService,
+        protected translate: TranslateService,
     ) { }
 
     ngOnInit(): void {
@@ -246,6 +252,37 @@ export class AdminDashboardPageComponent implements OnInit {
             take(1),
             finalize(() => this.loading$.next(false)),
         ).subscribe();
+    }
+
+    exportPdf(): void {
+        this.exportingPdf$.next(true);
+
+        const url = new RESTURLCombiner(
+            environment.rest.baseUrl,
+            'statistics',
+            'communitybitstreamstats',
+            'search',
+            'exportAll',
+        ).toString();
+
+        this.http.get(url, { responseType: 'blob' }).pipe(
+            finalize(() => this.exportingPdf$.next(false)),
+        ).subscribe({
+            next: (blob: Blob) => {
+                const objectUrl = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = objectUrl;
+                link.download = `repository-bitstream-stats-${new Date().toISOString().slice(0, 10)}.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(objectUrl);
+            },
+            error: (err) => {
+                console.error('PDF export failed', err);
+                this.notificationsService.error(null, this.translate.get('admin.dashboard.export.error'));
+            },
+        });
     }
 
     private loadCommunityBitstreamStats(communityId: string): Observable<CommunityBitstreamStatsResponse | null> {

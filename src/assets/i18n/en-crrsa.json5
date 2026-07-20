@@ -20,6 +20,10 @@
 
   "admin.dashboard.breadcrumbs": "Dashboard",
 
+  "admin.dashboard.select-community": "Select Subcity:",
+
+  "admin.dashboard.export.error": "Failed to export to file. Please try again later.",
+
   "item.page.filesection.document.status": "Status",
 
   "item.page.filesection.documentType": "Document Type",
@@ -277,8 +281,6 @@
   "browse.metadata.deathdate.breadcrumbs": "Browse by Death Date",
 
   "browse.metadata.placeofdeath.breadcrumbs": "Browse by Place of Death",
-
-  "admin.dashboard.select-community": "Select Subcity:",
 
 
   

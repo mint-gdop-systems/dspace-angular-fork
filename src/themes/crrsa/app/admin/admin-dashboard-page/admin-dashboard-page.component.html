@@ -3,6 +3,15 @@
         <button *ngIf="activeTab === 'admin'" class="btn btn-primary" (click)="refresh()" id="admin-dashboard-refresh">
             <i class="fas fa-sync-alt mr-1"></i> {{ 'admin.dashboard.refresh' | translate }}
         </button>
+        <button *ngIf="activeTab === 'admin'" class="btn btn-outline-secondary" (click)="exportPdf()"
+            [disabled]="exportingPdf$ | async" id="admin-dashboard-export-pdf">
+            <span *ngIf="!(exportingPdf$ | async)">
+                <i class="fas fa-file-pdf mr-1"></i> Export PDF
+            </span>
+            <span *ngIf="exportingPdf$ | async">
+                <i class="fas fa-spinner fa-spin mr-1"></i> Generating...
+            </span>
+        </button>
     </div>
 
     <!-- Tabs Navigation -->
