@@ -29,3 +29,21 @@ themes:
         attributes:
           rel: manifest
           href: assets/dars/images/favicons/manifest.webmanifest
+
+browseBy:
+  showTitleFirst: false
+  types:
+    - id: 'title'
+      type: 'title'
+    - id: 'dateissued'
+      type: 'date'
+    - id: 'docnumber'      # DARIS Custom Document Number Index
+      type: 'text'
+    - id: 'giver'        # DARIS Custom Receiver Name Index
+      type: 'text'
+    - id: 'receiver'        # DARIS Custom Receiver Name Index
+      type: 'text'
+    - id: 'service'        # DARIS Custom Service Type Index
+      type: 'text'
+    - id: 'date'           # DARIS Custom Document Date Index
+      type: 'date'

@@ -124,9 +124,19 @@ export class DSONameService {
 
       return eventName;
     },
+    VehicleSale: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
+    HouseSale: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
+    VehicleGift: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
+    HouseGift: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
+    LoanUnsecured: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
+    LoanSecured: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
+    LoanClearance: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
+    POA: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
+    POARevocation: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
+    CorporateArticles: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
+    CorporateMinutes: (dso: DSpaceObject, escapeHTML?: boolean): string => this.getDarisName(undefined, dso, escapeHTML),
     Default: (dso: DSpaceObject, escapeHTML?: boolean): string => {
-      // If object doesn't have dc.title metadata use name property
-      return dso.firstMetadataValue('dc.title', undefined, escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
+      return this.getDarisName(undefined, dso, escapeHTML);
     },
   };
 
@@ -169,7 +179,7 @@ export class DSONameService {
     const types = dso.getRenderTypes();
     const entityType = types
       .filter((type) => typeof type === 'string')
-      .find((type: string) => (['Person', 'OrgUnit', 'House', 'VitalEvent', 'CaseFile', 'CirculationEvent']).includes(type)) as string;
+      .find((type: string) => (['Person', 'OrgUnit', 'House', 'VitalEvent', 'CaseFile', 'CirculationEvent', 'VehicleSale', 'HouseSale', 'VehicleGift', 'HouseGift', 'LoanUnsecured', 'LoanSecured', 'LoanClearance', 'POA', 'POARevocation', 'CorporateArticles', 'CorporateMinutes']).includes(type)) as string;
     if (entityType === 'Person') {
       const familyName = this.firstMetadataValue(object, dso, 'person.familyName', escapeHTML);
       const givenName = this.firstMetadataValue(object, dso, 'person.givenName', escapeHTML);
@@ -245,9 +255,44 @@ export class DSONameService {
       }
 
       return eventName;
+    } else if (['VehicleSale', 'HouseSale', 'VehicleGift', 'HouseGift', 'LoanUnsecured', 'LoanSecured', 'LoanClearance', 'POA', 'POARevocation', 'CorporateArticles', 'CorporateMinutes'].includes(entityType)) {
+      return this.getDarisName(object, dso, escapeHTML);
     }
 
-    return this.firstMetadataValue(object, dso, 'dc.title', escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled');
+    return this.getDarisName(object, dso, escapeHTML);
+  }
+
+  private getDarisName(object: any, dso: DSpaceObject, escapeHTML?: boolean): string {
+    const docNumber = object ? this.firstMetadataValue(object, dso, 'dars.document.number', escapeHTML) : dso.firstMetadataValue('dars.document.number', undefined, escapeHTML);
+    const giverName = object ? this.firstMetadataValue(object, dso, 'dars.giver.name', escapeHTML) : dso.firstMetadataValue('dars.giver.name', undefined, escapeHTML);
+    const receiverName = object ? this.firstMetadataValue(object, dso, 'dars.receiver.name', escapeHTML) : dso.firstMetadataValue('dars.receiver.name', undefined, escapeHTML);
+    const orgName = object ? this.firstMetadataValue(object, dso, 'dars.organization.name', escapeHTML) : dso.firstMetadataValue('dars.organization.name', undefined, escapeHTML);
+    const poaRevoked = object ? this.firstMetadataValue(object, dso, 'dars.document.revokedNumber', escapeHTML) : dso.firstMetadataValue('dars.document.revokedNumber', undefined, escapeHTML);
+
+    let darisName = '';
+    if (isNotEmpty(docNumber)) {
+      darisName = `${docNumber}`;
+      if (isNotEmpty(giverName)) {
+         darisName += ` - ${giverName}`;
+      } else if (isNotEmpty(orgName)) {
+         darisName += ` - ${orgName}`;
+      }
+    } else if (isNotEmpty(giverName)) {
+      darisName = giverName;
+      if (isNotEmpty(receiverName)) {
+         darisName += ` -> ${receiverName}`;
+      }
+    } else if (isNotEmpty(orgName)) {
+      darisName = orgName;
+    } else if (isNotEmpty(poaRevoked)) {
+      darisName = `Revocation of ${poaRevoked}`;
+    }
+
+    if (isNotEmpty(darisName)) {
+      return darisName;
+    }
+
+    return object ? (this.firstMetadataValue(object, dso, 'dc.title', escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled')) : (dso.firstMetadataValue('dc.title', undefined, escapeHTML) || dso.name || this.translateService.instant('dso.name.untitled'));
   }
 
   /**
@@ -263,7 +308,7 @@ export class DSONameService {
     const types = dso.getRenderTypes();
     const entityType = types
       .filter((type) => typeof type === 'string')
-      .find((type: string) => (['House', 'VitalEvent', 'CaseFile', 'CirculationEvent']).includes(type)) as string;
+      .find((type: string) => (['House', 'VitalEvent', 'CaseFile', 'CirculationEvent', 'VehicleSale', 'HouseSale', 'VehicleGift', 'HouseGift', 'LoanUnsecured', 'LoanSecured', 'LoanClearance', 'POA', 'POARevocation', 'CorporateArticles', 'CorporateMinutes']).includes(type)) as string;
     if (entityType === "House") {
       return this.firstMetadataValue(object, dso, 'crvs.date.registration', escapeHTML) || "";
     } else if (entityType === "VitalEvent") {
@@ -303,6 +348,11 @@ export class DSONameService {
       return "No Date";
     }
 
+    const darsDate = this.firstMetadataValue(object, dso, 'dars.document.date', escapeHTML);
+    if (isNotEmpty(darsDate)) {
+      return darsDate;
+    }
+
     return "No Date";
   }
 
@@ -317,7 +367,7 @@ export class DSONameService {
    * @returns {string} the first matching string value, or `undefined`.
    */
   firstMetadataValue(object: any, dso: DSpaceObject, keyOrKeys: string | string[], escapeHTML?: boolean): string {
-    return Metadata.firstValue(dso.metadata, keyOrKeys, object.hitHighlights, undefined, escapeHTML);
+    return Metadata.firstValue(dso.metadata, keyOrKeys, object ? object.hitHighlights : undefined, undefined, escapeHTML);
   }
 
 }
