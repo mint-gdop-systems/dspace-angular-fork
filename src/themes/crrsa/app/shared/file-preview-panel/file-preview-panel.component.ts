@@ -61,7 +61,7 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
 
     private updatePreview() {
         this.previewRequest$.next();
-        
+
         const newRequestId = this.selectedFile?.uuid || this.selectedFile?.id;
         if (!newRequestId) return;
 
@@ -211,21 +211,27 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
         return (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
     }
 
-    getDocumentType(file: any): string {
-        if (!file) return 'Unknown';
-        if (typeof file.firstMetadataValue === 'function') {
-            return file.firstMetadataValue('crvs.documentType') || 'Unknown';
+    private getMetadataValue(file: any, key: string, defaultValue: string): string {
+        if (!file) {
+            return defaultValue;
         }
-        const metadata = file.metadata || {};
-        return metadata['crvs.documentType']?.[0]?.value || 'Unknown';
+
+        if (typeof file.firstMetadataValue === 'function') {
+            return file.firstMetadataValue(key) || defaultValue;
+        }
+
+        return file.metadata?.[key]?.[0]?.value || defaultValue;
+    }
+
+    getDocumentType(file: any): string {
+        return this.getMetadataValue(file, 'crvs.documentType', 'Unknown');
     }
 
     getDocumentStatus(file: any): string {
-        if (!file) return 'Unknown';
-        if (typeof file.firstMetadataValue === 'function') {
-            return file.firstMetadataValue('crvs.document.status') || 'Active';
-        }
-        const metadata = file.metadata || {};
-        return metadata['crvs.document.status']?.[0]?.value || 'Active';
+        return this.getMetadataValue(file, 'crvs.document.status', 'Active');
+    }
+
+    getPageCount(file: any): string {
+        return this.getMetadataValue(file, 'crvs.document.pages', '1');
     }
 }
