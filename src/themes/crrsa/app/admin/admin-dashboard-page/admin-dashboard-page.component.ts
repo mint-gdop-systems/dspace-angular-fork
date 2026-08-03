@@ -83,7 +83,7 @@ export class AdminDashboardPageComponent implements OnInit {
     totals$: Observable<{ archivedCount: number; workflowCount: number; bitstreamApproved: number; bitstreamDraft: number; bitstreamPending: number; bitstreamCount: number; pageApproved: number; pageDraft: number; pagePending: number; pageCount: number }>;
     communities$: Observable<Community[]>;
     selectedCommunityId$: Observable<string>;
-    exportingPdf$ = new BehaviorSubject<boolean>(false);
+    exporting$ = new BehaviorSubject<'pdf' | 'xlsx' | null>(null);
 
     loading$ = new BehaviorSubject<boolean>(false);
     private loadingSubscription?: Subscription;
@@ -254,8 +254,8 @@ export class AdminDashboardPageComponent implements OnInit {
         ).subscribe();
     }
 
-    exportPdf(): void {
-        this.exportingPdf$.next(true);
+    exportToFile(format: 'pdf' | 'xlsx'): void {
+        this.exporting$.next(format);
 
         const url = new RESTURLCombiner(
             environment.rest.baseUrl,
@@ -265,21 +265,21 @@ export class AdminDashboardPageComponent implements OnInit {
             'exportAll',
         ).toString();
 
-        this.http.get(url, { responseType: 'blob' }).pipe(
-            finalize(() => this.exportingPdf$.next(false)),
+        this.http.get(`${url}?format=${format}`, { responseType: 'blob' }).pipe(
+            finalize(() => this.exporting$.next(null)),
         ).subscribe({
             next: (blob: Blob) => {
                 const objectUrl = window.URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 link.href = objectUrl;
-                link.download = `repository-bitstream-stats-${new Date().toISOString().slice(0, 10)}.pdf`;
+                link.download = `repository-bitstream-stats-${new Date().toISOString().slice(0, 10)}.${format}`;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
                 window.URL.revokeObjectURL(objectUrl);
             },
             error: (err) => {
-                console.error('PDF export failed', err);
+                console.error(`${format.toUpperCase()} export failed`, err);
                 this.notificationsService.error(null, this.translate.get('admin.dashboard.export.error'));
             },
         });
