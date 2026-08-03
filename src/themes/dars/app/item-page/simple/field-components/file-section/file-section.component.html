@@ -20,15 +20,15 @@
                   
                   <span> ({{(file?.sizeBytes) | dsFileSize }})</span>
 
-                  @if (file.firstMetadataValue('legal.document.pageCount')) {
+                  @if (file.firstMetadataValue('dars.file.pageCount')) {
                     <span class="page-count text-muted ms-1">
-                      • {{ file.firstMetadataValue('legal.document.pageCount') }} pages
+                      • {{ file.firstMetadataValue('dars.file.pageCount') }} pages
                     </span>
                   }
 
-                  @if (file.firstMetadataValue('legal.document.status') === "Inactive") {
-                    <span class="badge bg-secondary ms-1" style="opacity: 0.6;">
-                      {{ file.firstMetadataValue('legal.document.status') }}
+                  @if (file.firstMetadataValue('dars.file.type')) {
+                    <span class="document-type text-muted ms-1">
+                      • {{ file.firstMetadataValue('dars.file.type') }}
                     </span>
                   }
                 </ds-file-download-link>

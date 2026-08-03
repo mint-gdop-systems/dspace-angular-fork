@@ -29,6 +29,14 @@
               <dd class="col-md-8">
                 {{ (file.format | async)?.payload?.description }}
               </dd>
+              <!-- @if (file.hasMetadata('dars.file.pageCount')) {
+              <dt class="col-md-4">
+                {{ "item.page.filesection.pageCount" | translate }}
+              </dt>
+              <dd class="col-md-8">
+                {{ file.firstMetadataValue("dars.file.pageCount") }}
+              </dd>
+              } -->
               @if (file.hasMetadata('dc.description')) {
               <dt class="col-md-4">
                 {{ "item.page.filesection.description" | translate }}
@@ -37,29 +45,21 @@
                 {{ file.firstMetadataValue("dc.description") }}
               </dd>
               }
-              @if (file.hasMetadata('legal.case.documentType')) {
+              @if (file.hasMetadata('dars.file.type')) {
               <dt class="col-md-4">
                 {{ "item.page.filesection.documentType" | translate }}
               </dt>
               <dd class="col-md-8">
-                {{ file.firstMetadataValue("legal.case.documentType") }}
-              </dd>
-              }
-              @if (file.hasMetadata('crvs.document.status')) {
-              <dt class="col-md-4">
-                {{ "item.page.filesection.document.status" | translate }}
-              </dt>
-              <dd class="col-md-8">
-                {{ file.firstMetadataValue("crvs.document.status") }}
+                {{ file.firstMetadataValue("dars.file.type") }}
               </dd>
               }
               
-              @if (file.hasMetadata('legal.document.pageCount')) {
+              @if (file.hasMetadata('dars.file.pageCount')) {
               <dt class="col-md-4">
                 {{ "item.page.filesection.pageCount" | translate }}
               </dt>
               <dd class="col-md-8">
-                {{ file.firstMetadataValue("legal.document.pageCount") }}
+                {{ file.firstMetadataValue("dars.file.pageCount") }}
               </dd>
               }
             </dl>
