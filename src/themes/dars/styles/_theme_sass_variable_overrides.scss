@@ -45,14 +45,14 @@ $font-family-sans-serif: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI"
 //$cyan:    #17a2b8 !default;
 
 // Override semantic colors here
-$primary:   #073c59;  // Brand primary (logo)
-$secondary: #3f5f72;  // Muted steel blue
+$primary:   #3c7fe3;  // Brand primary (logo)
+$secondary: #fcfcb4;  // Muted steel blue
 $success:   #7bbf4b;  // Balanced green
-$info:      #2c7da0;  // Brand-compatible cyan-blue
+$info:      #3c7fe3;  // Brand-compatible cyan-blue
 $warning:   #e39b3b;  // Warm amber
 $danger:    #c44141;  // Clear red
-$light:     #f6f8fa;  // Soft off-white
-$dark:      #041f2d;  // Deep navy
+$light:     #ffffff;  // Soft off-white
+$dark:      #20457a;  // Deep blue for sidebar/contrast
 
 // Add new semantic colors here (you don't need to add existing semantic colors)
 $theme-custom-semantic-colors: (
@@ -62,9 +62,9 @@ $theme-custom-semantic-colors: (
 
 $min-contrast-ratio: 3 !default;
 
-$body-color: #24343f;
+$body-color: #212529;
 
-$link-color: #2c7da0;
+$link-color: #3c7fe3;
 $link-decoration: none;
 $link-hover-color: darken($link-color, 12%);
 $link-hover-decoration: underline;
@@ -80,17 +80,19 @@ $navbar-dark-color: #fff;
 $ds-home-news-link-color: #9fe870;
 $ds-header-navbar-border-bottom-color: transparent;
 
-$ds-breadcrumb-link-color: #1f6b8a !default;
-$ds-breadcrumb-link-active-color: #041f2d !default;
+$ds-breadcrumb-link-color: #3c7fe3 !default;
+$ds-breadcrumb-link-active-color: #20457a !default;
 
 // Navigation colors - aligned to brand
-$ds-header-bg: #073c59;
-$ds-navbar-bg: #073c59;
-$ds-navbar-dropdown-bg: #073c59;
-$ds-expandable-navbar-bg: #073c59;
+$ds-header-bg: #3c7fe3;
+$ds-navbar-bg: #3c7fe3;
+$ds-navbar-dropdown-bg: #3c7fe3;
+$ds-expandable-navbar-bg: #3c7fe3;
+$ds-admin-sidebar-bg: #20457a; // explicitly set admin sidebar background to the new deep blue
+$ds-admin-sidebar-active-bg: darken(#20457a, 3%);
 $ds-navbar-link-color: #ffffff;
-$ds-navbar-link-color-hover: #8dc6e0;
+$ds-navbar-link-color-hover: #fcfcb4; // updated hover to the accent yellow
 
 // Browse navigation colors
-$ds-browse-nav-bg: #073c59;
+$ds-browse-nav-bg: #3c7fe3;
 $ds-browse-nav-link-color: #ffffff;
