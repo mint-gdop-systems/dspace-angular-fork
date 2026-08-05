@@ -7481,4 +7481,158 @@
   "item.preview.organization.address.addressLocality": "City",
 
   "item.preview.organization.alternateName": "Alternative name",
+
+  
+  "vehiclesale.page.titleprefix": "Document Number",
+
+  "loanunsecured.page.titleprefix": "Document Number",
+
+  "loansecured.page.titleprefix": "Document Number",
+
+  "housesale.page.titleprefix": "Document Number",
+
+  "vehiclegift.page.titleprefix": "Document Number",
+
+  "housegift.page.titleprefix": "Document Number",
+
+  "corporateminutes.page.titleprefix": "Document Number",
+
+  "corporatearticles.page.titleprefix": "Document Number",
+
+  "will.page.titleprefix": "Document Number",
+
+  "foreignaffairs.page.titleprefix": "Document Number",
+
+  "poarevocation.page.titleprefix": "Document Number",
+
+  "powerofattorney.page.titleprefix": "Document Number",
+
+  "loanunsecured.listelement.badge":"Loan UnSecure",
+
+  "loansecured.listelement.badge": "Loan Secure",
+
+  "vehiclesale.listelement.badge": "Vehicle Sale",
+
+  "housesale.listelement.badge": "House Sale",
+
+  "vehiclegift.listelement.badge": "Vehicle Gift",
+
+  "housegift.listelement.badge": "Property Gift",
+
+  "corporateminutes.listelement.badge": "Corporate Minutes",
+
+  "corporatearticles.listelement.badge": "Corporate Articles",
+
+  "will.listelement.badge": "Will",
+
+  "foreignaffairs.listelement.badge": "Foreign Affairs",
+
+  "poarevocation.listelement.badge": "POA Revocation",
+
+  "powerofattorney.listelement.badge": "Power Of Attorney",
+
+
+  "search.filters.filter.branchLocation.head": "Branch Location",
+
+  "search.filters.filter.serviceType.head": "Service Type",
+
+  "search.filters.filter.documentType.head": "Document Type",
+
+  "search.filters.filter.documentDate.head": "Document Date",
+
+  "search.filters.filter.giverName.head": "Giver Name",
+  
+  "search.filters.filter.receiverName.head": "Receiver Name",
+  
+  "search.filters.filter.documentDate.min.label": "Min",
+
+  "search.filters.filter.documentDate.max.label": "Max",
+
+
+  "sorting.dars.document.date.DESC": "Document Date (newest first)",
+
+  "sorting.dars.document.date.ASC": "Document Date (oldest first)",
+
+  "sorting.dars.document.number.ASC": "Document Number (A-Z/0-9)",
+
+  "sorting.dars.giver.name.ASC": "Giver (A-Z)",
+
+  "sorting.dars.receiver.name.ASC": "Receiver (A-Z)",
+
+  "sorting.dars.service.type.ASC": "Service (A-Z)",
+
+  "sorting.dars.organization.tin.ASC": "Organization Tin (A-Z/0-9)",
+
+  "sorting.dars.vehicle.plate.ASC": "Vehicle Plate (A-Z/0-9)",
+
+
+  "dars.branch.location": "Branch Location", 
+
+  
+  "browse.metadata.giver": "Giver",
+
+  "browse.metadata.receiver": "Receiver",
+
+  "browse.metadata.service": "Service Type",
+
+  "browse.metadata.date": "Document Date",
+
+  "browse.metadata.docnumber": "Document Number",
+
+  "browse.metadata.docnumber.breadcrumbs": "Browsing by Document Number",
+
+  "browse.metadata.date.breadcrumbs": "Browsing by Document Date",
+
+  "browse.metadata.giver.breadcrumbs": "Browsing by Giver",
+
+  "browse.metadata.receiver.breadcrumbs": "Browsing by Receiver",
+
+  "browse.metadata.service.breadcrumbs": "Browsing by Service Type",
+
+  "browse.metadata.service": "Browsing by Service Type",
+
+  "browse.comcol.by.docnumber": "By Document Number", 
+
+  "browse.comcol.by.giver": "By Giver", 
+
+  "browse.comcol.by.receiver": "By Receiver", 
+
+  "browse.comcol.by.service": "By Service Type",   
+
+  
+  "menu.section.browse_global_by_docnumber": "By Document Number",
+
+  "menu.section.browse_global_by_date": "By Document Date",
+
+  "menu.section.browse_global_by_giver": "By Giver",
+
+  "menu.section.browse_global_by_receiver": "By Receiver",
+
+  "menu.section.browse_global_by_service": "By Service Type",
+
+
+  "submission.sections.documentinfo": "የሰነድ መረጃ (Document Info)",
+
+  "submission.sections.partiesinfo": "የተዋዋዮች መረጃ (Parties Info)",
+
+  "submission.sections.processinginfo": "የሰራተኛ መረጃ (Processing Info)",
+
+  "submission.sections.poainfo": "የውክልና መረጃ (PoA Info)",
+
+  "submission.sections.loaninfo": "የብድር መረጃ (Loan Info)",
+
+  "submission.sections.revocationinfo": "የመሻሪያ/ማረጋገጫ መረጃ (Revocation/Update Info)",
+
+  "submission.sections.propertygiftinfo": "የቤት ስጦታ መረጃ (House Gift Info)",
+
+  "submission.sections.vehiclegiftinfo": "የመኪና ስጦታ መረጃ (Vehicle Gift Info)",
+
+  "submission.sections.propertysalesinfo": "የቤት ሽያጭ መረጃ (Property Sale Info)",
+
+  "submission.sections.vehiclesalesinfo": "የመኪና ሽያጭ መረጃ (Vehicle Sales Info)",
+
+  "submission.sections.corporatearticlesinfo": "የድርጅት መመስረቻ (Corporate Articles)",
+  
+  "submission.sections.corporateminutesinfo": "የድርጅት የስብሰባ ቃለ-ጉባዔ (Minutes/Auth)",
+
 }
