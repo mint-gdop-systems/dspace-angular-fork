@@ -115,7 +115,7 @@
 
         <div class="row mb-4">
             <!-- Total Pages -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-3 mb-3">
                 <div class="card shadow-sm border-left-success h-100">
                     <div class="card-body py-4">
                         <div class="row no-gutters align-items-center">
@@ -132,7 +132,7 @@
             </div>
 
             <!-- Judge Pages -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-3 mb-3">
                 <div class="card shadow-sm border-left-warning h-100">
                     <div class="card-body py-4">
                         <div class="row no-gutters align-items-center">
@@ -149,7 +149,7 @@
             </div>
 
             <!-- Misc Pages -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-3 mb-3">
                 <div class="card shadow-sm border-left-info h-100">
                     <div class="card-body py-4">
                         <div class="row no-gutters align-items-center">
@@ -159,6 +159,23 @@
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-file-invoice fa-2x text-gray-300 opacity-25"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Office Pages -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm border-left-secondary h-100">
+                    <div class="card-body py-4">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">በጽ/ቤቱ የተሰራ (Office Pages)</div>
+                                <div class="h3 mb-0 font-weight-bold">{{ stats.summary.officePageCount }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-building fa-2x text-gray-300 opacity-25"></i>
                             </div>
                         </div>
                     </div>
@@ -186,6 +203,7 @@
                                 <th>File Count</th>
                                 <th>በዳኛ የተሰራ<br/><small>(page count)</small></th>
                                 <th>ልዩ ልዩ<br/><small>(page count)</small></th>
+                                <th>በጽ/ቤቱ የተሰራ<br/><small>(page count)</small></th>
                                 <th>Other<br/><small>(page count)</small></th>
                                 <th>Total Page Count</th>
                             </tr>
@@ -202,11 +220,12 @@
                                 <td>{{ item.fileCount }}</td>
                                 <td>{{ item.judgePageCount }}</td>
                                 <td>{{ item.miscPageCount }}</td>
+                                <td>{{ item.officePageCount }}</td>
                                 <td>{{ item.otherPageCount }}</td>
                                 <td><strong>{{ item.totalPageCount }}</strong></td>
                             </tr>
                             <tr *ngIf="stats.items.length === 0">
-                                <td colspan="8" class="text-center py-4 text-muted">No items found matching the selected criteria.</td>
+                                <td colspan="9" class="text-center py-4 text-muted">No items found matching the selected criteria.</td>
                             </tr>
                         </tbody>
                     </table>

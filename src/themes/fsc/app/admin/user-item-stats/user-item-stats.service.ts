@@ -13,6 +13,7 @@ export interface UserItemStatSummary {
   pendingCount: number;
   judgePageCount: number;
   miscPageCount: number;
+  officePageCount: number;
   otherPageCount: number;
   totalPageCount: number;
 }
@@ -25,6 +26,7 @@ export interface UserItemStatRecord {
   fileCount: number;
   judgePageCount: number;
   miscPageCount: number;
+  officePageCount: number;
   otherPageCount: number;
   totalPageCount: number;
 }
