@@ -2,7 +2,6 @@ import { Route } from '@angular/router';
 import { i18nBreadcrumbResolver } from '@dspace/core/breadcrumbs/i18n-breadcrumb.resolver';
 
 import { AdminCurationTasksComponent } from './admin-curation-tasks/admin-curation-tasks.component';
-import { BatchImportPageComponent } from './admin-import-batch-page/batch-import-page.component';
 import { ThemedMetadataImportPageComponent } from './admin-import-metadata-page/themed-metadata-import-page.component';
 import {
   LDN_PATH,
@@ -13,6 +12,7 @@ import {
 } from './admin-routing-paths';
 import { ThemedAdminSearchPageComponent } from './admin-search-page/themed-admin-search-page.component';
 import { ThemedAdminWorkflowPageComponent } from './admin-workflow-page/themed-admin-workflow-page.component';
+import { BatchImportPageComponent } from 'src/themes/crrsa/app/admin/admin-import-batch-page/batch-import-page.component';
 
 export const ROUTES: Route[] = [
   {

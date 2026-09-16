@@ -26,7 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FileDropzoneNoUploaderComponent } from '../../shared/upload/file-dropzone-no-uploader/file-dropzone-no-uploader.component';
 import { FileValueAccessorDirective } from '../../shared/utils/file-value-accessor.directive';
 import { FileValidator } from '../../shared/utils/require-file.validator';
-import { BatchImportPageComponent } from './batch-import-page.component';
+import { BatchImportPageComponent } from 'src/themes/crrsa/app/admin/admin-import-batch-page/batch-import-page.component';
 
 describe('BatchImportPageComponent', () => {
   let component: BatchImportPageComponent;
