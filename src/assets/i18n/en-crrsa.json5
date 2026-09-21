@@ -34,6 +34,10 @@
 
   "menu.section.analytics": "Analytics",
 
+  "menu.section.potential-duplicates": "Potential Approved Duplicates",
+
+  "potential-duplicates.breadcrumbs": "Potential Approved Duplicates",
+
   "mydspace.results.no-description": "No description",
 
   "mydspace.results.no-heads": "No family heads",

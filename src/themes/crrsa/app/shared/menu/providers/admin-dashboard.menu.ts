@@ -12,8 +12,8 @@ import {
     Observable,
     of
 } from 'rxjs';
-import { MenuItemType } from 'src/app/shared/menu/menu-item-type.model';
-import { AbstractMenuProvider, PartialMenuSection } from 'src/app/shared/menu/menu-provider.model';
+import { MenuItemType } from '../../../../../../app/shared/menu/menu-item-type.model';
+import { AbstractMenuProvider, PartialMenuSection } from '../../../../../../app/shared/menu/menu-provider.model';
 
 /**
  * Menu provider to create the "Admin Dashboard" menu section in the public navbar under Statistics.
@@ -38,6 +38,16 @@ export class AdminDashboardMenuProvider extends AbstractMenuProvider {
                     link: '/statistics/admin-dashboard',
                 },
                 icon: 'chart-bar',
+            },
+            {
+                id: 'potential-duplicated',
+                visible: true,
+                model: {
+                    type: MenuItemType.LINK,
+                    text: 'menu.section.potential-duplicates',
+                    link: '/admin/potential-duplicates',
+                },
+                icon: 'copy',
             },
         ]);
     }

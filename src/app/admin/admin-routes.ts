@@ -12,9 +12,20 @@ import {
 } from './admin-routing-paths';
 import { ThemedAdminSearchPageComponent } from './admin-search-page/themed-admin-search-page.component';
 import { ThemedAdminWorkflowPageComponent } from './admin-workflow-page/themed-admin-workflow-page.component';
-import { BatchImportPageComponent } from 'src/themes/crrsa/app/admin/admin-import-batch-page/batch-import-page.component';
+import { BatchImportPageComponent } from '../../themes/crrsa/app/admin/admin-import-batch-page/batch-import-page.component';
 
 export const ROUTES: Route[] = [
+  {
+    path: 'potential-duplicates',
+    resolve: {
+      breadcrumb: i18nBreadcrumbResolver,
+    },
+    data: {
+      title: 'potential-duplicates.title',
+      breadcrumbKey: 'potential-duplicates',
+    },
+    loadComponent: () => import('../../themes/crrsa/app/admin/potential-duplicates/potential-duplicates-page.component').then((m) => m.PotentialDuplicatesPageComponent),
+  },
   {
     path: NOTIFICATIONS_MODULE_PATH,
     loadChildren: () => import('./admin-notifications/admin-notifications-routes')
