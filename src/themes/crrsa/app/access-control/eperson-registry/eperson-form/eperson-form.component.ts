@@ -64,7 +64,6 @@ import {
 
 import { TYPE_REQUEST_FORGOT } from '../../../../../../app/register-email-form/register-email-form.component';
 import { ValidateEmailNotTaken } from './validators/email-taken.validator';
-import { BtnDisabledDirective } from '../../../../../../app/shared/btn-disabled.directive';
 import { ConfirmationModalComponent } from '../../../../../../app/shared/confirmation-modal/confirmation-modal.component';
 import { FormBuilderService } from '../../../../../../app/shared/form/builder/form-builder.service';
 import { FormComponent } from '../../../../../../app/shared/form/form.component';
@@ -80,7 +79,6 @@ import { EpeopleRegistryService } from '../../../../../../app/access-control/epe
   templateUrl: './eperson-form.component.html',
   imports: [
     AsyncPipe,
-    BtnDisabledDirective,
     FormComponent,
     HasNoValuePipe,
     PaginationComponent,
