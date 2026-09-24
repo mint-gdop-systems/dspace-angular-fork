@@ -58,7 +58,7 @@ import { ThemedLoadingComponent } from '../../shared/loading/themed-loading.comp
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { EPeopleRegistryComponent } from './epeople-registry.component';
 import { EpeopleRegistryService } from './epeople-registry.service';
-import { EPersonFormComponent } from './eperson-form/eperson-form.component';
+import { EPersonFormComponent } from '../../../themes/crrsa/app/access-control/eperson-registry/eperson-form/eperson-form.component';
 
 describe('EPeopleRegistryComponent', () => {
   let component: EPeopleRegistryComponent;

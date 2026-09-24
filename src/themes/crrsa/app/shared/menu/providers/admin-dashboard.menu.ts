@@ -9,11 +9,12 @@
 import { Injectable } from '@angular/core';
 import { AuthorizationDataService } from '@dspace/core/data/feature-authorization/authorization-data.service';
 import {
-    Observable,
-    of
+    map,
+    Observable
 } from 'rxjs';
 import { MenuItemType } from '../../../../../../app/shared/menu/menu-item-type.model';
 import { AbstractMenuProvider, PartialMenuSection } from '../../../../../../app/shared/menu/menu-provider.model';
+import { FeatureID } from '@dspace/core/data/feature-authorization/feature-id';
 
 /**
  * Menu provider to create the "Admin Dashboard" menu section in the public navbar under Statistics.
@@ -28,27 +29,32 @@ export class AdminDashboardMenuProvider extends AbstractMenuProvider {
     }
 
     public getSections(): Observable<PartialMenuSection[]> {
-        return of([
-            {
-                id: 'admin-dashboard',
-                visible: true,
-                model: {
-                    type: MenuItemType.LINK,
-                    text: 'menu.section.analytics',
-                    link: '/statistics/admin-dashboard',
-                },
-                icon: 'chart-bar',
-            },
-            {
-                id: 'potential-duplicated',
-                visible: true,
-                model: {
-                    type: MenuItemType.LINK,
-                    text: 'menu.section.potential-duplicates',
-                    link: '/admin/potential-duplicates',
-                },
-                icon: 'copy',
-            },
-        ]);
+        return this.authorizationService.isAuthorized(FeatureID.AdministratorOf).pipe(
+            map((isSiteAdmin) => {
+                return [
+                    {
+                        id: 'admin-dashboard',
+                        visible: true,
+                        model: {
+                            type: MenuItemType.LINK,
+                            text: 'menu.section.analytics',
+                            link: '/statistics/admin-dashboard',
+                        },
+                        icon: 'chart-bar',
+                    },
+                    {
+                        id: 'potential-duplicated',
+                        visible: isSiteAdmin,
+                        model: {
+                            type: MenuItemType.LINK,
+                            text: 'menu.section.potential-duplicates',
+                            link: '/admin/potential-duplicates',
+                        },
+                        icon: 'copy',
+                    },
+                ];
+            }),
+        );
+
     }
 }

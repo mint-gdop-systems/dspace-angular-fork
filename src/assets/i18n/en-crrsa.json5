@@ -286,6 +286,12 @@
 
   "browse.metadata.placeofdeath.breadcrumbs": "Browse by Place of Death",
 
+  "admin.access-control.epeople.form.password": "Password (min 8 characters)",
+
+  "admin.access-control.epeople.form.confirmPassword": "Confirm Password (min 8 characters)",
+
+  "error.validation.password.mismatch": "Passwords doesn't match",
+
 
   
   "401.help": "You're not authorized to access this page. You can use the button below to get back to the home page.",

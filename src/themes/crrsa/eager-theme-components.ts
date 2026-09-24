@@ -23,6 +23,7 @@ import { ItemPageComponent } from "src/themes/crrsa/app/item-page/simple/item-pa
 import { ThemedMyDSpaceStatusBadgeComponent } from "src/themes/crrsa/app/shared/object-collection/shared/badges/my-dspace-status-badge/themed-my-dspace-status-badge.component";
 import { SubmissionFormFooterComponent } from "src/themes/crrsa/app/submission/form/footer/submission-form-footer.component";
 import { BatchImportPageComponent } from "src/themes/crrsa/app/admin/admin-import-batch-page/batch-import-page.component";
+import { EPersonFormComponent } from "./app/access-control/eperson-registry/eperson-form/eperson-form.component";
 
 export const COMPONENTS = [
 	AdminSidebarComponent,
@@ -47,5 +48,6 @@ export const COMPONENTS = [
 	FullItemPageComponent,
 	UntypedItemComponent,
 	SubmissionFormFooterComponent,
-	BatchImportPageComponent
+	BatchImportPageComponent,
+	EPersonFormComponent
 ];

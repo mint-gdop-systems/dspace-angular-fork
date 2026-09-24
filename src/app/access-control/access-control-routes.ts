@@ -14,18 +14,18 @@ import {
 } from './access-control-routing-paths';
 import { BulkAccessComponent } from './bulk-access/bulk-access.component';
 import { EPeopleRegistryComponent } from './epeople-registry/epeople-registry.component';
-import { EPersonFormComponent } from './epeople-registry/eperson-form/eperson-form.component';
 import { EPersonResolver } from './epeople-registry/eperson-resolver.service';
 import { GroupFormComponent } from './group-registry/group-form/group-form.component';
 import { groupPageGuard } from './group-registry/group-page.guard';
 import { GroupsRegistryComponent } from './group-registry/groups-registry.component';
+import { EPersonFormComponent } from '../../themes/crrsa/app/access-control/eperson-registry/eperson-form/eperson-form.component';
 
 /**
  * Condition for displaying error messages on email form field
  */
 export const ValidateEmailErrorStateMatcher: DynamicErrorMessagesMatcher =
   (control: AbstractControl, model: any, hasFocus: boolean) => {
-    return ( control.touched && !hasFocus ) || ( control.errors?.emailTaken && hasFocus );
+    return (control.touched && !hasFocus) || (control.errors?.emailTaken && hasFocus);
   };
 
 const providers = [
