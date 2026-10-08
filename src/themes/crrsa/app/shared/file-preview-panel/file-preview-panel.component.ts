@@ -13,9 +13,11 @@ import {
   QueryList,
   ViewChildren,
   Directive,
-  AfterViewInit
+  AfterViewInit,
+  Inject,
+  PLATFORM_ID
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
@@ -24,10 +26,7 @@ import { ThemedFileDownloadLinkComponent } from 'src/app/shared/file-download-li
 import { Bitstream } from '@dspace/core/shared/bitstream.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
-import * as pdfjsLib from 'pdfjs-dist';
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/pdf.worker.min.mjs';
+import type { PDFDocumentProxy } from 'pdfjs-dist';
 
 // Directive to trigger canvas rendering once instantiated in DOM
 @Directive({
@@ -75,7 +74,8 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
 
 
   // PDF state matching reference component
-  public pdfDocument: pdfjsLib.PDFDocumentProxy | null = null;
+  public pdfDocument: PDFDocumentProxy | null = null;
+  private pdfjs: typeof import('pdfjs-dist') | null = null;
   public numPages: number = 0;
   public currentPage: number = 1;
   public pdfError: string | null = null;
@@ -102,15 +102,25 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
   private previewRequest$ = new Subject<void>();
 
   constructor(
-    private http: HttpClient,
-    private sanitizer: DomSanitizer,
-    private ngZone: NgZone,
-    private cdr: ChangeDetectorRef
+  private http: HttpClient,
+  private sanitizer: DomSanitizer,
+  private ngZone: NgZone,
+  private cdr: ChangeDetectorRef,
+  @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.renderPageCanvas = this.renderPageCanvas.bind(this);
   }
 
+  private async getPdfjs() {
+    if (!this.pdfjs) {
+      this.pdfjs = await import('pdfjs-dist');
+      this.pdfjs.GlobalWorkerOptions.workerSrc = 'assets/pdf.worker.min.mjs';
+    }
+    return this.pdfjs;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (changes.selectedFile && this.selectedFile) {
       this.updatePreview();
     }
@@ -181,7 +191,8 @@ export class FilePreviewPanelComponent implements OnChanges, OnDestroy {
 
   private async loadPdfDocument(url: string) {
     try {
-      const loadingTask = pdfjsLib.getDocument({ url });
+      const pdfjs = await this.getPdfjs();
+      const loadingTask = pdfjs.getDocument({ url });
       const pdf = await loadingTask.promise;
 
       this.pdfDocument = pdf;
