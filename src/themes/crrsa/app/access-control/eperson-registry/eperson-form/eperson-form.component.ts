@@ -328,42 +328,51 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
       },
       hint: this.translateService.instant(`${this.messagePrefix}.emailHint`),
     });
-    this.password = new DynamicInputModel({
-      id: 'password',
-      label: this.translateService.instant(`${this.messagePrefix}.password`),
-      name: 'password',
-      inputType: 'password',
-      validators: {
-        required: null,
-        minLength: 8,
-      },
-      required: true,
-      errorMessages: {
-        required: 'error.validation.required',
-        minlength: 'error.validation.password.minlength',
-      },
-    });
-    this.confirmPassword = new DynamicInputModel({
-      id: 'confirmPassword',
-      label: this.translateService.instant(`${this.messagePrefix}.confirmPassword`),
-      name: 'confirmPassword',
-      inputType: 'password',
-      validators: {
-        required: null,
-      },
-      required: true,
-      errorMessages: {
-        required: 'error.validation.required',
-        mismatch: 'error.validation.password.mismatch',
-      },
-    });
-    this.formModel = [
+
+    // Base form model containing common fields
+    const baseFormModel: DynamicFormControlModel[] = [
       this.firstName,
       this.lastName,
       this.email,
-      this.password,
-      this.confirmPassword,
     ];
+
+    // Only add password fields if we are NOT editing an existing EPerson
+    if (!this.route.snapshot.params.id && !this.epersonInitial) {
+      this.password = new DynamicInputModel({
+        id: 'password',
+        label: this.translateService.instant(`${this.messagePrefix}.password`),
+        name: 'password',
+        inputType: 'password',
+        validators: {
+          required: null,
+          minLength: 8,
+        },
+        required: true,
+        errorMessages: {
+          required: 'error.validation.required',
+          minlength: 'error.validation.password.minlength',
+        },
+      });
+
+      this.confirmPassword = new DynamicInputModel({
+        id: 'confirmPassword',
+        label: this.translateService.instant(`${this.messagePrefix}.confirmPassword`),
+        name: 'confirmPassword',
+        inputType: 'password',
+        validators: {
+          required: null,
+        },
+        required: true,
+        errorMessages: {
+          required: 'error.validation.required',
+          mismatch: 'error.validation.password.mismatch',
+        },
+      });
+
+      baseFormModel.push(this.password, this.confirmPassword);
+    }
+
+    this.formModel = baseFormModel;
     this.formGroup = this.formBuilderService.createFormGroup(this.formModel);
     this.subs.push(this.activeEPerson$.subscribe((eperson: EPerson) => {
       if (eperson != null) {
@@ -387,16 +396,20 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
         });
       }
     }));
-    this.subs.push(
-      this.formGroup.controls.confirmPassword.valueChanges.pipe(debounceTime(300)).subscribe(() => {
-        this.validatePasswordsMatch();
-      }),
-    );
-    this.subs.push(
-      this.formGroup.controls.password.valueChanges.pipe(debounceTime(300)).subscribe(() => {
-        this.validatePasswordsMatch();
-      }),
-    );
+
+    // Only subscribe to password match validation if confirmPassword exists in form group
+    if (this.formGroup.controls.confirmPassword && this.formGroup.controls.password) {
+      this.subs.push(
+        this.formGroup.controls.confirmPassword.valueChanges.pipe(debounceTime(300)).subscribe(() => {
+          this.validatePasswordsMatch();
+        }),
+      );
+      this.subs.push(
+        this.formGroup.controls.password.valueChanges.pipe(debounceTime(300)).subscribe(() => {
+          this.validatePasswordsMatch();
+        }),
+      );
+    }
 
     this.groups$ = this.activeEPerson$.pipe(
       switchMap((eperson) => {
@@ -450,7 +463,7 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.activeEPerson$.pipe(take(1)).subscribe(
       (ePerson: EPerson) => {
-        const values = {
+        const values: any = {
           metadata: {
             'eperson.firstname': [
               {
@@ -464,10 +477,15 @@ export class EPersonFormComponent implements OnInit, OnDestroy {
             ],
           },
           email: this.email.value,
-          password: this.password.value,
           canLogIn: true,
           requireCertificate: false,
         };
+
+        // Only include password if it's available (i.e. in create mode)
+        if (this.password && this.password.value) {
+          values.password = this.password.value;
+        }
+
         if (ePerson == null) {
           this.createNewEPerson(values);
         } else {
